@@ -3,17 +3,31 @@
  * application javascript
  */
 <!--//
+// Sign up/in listeners
+$(document).on("submit", "form", function(e) {
+	console.log( 'form submited');
 
-//sign up/in listeners
-$(document).on("click", "form", function(e) {
-
-    bootbox.alert("Hello world!", function() {
-        console.log("Alert Callback");
-    });
-
+	return true;
 });
 
-//BootBox listeners and callbacks
+$(document).on("click", "button.submit", function(e) {
+	console.log( 'btn.submit clicked');
+	$( this ).closest( 'form' )[0].reset();
+});
+
+$(document).on("click", "button.next", function(e) {
+	console.log( 'btn.next clicked');
+	$( this ).closest( 'form' )[0].reset();
+});
+
+$(document).on("click", "button.clear", function(e) {
+	console.log( 'btn.clear clicked');
+	$( this ).closest( 'form' )[0].reset();
+});
+
+
+
+// BootBox listeners and callbacks
 $(document).on("click", ".alert", function(e) {
 
     bootbox.alert("Hello world!", function() {
@@ -21,6 +35,4 @@ $(document).on("click", ".alert", function(e) {
     });
 
 });
-
-
  -->

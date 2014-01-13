@@ -18,6 +18,7 @@
     <h3>Sign In</h3>
 
     <div class="well well-lg">
+
         <form>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Username</span>
@@ -29,11 +30,7 @@
                 <input type="password"    class="form-control" placeholder="Password">
             </div>
 
-            <div class="btn-group">
-                <button type="button"     class="btn btn-default submit">Enter</button>
-                <button type="button"     class="btn btn-default clear">Clear</button>
-                <a href="<?= SITEROOT; ?>reset.php" id="sign_in_reset_account_link">Reset Login Data</a>
-            </div>
+            <?php require_once SITEROOT."/templates/form_enter.php"; ?>
 
         </form>
 
