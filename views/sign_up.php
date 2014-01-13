@@ -14,7 +14,9 @@
 
     <?php require_once SITEROOT."/templates/top_menu.php"; ?>
 
-<PRE>asdf</PRE>
+    <div class="well well-lg">
+    	`sign Up` content here
+	</div>
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
 

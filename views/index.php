@@ -23,7 +23,8 @@
             <small>Wireless internet access provided by Winds RV park.</small></h1>
         </div>
 
-        <a class="btn btn-primary btn-lg" role="button">Learn More</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary btn-lg" role="button" href="<?= SITEROOT; ?>/learn_more.php">Learn More</a>
+        &nbsp;&nbsp;&nbsp;
         <a class="btn btn-primary btn-lg" role="button" href="<?= SITEROOT; ?>/sign_up.php">Sign Up</a>
     </div>
 

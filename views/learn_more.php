@@ -14,7 +14,12 @@
 
     <?php require_once SITEROOT."/templates/top_menu.php"; ?>
 
-    
+    <!--// Page title -->
+    <h3>Learn More</h3>
+
+    <div class="well well-lg">
+        `Learn More` content here.
+    </div>
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
 

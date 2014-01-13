@@ -5,3 +5,20 @@
  body {
  	padding: 2%;
  }
+
+form {
+	width: 100%;
+}
+
+div.btn-group {
+	padding-left: 40%;
+}
+
+.input-group {
+	padding: 2%;
+}
+
+#sign_in_reset_account_link {
+	display: block;
+	padding-left: 25px;
+}
