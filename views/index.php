@@ -1,3 +1,7 @@
+<?php
+    require_once "../config.php";
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -20,7 +24,7 @@
         </div>
 
         <a class="btn btn-primary btn-lg" role="button">Learn More</a>&nbsp;&nbsp;&nbsp;
-        <a class="btn btn-primary btn-lg" role="button">Sign Up</a>
+        <a class="btn btn-primary btn-lg" role="button" href="<?= SITEROOT; ?>/sign_up.php">Sign Up</a>
     </div>
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
