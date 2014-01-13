@@ -1,0 +1,45 @@
+{
+    "name": "davidjeddy/radiusUXinterface",
+    "description": "Web based interface for a RADIUS authentication system that accepts payments for access to a network.",
+    "license": "Creative Commons 4.0",
+    "authors": [
+        {
+            "name": "David Eddy",
+            "email": "me@davidjeddy.com"
+        }
+    ],
+    "minimum-stability": "RC",
+    "repositories": {
+        "balupton": {
+            "type": "package",
+            "package": {
+                "name": "balupton/jquery-scrollto",
+                "version": "1.0.0",
+                "source": {
+                    "url": "https://github.com/balupton/jquery-scrollto.git",
+                    "type": "git",
+                    "reference": "791cc3157956e1319c32aa14d5eaa5fd6bae379f"
+                }
+            }
+        },
+        "makeusabrew": {
+            "type": "package",
+            "package": {
+                "name": "makeusabrew/bootbox",
+                "version": "4.1.0",
+                "source": {
+                    "url": "https://github.com/makeusabrew/bootbox.git",
+                    "type": "git",
+                    "reference": "f4ced08acee9ba17a542d72d44db8c868f5379c2"
+                }
+            }
+        }
+    },
+        "require": {
+        "components/jquery": "2.0.x",
+        "twitter/bootstrap": "3.0.x",
+        "monolog/monolog": "1.7.x",
+        "balupton/jquery-scrollto": "1.0.0",
+        "makeusabrew/bootbox": "4.1.0"
+    }
+}
