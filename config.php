@@ -50,6 +50,7 @@ try {
 
 //Start session if not already active
 if ( !isset( $_SESSION['IS_AUTH'] ) ) {
-	session_start();
-	$_SESSION['IS_AUTH'] == false;
+	//session_start();
+	//$_SESSION = array();
+	//$_SESSION'IS_AUTH'] == false;
 }
