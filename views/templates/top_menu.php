@@ -23,8 +23,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li><a href="<?php= SITEROOT; ?>/learn_more.php">Learn More</a></li>
-            <li><a href="<?php= SITEROOT; ?>/sign_in.php">Sign In</a></li>
+            <li><a href="<?= SITEROOT; ?>/learn_more.php">Learn More</a></li>
+            <li><a href="<?= SITEROOT; ?>/sign_in.php">Sign In</a></li>
             <?php if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
