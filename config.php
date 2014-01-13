@@ -7,11 +7,16 @@
  * @version 0.0.1
  */
 /* Standard configs */
-define('SITEOWNER', "");
+define('SITEOWNER', "Winds.net");
 define('SITEEMAIL', "admin@winds.net");
-define('SITETITLE', "Winds RV PArk Wireless Network");
-define('SITEHOME', 	"./");
-define('SITEROOT', 	"./views/");
+define('SITETITLE', "RV Park Wireless Network Access");
+define('SITEHOME', 	"../");
+define('SITEROOT', 	"../views");
+define('DEBUG', 	"DEBUG");
+
+/* Debug options */
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 /* DB conn info */
 define('DB_ADDY',	"localhost");

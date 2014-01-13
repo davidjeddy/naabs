@@ -1,10 +1,9 @@
 <?php
 /**
- * Load config and base index.
+ * Redirect to the view/index.php
  */
 try {
-	require_once "./config.php";
-	require_once SITEROOT."/index.php";
+	require_once "./views/index.php";
 } catch (Exception $e) {
     print $e->getMessage()." Config Error 1";
     exit;
