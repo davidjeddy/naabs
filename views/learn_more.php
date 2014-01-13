@@ -18,7 +18,7 @@
     <h3>Learn More</h3>
 
     <div class="well well-lg">
-        `Learn More` content here.
+        <p>`Learn More` content here.</p>
     </div>
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
