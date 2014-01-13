@@ -2,9 +2,9 @@
 /**
  * Default Top menu template
  *
- * @author David Eddy <me@davidjeddy.com>
- * @date 2014-01-13
- * @since 0.0.1
+ * @author  David Eddy <me@davidjeddy.com>
+ * @date    2014-01-13
+ * @since   0.0.1
  * @version 0.0.1
  */
 ?>
@@ -25,7 +25,10 @@
         <ul class="nav navbar-nav">
             <li><a href="<?= SITEROOT; ?>/learn_more.php">Learn More</a></li>
             <li><a href="<?= SITEROOT; ?>/sign_up.php">Sign up</a></li>
-            <?php //if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <?php if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
+                <li><a href="<?= SITEROOT; ?>/sign_out.php">Sign Out</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -36,14 +39,19 @@
                         <li><a href="<?= SITEROOT; ?>/my_access_history.php">Access History</a></li>
                     </ul>
                 </li>
-            <?php //}; ?>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <?php if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
-                <li><a href="<?= SITEROOT; ?>/sign_out.php">Sign Out</a></li>
             <?php } else {; ?>
                 <li><a href="<?= SITEROOT; ?>/sign_in.php">Sign In</a></li>
             <?php }; ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?= SITEROOT; ?>/my_devices.php">My Device</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?= SITEROOT; ?>/my_time.php">Time (Add / View / Refund)</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?= SITEROOT; ?>/my_access_history.php">Access History</a></li>
+                    </ul>
+                </li>
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>

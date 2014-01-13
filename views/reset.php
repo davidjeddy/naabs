@@ -15,14 +15,11 @@
     <?php require_once SITEROOT."/templates/top_menu.php"; ?>
 
     <!--// Page title -->
-    <h3>My Time</h3>
+    <h3>Reset Login</h3>
 
     <div class="well well-lg">
-        <p>`My Time` content here.</p>
-        <p>Counter of time remaining.</p>
+        <p>`Reset Login` content here.</p>
     </div>
-
-    <?php require_once SITEROOT."/templates/add_time_form.php"; ?>
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
 
