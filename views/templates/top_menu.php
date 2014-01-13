@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li><a href="<?= SITEROOT; ?>/learn_more.php">Learn More</a></li>
-            <li><a href="<?= SITEROOT; ?>/sign_in.php">Sign In</a></li>
+            <li><a href="<?= SITEROOT; ?>/sign_up.php">Sign up</a></li>
             <?php //if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
@@ -39,9 +39,11 @@
             <?php //}; ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <?php //if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
+            <?php if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
                 <li><a href="<?= SITEROOT; ?>/sign_out.php">Sign Out</a></li>
-            <?php //}; ?>
+            <?php } else {; ?>
+                <li><a href="<?= SITEROOT; ?>/sign_in.php">Sign In</a></li>
+            <?php }; ?>
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
