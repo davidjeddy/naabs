@@ -12,6 +12,47 @@ function ajax() {
 	return true;
 }
 
+/**
+ * Convet form field elem properties 'name' into human readable string
+ *
+ * @author David Eddy <me@davidjeddy.com>
+ * @version 0.0.1
+ * @since 0.0.1
+ * @param string param [required]
+ * @param string return_type [optional]
+ * @return string return_data
+ */
+function convertFieldNames (param, return_type) {
+
+	if (typeof(return_type) == 'undefined') {
+		return_type = 1; // human readable
+	};
+
+
+
+	var return_data;
+	if (return_type == 1) {
+
+		//Uppercase the first letter
+		return_data = param.charAt(0).toUpperCase() + param.slice(1);
+		
+		//replace '_' & '-' with ' '
+		return_data = return_data.replace("_", " ")
+		return_data = return_data.replace("-", " ")
+	} else 	if (return_type == 1) {
+
+		//replace '_' & '-' with ' '
+		return_data = return_data.replace(" ", "_")
+
+		//Uppercase the first letter
+		return_data = param.charAt(0).toLowerCase();
+	}
+
+
+
+	return return_data;
+}
+
 // Form submit logic
 $(document).on("submit", "form", function(e) {
 	console.log( 'form submited');
