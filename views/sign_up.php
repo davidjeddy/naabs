@@ -16,7 +16,7 @@
 
     <!--// Page title -->
     <h3>Sign Up</h3>
-    <h5>Step 1 of 2 : Winds.net Account Creation</h5>
+    <h5>Step 1 of 3 : Winds.net Account Creation</h5>
 
     <!--// 3 step sign up process: general, address, billing option -->
     <form name="sign_up_1" id="sign_up_1" action="sign_up_2.php">

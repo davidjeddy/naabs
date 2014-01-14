@@ -9,7 +9,7 @@
  */
 function ajax() {
 
-return true;
+	return true;
 }
 
 // Form submit logic
@@ -29,7 +29,7 @@ $(document).on("submit", "form", function(e) {
 });
 
 // Form button actions
-$(document).on("click", "form button.submit", function(e) {
+$(document).on("click", "button.submit", function(e) {
 	console.log( 'button.submit clicked');
 	
 	// Get form elem
@@ -46,8 +46,8 @@ $(document).on("click", "form button.submit", function(e) {
 	return true;
 });
 
-$(document).on("click", "form button.next", function(e) {
-	console.log( 'button.next clicked');
+$(document).on("click", "button.next", function(e) {
+	console.log( 'button.next clicked' );
 	
 	// Get form elem
 	var form = $(this).closest('form');
@@ -72,10 +72,17 @@ $(document).on("click", "form button.next", function(e) {
 
 $(document).on("click", "button.clear", function(e) {
 	console.log( 'btn.clear clicked');
-	
-	$(this).closest( 'form' )[0].reset();
 
-	$.scrollto( '0%', 250);
+	// Reset Val	
+	var form = $(this).closest( 'form' );
+	form[0].reset();
+
+	// Clear valitation errors
+	var form_val = form.validate();
+	form_val.resetForm();
+
+	//scroll to the top of the page if possible
+	//$().scrollto( '0%', 250);
 
 	return true;
 });
