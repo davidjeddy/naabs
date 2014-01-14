@@ -19,15 +19,15 @@
 
     <div class="well well-lg">
 
-        <form>
+        <form id="sign_in">
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Username</span>
-                <input type="text"        class="form-control" placeholder="Username">
+                <span class="input-group-addon">Email</span>
+                <input type="text"      class="form-control" maxlength="64" placeholder="Email" name="Email" required>
             </div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Password</span>
-                <input type="password"    class="form-control" placeholder="Password">
+                <input type="password"  class="form-control" maxlength="32" placeholder="Password" name="Password" required>
             </div>
 
             <?php require_once SITEROOT."/templates/form_enter.php"; ?>
@@ -37,6 +37,20 @@
     </div>
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
-
+    <script>
+        $("#sign_in").validate({
+            rules: {
+                // no quoting necessary
+                "Email": {
+                  required: true,
+                  email: true
+                },
+                "Password": {
+                    required: true,
+                    minlength: 8,
+                }
+            }
+        });
+    </script>
 </body>
 </html>

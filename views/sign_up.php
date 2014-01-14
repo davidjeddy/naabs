@@ -22,20 +22,15 @@
         <div class="well well-lg">
             <h3>Account</h3>
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Username</span>
-                <input type="text"        class="form-control" placeholder="Username">
+                <span class="input-group-addon">Email</span>
+                <input type="text"    class="form-control" placeholder="Email">
+                <input type="text"    class="form-control" placeholder="Repeat email">
             </div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Password</span>
                 <input type="password"    class="form-control" placeholder="Password">
                 <input type="password"    class="form-control" placeholder="Repeat Password">
-            </div>
-
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon">Email</span>
-                <input type="text"    class="form-control" placeholder="Email">
-                <input type="text"    class="form-control" placeholder="Repeat email">
             </div>
         </div>
 

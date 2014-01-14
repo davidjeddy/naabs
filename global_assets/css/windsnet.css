@@ -22,3 +22,9 @@ div.btn-group {
 	display: block;
 	padding-left: 60px;
 }
+
+label.error {
+	font-size: 18px;
+	font-weight:  bolder;
+	color: red;
+}
