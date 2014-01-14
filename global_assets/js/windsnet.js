@@ -23,6 +23,8 @@ $(document).on("click", "button.next", function(e) {
 $(document).on("click", "button.clear", function(e) {
 	console.log( 'btn.clear clicked');
 	$( this ).closest( 'form' )[0].reset();
+
+	$.scrollto( '0%', 250);
 });
 
 

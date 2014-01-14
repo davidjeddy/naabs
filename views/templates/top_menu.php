@@ -29,27 +29,19 @@
         <ul class="nav navbar-nav navbar-right">
             <?php if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
                 <li><a href="<?= SITEROOT; ?>/sign_out.php">Sign Out</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="<?= SITEROOT; ?>/my_devices.php">My Device</a></li>
-                        <li class="divider"></li>
-                        <li><a href="<?= SITEROOT; ?>/my_time.php">Time (Add / View / Refund)</a></li>
-                        <li class="divider"></li>
-                        <li><a href="<?= SITEROOT; ?>/my_access_history.php">Access History</a></li>
-                    </ul>
-                </li>
             <?php } else {; ?>
                 <li><a href="<?= SITEROOT; ?>/sign_in.php">Sign In</a></li>
             <?php }; ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        <li><a href="<?= SITEROOT; ?>/my_addresses.php">My Addresses</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?= SITEROOT; ?>/my_time.php">My Time</a></li>
+                        <li class="divider"></li>
                         <li><a href="<?= SITEROOT; ?>/my_devices.php">My Device</a></li>
                         <li class="divider"></li>
-                        <li><a href="<?= SITEROOT; ?>/my_time.php">Time (Add / View / Refund)</a></li>
-                        <li class="divider"></li>
-                        <li><a href="<?= SITEROOT; ?>/my_access_history.php">Access History</a></li>
+                        <li><a href="<?= SITEROOT; ?>/my_history.php">My History</a></li>
                     </ul>
                 </li>
         </ul>
