@@ -23,14 +23,11 @@
     </div>
 
     <form>
+
         <div class="well well-lg">
-
-            <h3>Add Time</h3>
-
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Add Time</span>
-                <select name="country" class="form-control">
-                    <!--// Will pull from an API service -->
+                <span class="input-group-addon">Duration</span>
+                <select class="form-control" name="service_duration">
                     <option value="NULL"        >Select One</option>
                     <option value="86400"       >One Day ($5.95 USD)</option>
                     <option value="604800"      >One Week ($11.95 USD)</option>
@@ -38,7 +35,6 @@
                     <option value="54432000"    >Three Month ($90 days, 74.85 USD)</option>
                 </select>
             </div>
-
         </div>
 
         <div class="well well-lg">
