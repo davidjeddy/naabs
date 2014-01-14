@@ -27,12 +27,22 @@ define('DB_PASS',	"");
 /* Edit for your locality */
 date_default_timezone_set("UTC");
 
+/* Paypal application Info */
+
+
 /* DO NOT CHANGE! */
 define('DATEFORMAT',"YYYY-MM-DD");
 define('TIMEFORMAT',"HH-mm-ss");
 define('NOW_YEAR', 	date("Y"));
 define('NOW_MONTH', date("M"));
 define('NOW_DAY',	date("D"));
+
+
+
+if ( !is_dir( "../vendor" ) ) {
+    print_r( "Install process not run or vendor directory moved.\nPlease see README file for details.");
+    exit;
+}
 
 
 
@@ -54,7 +64,7 @@ try {
 */
 
 //Start session if not already active
-if ( !isset( $_SESSION['IS_AUTH'] ) ) {
+if ( !isset( $_SESSION ) ) {
 	//session_start();
 	//$_SESSION = array();
 	//$_SESSION'IS_AUTH'] == false;
