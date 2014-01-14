@@ -29,17 +29,44 @@ $(document).on("submit", "form", function(e) {
 });
 
 // Form button actions
-$(document).on("click", "button.submit", function(e) {
-	console.log( 'btn.submit clicked');
+$(document).on("click", "form button.submit", function(e) {
+	console.log( 'button.submit clicked');
+	
+	// Get form elem
+	var form = $(this).closest('form');
 
-	$(this).closest('form').trigger('submit');
+	// Is the form currently client valid?
+	if ( form.valid() != true ) {
+		console.log( 'form not valid.');
+		return false;
+	}
+
+	//Do the AJAX call with all the form data
 
 	return true;
 });
 
-$(document).on("click", "button.next", function(e) {
-	console.log( 'btn.next clicked');
+$(document).on("click", "form button.next", function(e) {
+	console.log( 'button.next clicked');
 	
+	// Get form elem
+	var form = $(this).closest('form');
+
+	// Is the form currently client valid?
+	if ( form.valid() != true ) {
+		console.log( 'form not valid.');
+		return false;
+	}
+
+	// Serialize data
+	var form_data = form.serialize();
+
+	//write data to a cookie
+	$.cookie('windsnet_'+form.attr('name'), form_data);
+
+	// relocate to the forms 'action' property
+	window.location = "./"+form.attr('action');
+
 	return true;
 });
 

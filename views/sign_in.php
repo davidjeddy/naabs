@@ -22,12 +22,12 @@
         <form id="sign_in">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Email</span>
-                <input type="text"      class="form-control" maxlength="64" placeholder="Email" name="Email" required>
+                <input type="text"      class="form-control" maxlength="64" placeholder="Email" name="Email">
             </div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Password</span>
-                <input type="password"  class="form-control" maxlength="32" placeholder="Password" name="Password" required>
+                <input type="password"  class="form-control" maxlength="32" placeholder="Password" name="Password">
             </div>
 
             <?php require_once SITEROOT."/templates/form_enter.php"; ?>

@@ -18,7 +18,7 @@ div.btn-group {
 	padding: 2%;
 }
 
-#sign_in_reset_account_link {
+a#sign_in_reset_account_link {
 	display: block;
 	padding-left: 60px;
 }
@@ -27,4 +27,9 @@ label.error {
 	font-size: 18px;
 	font-weight:  bolder;
 	color: red;
+}
+
+/* Need to color DDL option text */
+select.form-control option {
+	color:#666666;
 }
