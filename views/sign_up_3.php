@@ -60,21 +60,45 @@
             var billing_data = $.cookie('windsnet_sign_up_2');
             billing_data = jQuery.unserialize(billing_data);
 
-            // Print out data as 'Account' and 'Billing' elem
-            // Account data elem: #account_data
-            // Account data exp: <h4>Email:&nbsp;<small>test@user.com</small></h4>
 
-            $.each( form_account_data, function(key, value){
+
+            // Print out data as 'Account' and 'Billing' elem
+            var account_data_string = "";
+            $.each( account_data, function(key, value){
+
+                // Ignore repeat_* fields
+                if ( key.substr(0,7) == "repeat_" ) {
+                    return;
+                }
+
+                // Hide p/w
+                if (key == "password") {
+                    value = "*****";
+                }
+
+                // Concatinate  k/v pairs into the DOM
+                account_data_string += "<h4>"+convertFieldNames(key)+":&nbsp;<small>"+value+"</small></h4>";
+            });
+
+            account_elem.append(account_data_string);
+
+
+
+            // Billing data elem: #billing_data
+            var billing_data_string = "";
+            $.each( billing_data, function(key, value){
 
                 // Remove 'repeat_*' indexes
 
-                // Concatinate  k/v pairs into the DOM
-                $()
-                console.log( key+": "+value );
-            });
+                // Hide p/w
+                if (key == "card_number") {
+                    value = "*****"+value.substr(12,16);
+                }
 
-            // Billing data elem: #account_data
-            // Account data exp: <h4>Card Number:&nbsp;<small>3210321032103210</small></h4>
+                // Concatinate  k/v pairs into the DOM
+                billing_data_string += "<h4>"+convertFieldNames(key)+":&nbsp;<small>"+value+"</small></h4>";
+            });
+            billing_elem.append(billing_data_string);
         });
     </script>
 </body>

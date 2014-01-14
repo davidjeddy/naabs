@@ -68,8 +68,8 @@
                 <span class="input-group-addon">Card Type</span>
                 <select class="form-control" name="card_type">
                     <option>Select One</option>
-                    <option value="1">Mastercard</option>
-                    <option value="2">Visa</option>
+                    <option value="Mastercard">Mastercard</option>
+                    <option value="Visa">Visa</option>
                 </select>
             </div>
 
@@ -148,7 +148,7 @@
                     },
                     "card_type": {
                         required: true,
-                        integer: true,
+                        lettersonly: true,
                     },
                     "card_expire_month": {
                         required: true,
@@ -170,9 +170,6 @@
                     },
                     "device_count": {
                         integer: "Must select the number of devices you plan to use.",
-                    },
-                    "card_type": {
-                        integer: "Card Type required.",
                     },
                     "card_expire_month": {
                         integer: "Expiration month needed.",
