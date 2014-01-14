@@ -1,6 +1,6 @@
 {
-    "name": "davidjeddy/radiusUXinterface",
-    "description": "Web based interface for a RADIUS authentication system that accepts payments for access to a network.",
+    "name": "davidjeddy/RADIUSWebPaymentGateway",
+    "description": "Web based interface for a FreeRADIUS authentication server that accepts payments for access to a (typically Wifi) network.",
     "license": "Creative Commons 4.0",
     "authors": [
         {
@@ -33,6 +33,18 @@
                     "reference": "f4ced08acee9ba17a542d72d44db8c868f5379c2"
                 }
             }
+        },
+        "carhartl": {
+            "type": "package",
+            "package": {
+                "name": "carhartl/jquery-cookie",
+                "version": "1.4.0",
+                "source": {
+                    "url": "https://github.com/carhartl/jquery-cookie.git",
+                    "type": "git",
+                    "reference": "fbb0117ff06f7d7410c4243af8906e64d3ad27de"
+                }
+            }
         }
     },
         "require": {
@@ -40,6 +52,7 @@
         "twitter/bootstrap": "3.0.x",
         "monolog/monolog": "1.7.x",
         "balupton/jquery-scrollto": "1.0.0",
-        "makeusabrew/bootbox": "4.1.0"
+        "makeusabrew/bootbox": "4.1.0",
+        "carhartl/jquery-cookie": "1.4.0"
     }
 }
