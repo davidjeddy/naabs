@@ -27,11 +27,11 @@
             <li><a href="<?= SITEROOT; ?>/sign_up.php">Sign up</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <?php if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){ ?>
-                <li><a href="<?= SITEROOT; ?>/sign_out.php">Sign Out</a></li>
-            <?php } else {; ?>
-                <li><a href="<?= SITEROOT; ?>/sign_in.php">Sign In</a></li>
-            <?php }; ?>
+            <?php 
+            if ( 1==1 ) {
+            //if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){
+            ?>
+                <li><a href="#">Status: OK</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -44,6 +44,10 @@
                         <li><a href="<?= SITEROOT; ?>/my_history.php">My History</a></li>
                     </ul>
                 </li>
+                <li><a href="<?= SITEROOT; ?>/sign_out.php">Sign Out</a></li>
+            <?php } else {; ?>
+                <li><a href="<?= SITEROOT; ?>/sign_in.php">Sign In</a></li>
+            <?php }; ?>
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
