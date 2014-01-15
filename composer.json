@@ -47,10 +47,11 @@
             }
         }
     },
-        "require": {
+    "require": {
         "components/jquery": "2.0.x",
         "twitter/bootstrap": "3.0.x",
         "monolog/monolog": "1.7.x",
+        "respect/validation": "0.5.0",
         "balupton/jquery-scrollto": "1.0.0",
         "makeusabrew/bootbox": "4.1.0",
         "carhartl/jquery-cookie": "1.4.0"
