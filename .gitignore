@@ -32,3 +32,5 @@ vendor/
 ~$*
 priv_docs/
 *.lock
+*.rar
+*.zip
