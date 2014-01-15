@@ -1,11 +1,9 @@
-Dependances: Composer, GiT
+Dependances:
+Composer http://getcomposer.org/doc/00-intro.md#downloading-the-composer-executable 
+GiT https://code.google.com/p/git-core/downloads/list
 
-URLs: http://getcomposer.org/doc/00-intro.md#downloading-the-composer-executable 
-
-https://code.google.com/p/git-core/downloads/list
-
-Install: Change to working dir Copy to root dir of application
-
-SetUp: Change to working dir Run the following command composer install
-
-Use: In a browser goto the URL that points to index.html Consume
+Application install:
+Create a home dir for the application. 
+Ensure dir is accessible bu your web server and sql server
+Install Git and Composer
+Run 'composer install' from the applications home dir
