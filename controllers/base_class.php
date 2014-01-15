@@ -68,8 +68,22 @@ class baseClass {
     // Go off and do what the form was submitted to do
     private function goAction() {
 
-        echo json_encode(array(true, $this->form_data));
-        exit;
+    	switch($this->form_data->action) {
+    		case 'add_user':
+    			//execute payment first
+    			require_once __DIR__.'/payment_class.php';    		
+				$paymentClass = new paymentClass();
+				$paymentClass->addTime($this->form_data);
+
+				// if that returns ok, add the user account to RADIUS
+				require_once __DIR__.'/user_class.php';    		
+    			$userClass = new userClass($this->form_data);
+
+    		break;
+    		default:
+    			echo json_encode(array(false, "No valid cation found."));
+    	}
+
         return true;
     }
 }
