@@ -33,3 +33,13 @@ label.error {
 select.form-control option {
 	color:#666666;
 }
+
+.clear {
+	margin: 0 10px;
+}
+.next {
+	margin: 0 10px;
+}
+.submit {
+	margin: 0 10px;
+}
