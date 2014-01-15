@@ -5,11 +5,46 @@
 <!--//
 //AJAX process function
 /**
- * Execute AJAX call using passed in data
+ * Execute AJAX call
+ *
+ * @author David J Eddy <me@davidjeddy.com>
+ * @version 0.0.1
+ * @since 0.0.2
+ * @date 2014-01-15
+ * @param string type [optional]
+ * @param string data [optional]
+ * @param string method [optional]
+ * @param string url [optional]
+ * @return boolean
  */
-function ajax() {
+function ajaxCall (type, data, dataType, url) {
+	console.log( 'ajax function called' );
 
-	return true;
+	if ( typeof('type') == 'undefined' ) 	{ type 	= "POST"; } 
+	if ( typeof('data') == 'undefined' ) 	{ data 	= "NULL"; }
+	if ( typeof('dataType') == 'undefined' ){ dataType= "JSON"; } 
+	if ( typeof('url') == 'undefined' ) 	{ url 	= "../controllers/base_class.php"; }
+
+
+
+    var promise = $.ajax({ type: type, data: data, dataType: dataType, url: url });
+
+    promise.success(function(data) {
+		console.log(data);
+
+        return true;
+    });
+
+    promise.error(function(data) {
+		console.log(data);
+
+        return false;
+    });
+
+    promise.complete(function(){
+
+		return true;
+    });
 }
 
 /**
