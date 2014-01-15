@@ -5,11 +5,46 @@
 <!--//
 //AJAX process function
 /**
- * Execute AJAX call using passed in data
+ * Execute AJAX call
+ *
+ * @author David J Eddy <me@davidjeddy.com>
+ * @version 0.0.1
+ * @since 0.0.2
+ * @date 2014-01-15
+ * @param string type [optional]
+ * @param string data [optional]
+ * @param string method [optional]
+ * @param string url [optional]
+ * @return boolean
  */
-function ajax() {
+function ajaxCall (type, data, dataType, url) {
+	console.log( 'ajax function called' );
 
-	return true;
+	if ( typeof('type') == 'undefined' ) 	{ type 	= "POST"; } 
+	if ( typeof('data') == 'undefined' ) 	{ data 	= "NULL"; }
+	if ( typeof('dataType') == 'undefined' ){ dataType= "JSON"; } 
+	if ( typeof('url') == 'undefined' ) 	{ url 	= "../controllers/base_class.php"; }
+
+
+
+    var promise = $.ajax({ type: type, data: data, dataType: dataType, url: url });
+
+    promise.success(function(data) {
+		console.log(data);
+
+        return true;
+    });
+
+    promise.error(function(data) {
+		console.log(data);
+
+        return false;
+    });
+
+    promise.complete(function(){
+
+		return true;
+    });
 }
 
 /**
@@ -70,19 +105,19 @@ $(document).on("submit", "form", function(e) {
 });
 
 // Form button actions
-$(document).on("click", "button.submit", function(e) {
-	console.log( 'button.submit clicked');
-	
-	// Get form elem
-	var form = $(this).closest('form');
+$(document).on("click", "button.clear", function(e) {
+	console.log( 'btn.clear clicked');
 
-	// Is the form currently client valid?
-	if ( form.valid() != true ) {
-		console.log( 'form not valid.');
-		return false;
-	}
+	// Reset Val	
+	var form = $(this).closest( 'form' );
+	form[0].reset();
 
-	//Do the AJAX call with all the form data
+	// Clear valitation errors
+	var form_val = form.validate();
+	form_val.resetForm();
+
+	//scroll to the top of the page if possible
+	//$().scrollto( '0%', 250);
 
 	return true;
 });
@@ -103,7 +138,7 @@ $(document).on("click", "button.next", function(e) {
 	var form_data = form.serialize();
 
 	//write data to a cookie
-	$.cookie('windsnet_'+form.attr('name'), form_data);
+	$.cookie('windsnet_'+form.attr('name'), form_data, { expires: 7, path: '/'+form.attr('id')+'' });
 
 	// relocate to the forms 'action' property
 	window.location = "./"+form.attr('action');
@@ -111,22 +146,34 @@ $(document).on("click", "button.next", function(e) {
 	return true;
 });
 
-$(document).on("click", "button.clear", function(e) {
-	console.log( 'btn.clear clicked');
+$(document).on("click", "button.submit", function(e) {
+	console.log( 'button.submit clicked');
+	
+	//Prevent default form action
+	e.preventDefault;
 
-	// Reset Val	
-	var form = $(this).closest( 'form' );
-	form[0].reset();
+	// Get form elem
+	var form = $(this).closest('form');
 
-	// Clear valitation errors
-	var form_val = form.validate();
-	form_val.resetForm();
 
-	//scroll to the top of the page if possible
-	//$().scrollto( '0%', 250);
+
+	// Is the form currently client valid?
+	if ( form.valid() != true ) {
+		console.log( 'form not valid.');
+		return false;
+	}
+
+
+
+	//Do the AJAX call with all the form data
+	ajaxCall("post", form.serialize(), "JSON", form.attr('action'));
+
+
 
 	return true;
 });
+
+
 
 // BootBox listeners and callbacks
 $(document).on("click", ".alert", function(e) {

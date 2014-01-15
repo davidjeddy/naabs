@@ -28,7 +28,8 @@ define('DB_PASS',	"");
 date_default_timezone_set("UTC");
 
 /* Paypal application Info */
-
+define('PayPal_CLIENTID', "");
+define('PayPal_SECRET', "");
 
 /* DO NOT CHANGE! */
 define('DATEFORMAT',"YYYY-MM-DD");

@@ -7,6 +7,6 @@ if (isset( $_SESSION['IS_SIGNUP'] )) {
     require_once SITEROOT."/templates/form_enter.php";
 //if neither, no options
 } else {
-    echo '<p>You are not currently authorized to submot this data.</p>';
+    echo '<p>You are not currently authorized to submit this form.</p>';
 };
 ?>
