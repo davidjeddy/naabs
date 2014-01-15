@@ -19,7 +19,7 @@
     <h5>Step 3 of 3 : Purchase / Confirmation</h5>
 
     <!--// 3 step sign up process: general, address, billing option -->
-    <form name="sign_up_3" id="sign_up_3" action="../controllers/sign_up_class.php">
+    <form name="sign_up_3" id="sign_up_3" action="../controllers/base_class.php">
 
         <div class="well well-lg">
             <h3>Account&nbsp;<small><a href="./sign_up.php" target="_self">change</a></small></h3>
@@ -67,8 +67,8 @@
 
 
 
-            // This will be populated with the generated fields and values
-            var form_fields_elems_string = "";
+            // What action is the form doing? Append to this all form data as well.
+            var form_fields_elems_string = "<input type=\"hidden\" name=\"action\" value=\"add_user\" />";
 
             // Print out data as 'Account' and 'Billing' elem
             var account_data_string = "";
