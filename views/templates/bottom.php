@@ -10,4 +10,4 @@
 <script language="javascript" src="<?= SITEHOME; ?>global_assets/js/jquery.unserialize.js" ></script>
 
 <!--// Application JS logic -->
-<script language="javascript" src="<?= SITEHOME; ?>global_assets/js/windsnet.js"></script>
+<script language="javascript" src="<?= SITEHOME; ?>global_assets/js/site.js"></script>
