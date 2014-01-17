@@ -46,23 +46,21 @@
     <script language="javascript">
         $( document ).ready(function() {
             // Return to page you came from if the cookie data is not set
-            if (
-                typeof($.cookie('windsnet_sign_up_1')) == "undefined"
-                || typeof($.cookie('windsnet_sign_up_2')) == "undefined"
+            if ( $.cookie('sign_up_1') == ""
+                || $.cookie('sign_up_2') == ""
             ) {
-                window.location = -1;
+                window.history.back();
             }
-
 
 
             // Accont data
             var account_elem = $("#account_data");
-            var account_data = $.cookie('windsnet_sign_up_1');
+            var account_data = $.cookie('sign_up_1');
             account_data = jQuery.unserialize(account_data);
             
             // Billing data
             var billing_elem = $("#billing_data");
-            var billing_data = $.cookie('windsnet_sign_up_2');
+            var billing_data = $.cookie('sign_up_2');
             billing_data = jQuery.unserialize(billing_data);
 
 
@@ -133,6 +131,7 @@
             // Append form field
             $( "#form_fields" ).append(form_fields_elems_string);
         });
+
     </script>
 </body>
 </html>

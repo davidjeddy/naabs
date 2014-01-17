@@ -138,7 +138,7 @@ $(document).on("click", "button.next", function(e) {
 	var form_data = form.serialize();
 
 	//write data to a cookie
-	$.cookie('windsnet_'+form.attr('name'), form_data, { expires: 7, path: '/'+form.attr('id')+'' });
+	$.cookie(form.attr('name'), form_data, { expires: 7, path: '/' });
 
 	// relocate to the forms 'action' property
 	window.location = "./"+form.attr('action');

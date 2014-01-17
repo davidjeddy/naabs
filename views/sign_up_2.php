@@ -108,8 +108,8 @@
         </div>
 
         <?php require_once SITEROOT."/templates/form_next.php"; ?>
-
     </form>
+
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
 
     <!--// Add some addition methods to the valitor -->
@@ -119,8 +119,8 @@
     <script language="javascript">
         $( document ).ready(function() {
             // Return to page you came from if the cookie data is not set
-            if ( typeof($.cookie('windsnet_sign_up_1')) == "undefined" ) {
-                window.location = -1;
+            if ( $.cookie('sign_up_1') == "" ) {
+                window.history.back();
             }
 
             $("#sign_up_2").validate({
