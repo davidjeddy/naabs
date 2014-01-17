@@ -13,20 +13,26 @@
  * @since 0.0.2b
  */
 
+require_once (__DIR__.'/../config.php');
 // Autoload all the classes controlled by composer
 require_once (__DIR__.'/../vendor/autoload.php');
 use Respect\Validation\Validator as valClass;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 
 
 class baseClass {
 
     private $form_data;
+    private $logger;
 
 
 
     // Build in methods
     function __construct () {
+
+        $this->form_data = new stdClass();
 
         // Validate data, as of v0.0.2 all data is alphanumeric only
         if ( isset($_POST) && !empty($_POST) ) {
@@ -34,6 +40,10 @@ class baseClass {
         }
 
         unset($_POST);
+
+        // create a log channel
+        $this->logger = new Logger('AppLogger');
+        $this->logger->pushHandler(new StreamHandler('../logs/App.log', Logger::DEBUG));
 
         // Get the action and class
         if ( isset($this->form_data->action) && !empty($this->form_data->action) ) {
@@ -50,7 +60,7 @@ class baseClass {
         foreach($_POST as $key => $value) {
 
             // Validate form field value a-Z 0-9
-            if (valClass::alnum('_-\' ')->validate($value) !== true
+            if (valClass::alnum('_-\'. ')->validate($value) !== true
             	&& valClass::email()->validate($value) !== true
             ) {
                 //TODO make return data class 0.0.2
@@ -58,26 +68,32 @@ class baseClass {
                 exit;
             }
 
-            // If pair is valud
             $this->form_data->{$key} = $value;
         }
         
+
+
         return true;
     }
 
     // Go off and do what the form was submitted to do
     private function goAction() {
+        $this->logger->addDebug('Starting baseClass->goAction()');
 
     	switch($this->form_data->action) {
     		case 'add_user':
     			//execute payment first
-    			require_once __DIR__.'/payment_class.php';    		
-				$paymentClass = new paymentClass();
+    			require_once __DIR__.'/payment_class.php';
+				$paymentClass = new paymentClass($this->logger);
+                
+                // Create a payment option
+                $paymentClass->createPaymentMethod($this->form_data);
+                // Process payment (transaction)
 				$paymentClass->addTime($this->form_data);
 
 				// if that returns ok, add the user account to RADIUS
-				require_once __DIR__.'/user_class.php';    		
-    			$userClass = new userClass($this->form_data);
+				//require_once __DIR__.'/user_class.php';    		
+    			//$userClass = new userClass($this->form_data);
 
     		break;
     		default:
