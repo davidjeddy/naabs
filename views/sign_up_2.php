@@ -60,6 +60,16 @@
             </div>
 
             <div class="input-group input-group-lg">
+                <span class="input-group-addon">Billig</br>Address</span>
+                <input type="text"    class="form-control" placeholder="Street 1"   name="street_1">
+                <input type="text"    class="form-control" placeholder="Street 2"   name="street_2">
+                <input type="text"    class="form-control" placeholder="City"       name="city">
+                <input type="text"    class="form-control" placeholder="State"      name="state">
+                <input type="text"    class="form-control" placeholder="ZIP"        name="zip">
+            </div>
+
+
+            <div class="input-group input-group-lg">
                 <span class="input-group-addon">Card Number</span>
                 <input type="text"    class="form-control" placeholder="Card Number"  name="card_number">
             </div>
@@ -140,6 +150,26 @@
                     "last_name": {
                         required: true,
                         lettersonly: true,
+                    },
+                    "street_1": {
+                        required: true,
+                    },
+                    "street_2": {
+                    },
+                    "city": {
+                        required: true,
+                    },
+                    "state": {
+                        required: true,
+                        lettersonly: true,
+                        minlength: 2,
+                        maxlength: 2
+                    },
+                    "zip": {
+                        required: true,
+                        integer: true,
+                        minlength: 5,
+                        maxlength: 5
                     },
                     "card_number": {
                         required: true,
