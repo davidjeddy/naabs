@@ -17,19 +17,159 @@
  * @since 0.0.2b
  */
 
-require_once (__DIR__."/../vendor/autoload.php");
+require_once (__DIR__.'/../config.php');
+// Autoload all the classes controlled by composer
+require_once (__DIR__.'/../vendor/autoload.php');
 use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
+
+use PayPal\Api\Address;
+use PayPal\Api\CreditCard;
+use PayPal\Api\FundingInstrument;
+use PayPal\Api\Payer;
+use PayPal\Api\AmountDetails;
+use PayPal\Api\Amount;
+use PayPal\Api\Transaction;
+use PayPal\Api\Payment;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 
 
 class paymentClass {
 
-	function __construct ($param_data) {}
+	private $logger;
+	private $accessToken;
+
+	function __construct (Logger $logger) {
+		$this->logger = $logger;
+
+		//TODO change the curl calls to PHP CURL operations instead of exec().
+		$oauthCredential = new OAuthTokenCredential("".PP_CLIENTID."", "".PP_SECRET."");
+
+		$this->accessToken = $oauthCredential->getAccessToken();
+
+		$this->logger->addDebug('AccessTkn: '.$this->accessToken);
+
+		return true;
+	}
+
+	/**
+	 * Create a payment method for Paypal. Paypal abstracts the method of payment from the act of processing a transaction.
+	 *
+	 * @author David J Eddy <me@davidjeddy.com>
+	 * @version 0.0.1
+	 * @since 0.0.2b
+	 * @param object $param_data [required]
+	 * @return boolean
+	 */
+	public function createPaymentMethod($param_data) {
+
+		$this->logger->addDebug('paymentClass->createPaymentMethod() started.');
+
+		try {
+			// These are taken from the PayPal REST API docs. Swapped in our object properties and go.
+			$addr = new Address();
+			$addr->setLine1($param_data->street_1);
+			$addr->setCity($param_data->city);
+			$addr->setState($param_data->state);
+			$addr->setPostal_code($param_data->zip);
+			$addr->setCountry_code('US');
+			
+
+			$card = new CreditCard();
+			$card->setFirst_name($param_data->first_name);
+			$card->setLast_name($param_data->last_name);
+			$card->setNumber($param_data->card_number);
+			$card->setType($param_data->card_type);
+			$card->setExpire_month($param_data->card_expire_month);
+			$card->setExpire_year($param_data->card_expire_year);
+			$card->setCvv2($param_data->card_cvv2);
+			$card->setBilling_address($addr);
+
+			$fi = new FundingInstrument();
+			$fi->setCredit_card($card);
+
+			$payer = new Payer();
+			$payer->setPayment_method('credit_card');
+			$payer->setFunding_instruments(array($fi));
+
+			$amountDetails = new AmountDetails();
+			$amountDetails->setSubtotal('0.00');
+			$amountDetails->setTax('0.00');
+			$amountDetails->setShipping('0.0');
+
+			$amount = new Amount();
+			$amount->setCurrency('USD');
+			$amount->setTotal( $this->getAmounts($param_data) );
+			$amount->setDetails($amountDetails);
+
+			$transaction = new Transaction();
+			$transaction->setAmount($amount);
+			$transaction->setDescription('Access to wireless network for '.SITEOWNER."'s ".SITETITLE.".");
+
+			$payment = new Payment();
+			$payment->setIntent('sale');
+			$payment->setPayer($payer);
+			$payment->setTransactions(array($transaction));
+
+			$apiContext = new ApiContext(new OAuthTokenCredential("".PP_CLIENTID."", "".PP_SECRET.""));
+			$payment->create($apiContext);
+
+
+
+			//Execute payment
+			
+
+
+
+			return true;
+		} catch (Exception $e) {
+
+			$this->logger->addError('paymentClass->createPaymentMethod() failed with an error of '.$e);
+			return false;
+		}
+	}
 
 	public function addTime($param_data) {
+		
+		$this->logger->addDebug('Starting addTime()');
 
-	print_r( json_decode( exec( 'curl -v https://api.sandbox.paypal.com/v1/oauth2/token -H "Accept: application/json" -H "Accept-Language: en_US" -u "EOJ2S-Z6OoN_le_KS1d75wsZ6y0SFdVsY9183IvxFyZp:EClusMEUk8e9ihI7ZdVLF5cZ6y0SFdVsY9183IvxFyZp" -d "grant_type=client_credentials" ') ) );
+		return true;
+	}
 
 
+
+	/**
+	* Takes seocnds of access and convert to $ amount
+	*
+	* @author David J Eddy <me@davidjeddy.com>
+	* @version 0.0.1
+	* @since 0.0.2
+	* @date 2014-01-17
+	* @param integer $param_data [required]
+	* @return string
+	* @todo make this a DB call to the table containing the acces time data
+	*/
+	private function getAmounts($param_data) {
+
+        switch ($param_data) {
+        	case  "86400":
+        		return "5.95";
+        		break;
+        	case "604800":
+        		return "11.95";
+        		break;
+        	case "18144000":
+        		return "24.95";
+        		break;
+        	case "54432000":
+        		return "11.95";
+        		break;
+        	default:
+        		return "0.0";
+        		break;
+        }
 	}
 }

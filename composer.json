@@ -58,5 +58,10 @@
         "ext-curl": "*",
         "ext-json": "*",
         "paypal/rest-api-sdk-php" : "0.5.*"
-    }
+    },
+    "autoload": {
+        "psr-0": {
+            "PayPal": "lib/"
+        }
+    }    
 }
