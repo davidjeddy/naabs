@@ -61,11 +61,11 @@
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Billig</br>Address</span>
-                <input type="text"    class="form-control" placeholder="Street 1"   name="street_1">
-                <input type="text"    class="form-control" placeholder="Street 2"   name="street_2">
+                <input type="text"    class="form-control" placeholder="Street"   name="line1">
                 <input type="text"    class="form-control" placeholder="City"       name="city">
                 <input type="text"    class="form-control" placeholder="State"      name="state">
                 <input type="text"    class="form-control" placeholder="ZIP"        name="zip">
+                <input type="hidden"  class="form-control" placeholder="Country"    name="country" value="US">
             </div>
 
 
@@ -78,8 +78,8 @@
                 <span class="input-group-addon">Card Type</span>
                 <select class="form-control" name="card_type">
                     <option>Select One</option>
-                    <option value="Mastercard">Mastercard</option>
-                    <option value="Visa">Visa</option>
+                    <option value="mastercard">Mastercard</option>
+                    <option value="visa">Visa</option>
                 </select>
             </div>
 
@@ -103,11 +103,11 @@
                 <!--// Automat this to include this year and then +4 more -->
                 <select class="form-control" name="card_expire_year">
                     <option value="NULL">Select Yesar</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
                 </select>
             </div>
 
@@ -153,8 +153,6 @@
                     },
                     "street_1": {
                         required: true,
-                    },
-                    "street_2": {
                     },
                     "city": {
                         required: true,

@@ -12,7 +12,8 @@ define('SITEEMAIL', "admin@winds.net");
 define('SITETITLE', "RV Park Wireless Network Access");
 define('SITEHOME', 	"../");
 define('SITEROOT', 	"../views");
-define('DEBUG', 	"DEBUG");
+define('TAXRATE', 0.07);
+define('SHIPRATE', 0.03);
 
 /* Debug options */
 error_reporting(E_ALL);
@@ -28,8 +29,9 @@ define('DB_PASS',	"");
 date_default_timezone_set("UTC");
 
 /* Paypal application Info */
-define('PayPal_CLIENTID', "");
-define('PayPal_SECRET', "");
+define('PP_CLIENTID', "AVNj_hDHDYISigTl5T9x08B9Vc9b8kh9zQ_VCzsxvMUNbMrLCfLY2jNBfz4j");
+define('PP_SECRET', "ECXsUBCGcNh7eOwWmNxNh9qchrnqCjB9NDbMMDWA_pZfwPr1lq3tiN1MLJCU");
+define('PP_CONFIG_PATH', __DIR__);
 
 /* DO NOT CHANGE! */
 define('DATEFORMAT',"YYYY-MM-DD");

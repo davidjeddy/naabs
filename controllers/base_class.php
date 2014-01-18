@@ -80,21 +80,30 @@ class baseClass {
     private function goAction() {
         $this->logger->addDebug('Starting baseClass->goAction()');
 
+        $return_data;
+
     	switch($this->form_data->action) {
     		case 'add_user':
+
+
+                //Create the user account in the DB
+                require_once __DIR__.'/user_class.php';           
+                $userClass = new userClass($this->logger);
+                echo json_encode(array(true, $userClass->createUser($this->form_data)));
+
+
+                //if the account created correctly
     			//execute payment first
     			require_once __DIR__.'/payment_class.php';
 				$paymentClass = new paymentClass($this->logger);
                 
-                // Create a payment option
-                $paymentClass->createPaymentMethod($this->form_data);
+                //Submit a (CC) payment
+                $paymentClass->createTime($this->form_data);
                 // Process payment (transaction)
-				$paymentClass->addTime($this->form_data);
+				echo json_encode(array(true, $paymentClass->updateTime($this->form_data)));
 
-				// if that returns ok, add the user account to RADIUS
-				//require_once __DIR__.'/user_class.php';    		
-    			//$userClass = new userClass($this->form_data);
-
+                // Done
+                return true;
     		break;
     		default:
     			echo json_encode(array(false, "No valid cation found."));
