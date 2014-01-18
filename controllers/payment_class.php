@@ -32,6 +32,7 @@ use PayPal\Api\Amount;
 use PayPal\Api\Transaction;
 use PayPal\Api\Payment;
 
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -44,13 +45,6 @@ class paymentClass {
 
 	function __construct (Logger $logger) {
 		$this->logger = $logger;
-
-		//TODO change the curl calls to PHP CURL operations instead of exec().
-		$oauthCredential = new OAuthTokenCredential("".PP_CLIENTID."", "".PP_SECRET."");
-
-		$this->accessToken = $oauthCredential->getAccessToken();
-
-		$this->logger->addDebug('AccessTkn: '.$this->accessToken);
 
 		return true;
 	}
@@ -69,62 +63,45 @@ class paymentClass {
 		$this->logger->addDebug('paymentClass->createPaymentMethod() started.');
 
 		try {
-			// These are taken from the PayPal REST API docs. Swapped in our object properties and go.
-			$addr = new Address();
-			$addr->setLine1($param_data->street_1);
-			$addr->setCity($param_data->city);
-			$addr->setState($param_data->state);
-			$addr->setPostal_code($param_data->zip);
-			$addr->setCountry_code('US');
+
+			$creditCardId ="3210321032103210";
+			$total = "0.01";
+			$currency = 'USD';
+			$paymentDesc = "Test CC payment";
 			
-
 			$card = new CreditCard();
-			$card->setFirst_name($param_data->first_name);
-			$card->setLast_name($param_data->last_name);
-			$card->setNumber($param_data->card_number);
-			$card->setType($param_data->card_type);
-			$card->setExpire_month($param_data->card_expire_month);
-			$card->setExpire_year($param_data->card_expire_year);
-			$card->setCvv2($param_data->card_cvv2);
-			$card->setBilling_address($addr);
+			$card->setType("visa");
+			$card->setNumber("4446283280247004");
+			$card->setExpire_month("11");
+			$card->setExpire_year("2018");
+			$card->setFirst_name("Joe");
+			$card->setLast_name("Shopper");
 
-			$fi = new FundingInstrument();
-			$fi->setCredit_card($card);
+
+			$fundingInstrument = new FundingInstrument();
+			$fundingInstrument->setCredit_card($card);
 
 			$payer = new Payer();
-			$payer->setPayment_method('credit_card');
-			$payer->setFunding_instruments(array($fi));
-
-			$amountDetails = new AmountDetails();
-			$amountDetails->setSubtotal('0.00');
-			$amountDetails->setTax('0.00');
-			$amountDetails->setShipping('0.0');
+			$payer->setPayment_method("credit_card");
+			$payer->setFunding_instruments(array($fundingInstrument));
 
 			$amount = new Amount();
-			$amount->setCurrency('USD');
-			$amount->setTotal( $this->getAmounts($param_data) );
-			$amount->setDetails($amountDetails);
+			$amount->setCurrency("USD");
+			$amount->setTotal("12");
 
 			$transaction = new Transaction();
 			$transaction->setAmount($amount);
-			$transaction->setDescription('Access to wireless network for '.SITEOWNER."'s ".SITETITLE.".");
+			$transaction->setDescription("creating a direct payment with credit card");
 
 			$payment = new Payment();
-			$payment->setIntent('sale');
+			$payment->setIntent("sale");
 			$payment->setPayer($payer);
 			$payment->setTransactions(array($transaction));
 
-			$apiContext = new ApiContext(new OAuthTokenCredential("".PP_CLIENTID."", "".PP_SECRET.""));
+			$apiContext = new ApiContext(new OAuthTokenCredential( PP_CLIENTID, PP_SECRET ));
 			$payment->create($apiContext);
 
-
-
-			//Execute payment
-			
-
-
-
-			return true;
+			return $payment;
 		} catch (Exception $e) {
 
 			$this->logger->addError('paymentClass->createPaymentMethod() failed with an error of '.$e);
