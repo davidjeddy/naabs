@@ -12,7 +12,8 @@ define('SITEEMAIL', "admin@winds.net");
 define('SITETITLE', "RV Park Wireless Network Access");
 define('SITEHOME', 	"../");
 define('SITEROOT', 	"../views");
-define('DEBUG', 	"DEBUG");
+define('TAXRATE', 0.07);
+define('SHIPRATE', 0.03);
 
 /* Debug options */
 error_reporting(E_ALL);

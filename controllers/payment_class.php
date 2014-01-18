@@ -41,7 +41,6 @@ use Monolog\Handler\StreamHandler;
 class paymentClass {
 
 	private $logger;
-	private $accessToken;
 
 	function __construct (Logger $logger) {
 		$this->logger = $logger;
@@ -50,7 +49,7 @@ class paymentClass {
 	}
 
 	/**
-	 * Create a payment method for Paypal. Paypal abstracts the method of payment from the act of processing a transaction.
+	 * Update/Submit a CC payment to Paypal for processing
 	 *
 	 * @author David J Eddy <me@davidjeddy.com>
 	 * @version 0.0.1
@@ -58,50 +57,59 @@ class paymentClass {
 	 * @param object $param_data [required]
 	 * @return boolean
 	 */
-	public function createPaymentMethod($param_data) {
+	public function createTime($param_data) {
 
-		$this->logger->addDebug('paymentClass->createPaymentMethod() started.');
+		$this->logger->addDebug('paymentClass->createTime() started.');
 
 		try {
+			$addr = new Address();
+			$addr->setLine1($param_data->line1);
+			$addr->setCity($param_data->city);
+			$addr->setCountry_code($param_data->country);
+			$addr->setPostal_code($param_data->zip);
+			$addr->setState($param_data->state);
 
-			$creditCardId ="3210321032103210";
-			$total = "0.01";
-			$currency = 'USD';
-			$paymentDesc = "Test CC payment";
-			
 			$card = new CreditCard();
-			$card->setType("visa");
-			$card->setNumber("4446283280247004");
-			$card->setExpire_month("11");
-			$card->setExpire_year("2018");
-			$card->setFirst_name("Joe");
-			$card->setLast_name("Shopper");
+			$card->setNumber($param_data->card_number);
+			$card->setType($param_data->card_type);
+			$card->setExpire_month($param_data->card_expire_month);
+			$card->setExpire_year($param_data->card_expire_year);
+			$card->setCvv2($param_data->card_cvv2);
+			$card->setFirst_name($param_data->first_name);
+			$card->setLast_name($param_data->last_name);
+			$card->setBilling_address($addr);
 
-
-			$fundingInstrument = new FundingInstrument();
-			$fundingInstrument->setCredit_card($card);
+			$fi = new FundingInstrument();
+			$fi->setCredit_card($card);
 
 			$payer = new Payer();
-			$payer->setPayment_method("credit_card");
-			$payer->setFunding_instruments(array($fundingInstrument));
+			$payer->setPayment_method('credit_card');
+			$payer->setFunding_instruments(array($fi));
+
+			$amountDetails = new AmountDetails();
+			$amountDetails->setSubtotal($this->getAmount($param_data->service_duration));
+			$amountDetails->setTax('0.00');
+			$amountDetails->setShipping('0.00');
 
 			$amount = new Amount();
-			$amount->setCurrency("USD");
-			$amount->setTotal("12");
+			$amount->setCurrency('USD');
+			//$amount->setTotal('7.47');
+			$amount->setTotal($this->getAmount($param_data->service_duration));
+			$amount->setDetails($amountDetails);
 
 			$transaction = new Transaction();
 			$transaction->setAmount($amount);
-			$transaction->setDescription("creating a direct payment with credit card");
+			$transaction->setDescription('This is the payment transaction description.');
 
 			$payment = new Payment();
-			$payment->setIntent("sale");
+			$payment->setIntent('sale');
 			$payment->setPayer($payer);
 			$payment->setTransactions(array($transaction));
 
 			$apiContext = new ApiContext(new OAuthTokenCredential( PP_CLIENTID, PP_SECRET ));
 			$payment->create($apiContext);
 
-			return $payment;
+			return $payment->getState();
 		} catch (Exception $e) {
 
 			$this->logger->addError('paymentClass->createPaymentMethod() failed with an error of '.$e);
@@ -129,7 +137,7 @@ class paymentClass {
 	* @return string
 	* @todo make this a DB call to the table containing the acces time data
 	*/
-	private function getAmounts($param_data) {
+	private function getAmount($param_data) {
 
         switch ($param_data) {
         	case  "86400":
@@ -142,7 +150,7 @@ class paymentClass {
         		return "24.95";
         		break;
         	case "54432000":
-        		return "11.95";
+        		return "74.85";
         		break;
         	default:
         		return "0.0";
