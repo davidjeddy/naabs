@@ -15,9 +15,12 @@
 require_once (__DIR__.'/../config.php');
 // Autoload all the classes controlled by composer
 require_once (__DIR__.'/../vendor/autoload.php');
+// Load model
+require_once (__DIR__.'/../models/user_model.php');
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+
 
 class userClass {
 
@@ -29,7 +32,11 @@ class userClass {
 		return true;
 	}
 
+	/**
+	 * No real business logic to do when creating a user
+	 */
 	public function createUser($param_data) {
-		return true;
+		$userModel = new userModel();
+		return $userModel->createUser($param_data);
 	}
 }
