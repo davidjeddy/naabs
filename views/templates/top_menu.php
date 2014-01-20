@@ -5,9 +5,20 @@
  * @author  David Eddy <me@davidjeddy.com>
  * @date    2014-01-13
  * @since   0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  */
+
+//TODO create a view side error template
+if (SITEDEBUG < 300) {
+    echo '<style>.debug {border-color:red}</style>';
+    echo 'SESSION:<PRE class="debug">';
+    print_r($_SESSION);
+    echo '</pre>COOKIE:<PRE class="debug">';
+    print_r($_COOKIE);
+    echo '</PRE>';
+}
 ?>
+
 <nav class="navbar navbar-default" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -24,19 +35,15 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li><a href="<?= SITEROOT; ?>/learn_more.php">Learn More</a></li>
-            <li><a href="<?= SITEROOT; ?>/sign_up.php">Sign up</a></li>
+            <li><a href="<?= SITEROOT; ?>/create_user.php">Sign up</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php 
-            if ( 1==1 ) {
-            //if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){
+            if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){
             ?>
-                <li><a href="#">Status: OK</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= SITEROOT; ?>/my_addresses.php">My Addresses</a></li>
-                        <li class="divider"></li>
                         <li><a href="<?= SITEROOT; ?>/my_time.php">My Time</a></li>
                         <li class="divider"></li>
                         <li><a href="<?= SITEROOT; ?>/my_devices.php">My Device</a></li>
