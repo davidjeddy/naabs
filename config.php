@@ -33,6 +33,8 @@ define('PP_CLIENTID', "AVNj_hDHDYISigTl5T9x08B9Vc9b8kh9zQ_VCzsxvMUNbMrLCfLY2jNBf
 define('PP_SECRET', "ECXsUBCGcNh7eOwWmNxNh9qchrnqCjB9NDbMMDWA_pZfwPr1lq3tiN1MLJCU");
 define('PP_CONFIG_PATH', __DIR__);
 
+
+
 /* DO NOT CHANGE! */
 define('DATEFORMAT',"YYYY-MM-DD");
 define('TIMEFORMAT',"HH-mm-ss");
@@ -67,8 +69,4 @@ try {
 */
 
 //Start session if not already active
-if ( !isset( $_SESSION ) ) {
-	//session_start();
-	//$_SESSION = array();
-	//$_SESSION'IS_AUTH'] == false;
-}
+session_start();
