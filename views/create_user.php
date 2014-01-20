@@ -15,23 +15,22 @@
     <?php require_once SITEROOT."/templates/top_menu.php"; ?>
 
     <!--// Page title -->
-    <h3>Sign Up</h3>
-    <h5>Step 1 of 3 : Winds.net Account Creation</h5>
+    <h3>Create User Account</h3>
 
     <!--// 3 step sign up process: general, address, billing option -->
-    <form name="sign_up_1" id="sign_up_1" action="sign_up_2.php">
+    <form name="signup1" id="signup1" action="signup2.php">
         <div class="well well-lg">
             <h3>Account</h3>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Email</span>
                 <input type="text"    class="form-control" placeholder="Email"          name="email"        id="email">
-                <input type="text"    class="form-control" placeholder="Repeat email"   name="repeat_email" id="repeat_email">
+                <input type="text"    class="form-control" placeholder="Repeat email"   name="repeatemail" id="repeatemail">
             </div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Password</span>
                 <input type="password"    class="form-control" placeholder="Password"           name="password"         id="password">
-                <input type="password"    class="form-control" placeholder="Repeat password"    name="repeat_password"  id="repeat_password">
+                <input type="password"    class="form-control" placeholder="Repeat password"    name="repeatpassword"  id="repeatpassword">
             </div>
         </div>
 
@@ -39,9 +38,9 @@
             <h3>Phone</h3>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Phone</span>
-                <input type="text"    class="form-control" length="11" placeholder="Cell Phone" name="cell_phone">
-                <input type="text"    class="form-control" length="32" placeholder="Home Phone" name="home_phone">
-                <input type="text"    class="form-control" length="32" placeholder="Alt. Phone" name="alt_phone">
+                <input type="text"    class="form-control" length="11" placeholder="Mobile Phone" name="mobilephone">
+                <input type="text"    class="form-control" length="32" placeholder="Home Phone" name="homephone">
+                <input type="text"    class="form-control" length="32" placeholder="Work Phone" name="workphone">
             </div>
         </div>
 
@@ -50,11 +49,12 @@
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Lot Number</span>
                 <!--// Some lots have alphabetical characters: 44A, 65B, etc. Cant us a DDL -->
-                <input type="text"    class="form-control" length="11" placeholder="0 to 850"  name="lot_id">
+                <input type="text"    class="form-control" length="11" placeholder="0 to 850"  name="lotid">
             </div>
         </div>
 
-        <?php require_once SITEROOT."/templates/form_next.php"; ?>
+        <input type="hidden" class="form-control" name="action" value="create_user">
+        <?php require_once SITEROOT."/templates/form_submit.php"; ?>
     </form>
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
@@ -64,14 +64,14 @@
 
     <!--// form validation -->
     <script language="javascript">
-        $("#sign_up_1").validate({
+        $("#signup1").validate({
             rules: {
                 // no quoting necessary
                 "email": {
                   required: true,
                   email: true,
                 },
-                "repeat_email": {
+                "repeatemail": {
                   required: true,
                   email: true,
                   equalTo: "#email",
@@ -80,36 +80,36 @@
                     required: true,
                     minlength: 8,
                 },
-                "repeat_password": {
+                "repeatpassword": {
                     required: true,
                     minlength: 8,
                     equalTo: "#password",
                 },
-                "cell_phone": {
+                "mobilephone": {
                     required: true,
                     phoneUS: true,
                 },
-                "home_phone": {
+                "homephone": {
                     phoneUS: true,
                 },
-                "alt_phone": {
+                "altphone": {
                     phoneUS: true,
                 }
             },
             messages: {
-                "repeat_email": {
+                "repeatemail": {
                     equalTo: "Email address must match.",
                 },
-                "repeat_password": {
+                "repeatpassword": {
                     equalTo: "Password does not match.",
                 },
-                "cell_phone": {
+                "cellphone": {
                     phoneUS: "U.S. formated phone number please.",
                 },
-                "home_phone": {
+                "homephone": {
                     phoneUS: "U.S. formated phone number please.",
                 },
-                "alt_phone": {
+                "altphone": {
                     phoneUS: "U.S. formated phone number please.",
                 },
             }
