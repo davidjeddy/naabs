@@ -83,30 +83,6 @@ $(document).on("click", "button.clear", function(e) {
 	return true;
 });
 
-$(document).on("click", "button.next", function(e) {
-	console.log( 'button.next clicked' );
-	
-	// Get form elem
-	var form = $(this).closest('form');
-
-	// Is the form currently client valid?
-	if ( form.valid() != true ) {
-		console.log( 'form not valid.');
-		return false;
-	}
-
-	// Serialize data
-	var form_data = form.serialize();
-
-	//write data to a cookie
-	$.cookie(form.attr('name'), form_data, { expires: 7, path: '/' });
-
-	// relocate to the forms 'action' property
-	window.location = "./"+form.attr('action');
-
-	return true;
-});
-
 $(document).on("click", "button.submit", function(e) {
 	console.log( 'button.submit clicked');
 	
