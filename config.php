@@ -13,7 +13,7 @@ define('SITETITLE', "RV Park Wireless Network Access");
 define('SITEHOME', 	"../");
 define('SITEROOT', 	"../views");
 define('TAXRATE', 0.07);
-define('SHIPRATE', 0.03);
+define('SHIPRATE', 0.00);
 
 /* Debug options */
 error_reporting(E_ALL);
