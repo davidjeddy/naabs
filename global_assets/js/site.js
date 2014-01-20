@@ -17,21 +17,29 @@
  * @param string url [optional]
  * @return boolean
  */
-function ajaxCall (type, data, dataType, url) {
+function ajaxCall (type, data, dataType) {
 	console.log( 'ajax function called' );
 
 	if ( typeof('type') == 'undefined' ) 	{ type 	= "POST"; } 
 	if ( typeof('data') == 'undefined' ) 	{ data 	= "NULL"; }
 	if ( typeof('dataType') == 'undefined' ){ dataType= "JSON"; } 
-	if ( typeof('url') == 'undefined' ) 	{ url 	= "../controllers/base_class.php"; }
 
 
 
-    var promise = $.ajax({ type: type, data: data, dataType: dataType, url: url });
+    var promise = $.ajax({ type: type, data: data, dataType: dataType, url: "../controllers/base_class.php" });
 
     promise.success(function(data) {
 		console.log(data);
 
+		if (data.bool === true) {
+			console.log('AJAX successful.');
+
+
+		} else {
+			console.log('AJAX failed.');
+
+			return false;
+		}
         return true;
     });
 
@@ -52,15 +60,13 @@ function ajaxCall (type, data, dataType, url) {
 // Form submit logic
 $(document).on("submit", "form", function(e) {
 	console.log( 'form submited');
+	var form = $(this);
 
 	// Prevent default	
 	e.preventDefault();
 
-	//if the form is 'sign in', validate both fields are populated.
-	if ( $(this).attr('id') == "sign_in") {
-
-		console.log( 'user signing in.');
-	}
+	//Do the AJAX call with all the form data
+	ajaxCall("post", form.serialize(), "JSON");
 	
 	return true;
 });
@@ -85,27 +91,17 @@ $(document).on("click", "button.clear", function(e) {
 
 $(document).on("click", "button.submit", function(e) {
 	console.log( 'button.submit clicked');
-	
-	//Prevent default form action
-	e.preventDefault;
 
 	// Get form elem
 	var form = $(this).closest('form');
-
-
 
 	// Is the form currently client valid?
 	if ( form.valid() != true ) {
 		console.log( 'form not valid.');
 		return false;
+	} else {
+		form.trigger('submit');
 	}
-
-
-
-	//Do the AJAX call with all the form data
-	ajaxCall("post", form.serialize(), "JSON", form.attr('action'));
-
-
 
 	return true;
 });
