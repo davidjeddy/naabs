@@ -18,7 +18,8 @@ require_once (__DIR__.'/base_model.php');
 
 class userModel extends baseModel {
 
-	private $conn2;
+
+	public function __construct() { parent::__construct(); }
 
 	// public methods
 	/**
@@ -32,17 +33,19 @@ class userModel extends baseModel {
 		$this->logger->addDebug('Starting userModel->createUser() with data', (array)$param_data);
 
 		try {
+
 		    $pstmt = $this->conn->prepare("
 		    	INSERT INTO `radius`.`radcheck`
 				(`username`, `attribute`, `op`, `value`)
 				VALUES( :username, 'Clear-Text', ':=', :value);
 			");
 
-		    return $pstmt->execute(array(
+		    $return_data =  $pstmt->execute(array(
 		    	'username' => $param_data->email,
 		    	'value' => $param_data->password
 		    ));
 
+		    return true;
 		} catch(PDOException $e) {
 			$this->logger->AddError( "Error: ".$e->getMessage());
 			return false;

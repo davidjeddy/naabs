@@ -12,31 +12,28 @@
  * @author David J Eddy <me@davidjeddy.com>
  * @since 0.0.2b
  */
-require_once (__DIR__.'/../config.php');
-// Autoload all the classes controlled by composer
-require_once (__DIR__.'/../vendor/autoload.php');
-// Load model
+require_once (__DIR__.'/base_class.php');
+// Include the model
 require_once (__DIR__.'/../models/user_model.php');
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 
-class userClass {
+class userClass extends baseClass {
 
-	private $logger;
-
-	function __construct (Logger $logger) {
-		$this->logger = $logger;
-
-		return true;
-	}
+	public function __construct() { parent::__construct(); }
 
 	/**
 	 * No real business logic to do when creating a user
 	 */
 	public function createUser($param_data) {
+		$this->logger->addDebug('Starting baseClass->goAction()');
+
+		// Instantiate the DB class.
 		$userModel = new userModel();
+
+		// Go make a new user
 		return $userModel->createUser($param_data);
 	}
 }

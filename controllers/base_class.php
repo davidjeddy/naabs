@@ -31,6 +31,12 @@ class baseClass {
 
     // Build in methods
     public function __construct () {
+        // create a log channel
+        $this->logger = new Logger('AppLogger');
+        
+        $this->logger->pushHandler(new StreamHandler(''.SITELOG.'', Logger::DEBUG));
+
+
 
         $this->form_data = new stdClass();
 
@@ -40,10 +46,6 @@ class baseClass {
         }
 
         unset($_POST);
-
-        // create a log channel
-        $this->logger = new Logger('AppLogger');
-        $this->logger->pushHandler(new StreamHandler('../logs/App.log', Logger::DEBUG));
 
         // Get the action and class
         if ( isset($this->form_data->action) && !empty($this->form_data->action) ) {
@@ -56,7 +58,9 @@ class baseClass {
 
     // Custom methods
     private function validateFormData () {
+        $this->logger->addDebug('Starting baseClass->validateFormData()');
 
+        // Loop all the form field values
         foreach($_POST as $key => $value) {
 
             //If the field name is a repeat field, ignore it for business logic
@@ -97,34 +101,29 @@ class baseClass {
 
     	switch($this->form_data->action) {
     		case 'create_user':
+                $this->logger->addDebug('Starting baseClass->goAction()->create_user');
+
                 //Create the user account in the DB
                 require_once __DIR__.'/user_class.php';           
-                $userClass = new userClass($this->logger);
+                $userClass = new userClass();
 
                 //Create user account
-                if ($userClass->createUser($this->form_data)) {
+                $return_data = $userClass->createUser($this->form_data);
+                //BOOLEAN true return
+                if ($return_data === true) {
                     echo json_encode(array("bool" => true, "text" => "User account created."));
+                //false return
                 } else {
-                    echo json_encode(array("bool" => false, "text" => "Failed to create user account."));
+                    echo json_encode(array("bool" => false, "text" => $return_data) );
                 }
 
     		break;
             case 'create_payment':
-
-                //if the account created correctly
-                //execute payment first
-                require_once __DIR__.'/payment_class.php';
-                $paymentClass = new paymentClass($this->logger);
-                
-                //Submit a (CC) payment
-                $paymentClass->createTime($this->form_data);
-                // Process payment (transaction)
-                if ($paymentClass->updateTime($this->form_data) == true) {
-                    //Update user record with new time amount.
-                };
+                $this->logger->addDebug('Starting baseClass->goAction()->create_payment');
             break;
     		default:
     			echo json_encode(array(false, "No valid cation found."));
+            break;
     	}
 
         return true;
@@ -137,25 +136,27 @@ class baseClass {
      * @Author Sivanesh Govindan
      * @Author David J Eddy <me@davidjeddy.com>
      * @data 2014-01-20
+     * @return string $ipaddress
      */
     private function getClientIP() {
-         $ipaddress = NULL;
-         if ( isset($_SERVER['HTTP_CLIENT_IP']) && $ipaddress == NULL)
-             $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-         else if( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $ipaddress == NULL)
-             $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-         else if( isset($_SERVER['HTTP_X_FORWARDED']) && $ipaddress == NULL)
-             $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-         else if( isset($_SERVER['HTTP_FORWARDED_FOR']) && $ipaddress == NULL)
-             $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-         else if( isset($_SERVER['HTTP_FORWARDED']) && $ipaddress == NULL)
-             $ipaddress = $_SERVER['HTTP_FORWARDED'];
-         else if( isset($_SERVER['REMOTE_ADDR']) && $ipaddress == NULL)
-             $ipaddress = $_SERVER['REMOTE_ADDR'];
-         else
-             $ipaddress = '0.0.0.0';
+        $this->logger->addDebug('Starting baseClass->goAction()->create_payment');
 
-         return $ipaddress; 
+        $ipaddress = NULL;
+        if ( isset($_SERVER['HTTP_CLIENT_IP']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        else if( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if( isset($_SERVER['HTTP_X_FORWARDED']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        else if( isset($_SERVER['HTTP_FORWARDED_FOR']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        else if( isset($_SERVER['HTTP_FORWARDED']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        else if( isset($_SERVER['REMOTE_ADDR']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+        else
+            $ipaddress = '0.0.0.0';
+        return $ipaddress; 
     }
 }
 

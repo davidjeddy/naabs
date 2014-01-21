@@ -27,10 +27,10 @@ class baseModel {
 	protected $logger;
 	protected $conn;
 
-	function __construct () {
+	public function __construct () {
         // Create a log channel
         $this->logger = new Logger('AppLogger');
-        $this->logger->pushHandler(new StreamHandler('../logs/App.log', Logger::DEBUG));
+        $this->logger->pushHandler(new StreamHandler(SITELOG, Logger::DEBUG));
 
 		$this->logger->addDebug('Starting baseModel->__construct()');
 
@@ -39,17 +39,18 @@ class baseModel {
 		// Create the DB connection
 		try {
 			// Setup conn string
-			$this->conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';', DB_USER, DB_PASS);
+			$this->conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';', ''.DB_USER.'', ''.DB_PASS.'');
+
 			// Pass back PDO errors and exceptions.
 		    $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		    print_r( $this->conn);
-
+		    return true;
 		} catch(PDOException $e) {
 			// Log errors
 			$this->logger->addError('ERROR: ' . $e->getMessage());
 			return false;
 		}
-	}
 
+		return false;
+	}
 }
