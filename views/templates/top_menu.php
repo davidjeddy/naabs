@@ -7,16 +7,7 @@
  * @since   0.0.1
  * @version 0.0.2
  */
-
-//TODO create a view side error template
-if (SITEDEBUG < 300) {
-    echo '<style>.debug {border-color:red}</style>';
-    echo 'SESSION:<PRE class="debug">';
-    print_r($_SESSION);
-    echo '</pre>COOKIE:<PRE class="debug">';
-    print_r($_COOKIE);
-    echo '</PRE>';
-}
+include_once( __DIR__.'/view_debug.php');
 ?>
 
 <nav class="navbar navbar-default" role="navigation">

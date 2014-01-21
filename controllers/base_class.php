@@ -24,13 +24,13 @@ use Monolog\Handler\StreamHandler;
 
 class baseClass {
 
-    private $form_data;
-    private $logger;
+    protected $form_data;
+    protected $logger;
 
 
 
     // Build in methods
-    function __construct () {
+    public function __construct () {
 
         $this->form_data = new stdClass();
 
