@@ -18,7 +18,7 @@
     <h3>Create User Account</h3>
 
     <!--// 3 step sign up process: general, address, billing option -->
-    <form name="signup1" id="signup1">
+    <form name="signup1" id="signup1" action="./my_time.php">
         <div class="well well-lg">
             <h3>Account</h3>
             <div class="input-group input-group-lg">
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <input type="hidden" class="form-control" name="action" value="user_create">
+        <input type="hidden" class="form-control" name="action" value="create_user">
         <?php require_once SITEROOT."/templates/form_submit.php"; ?>
     </form>
 
