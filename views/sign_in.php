@@ -30,7 +30,7 @@
                 <input type="password"  class="form-control" maxlength="32" placeholder="Password" name="Password">
             </div>
 
-            <?php require_once SITEROOT."/templates/form_enter.php"; ?>
+            <?php require_once SITEROOT."/templates/form_submit.php"; ?>
 
         </form>
 

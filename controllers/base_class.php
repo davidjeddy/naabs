@@ -24,13 +24,19 @@ use Monolog\Handler\StreamHandler;
 
 class baseClass {
 
-    private $form_data;
-    private $logger;
+    protected $form_data;
+    protected $logger;
 
 
 
     // Build in methods
-    function __construct () {
+    public function __construct () {
+        // create a log channel
+        $this->logger = new Logger('AppLogger');
+        
+        $this->logger->pushHandler(new StreamHandler(''.SITELOG.'', Logger::DEBUG));
+
+
 
         $this->form_data = new stdClass();
 
@@ -40,10 +46,6 @@ class baseClass {
         }
 
         unset($_POST);
-
-        // create a log channel
-        $this->logger = new Logger('AppLogger');
-        $this->logger->pushHandler(new StreamHandler('../logs/App.log', Logger::DEBUG));
 
         // Get the action and class
         if ( isset($this->form_data->action) && !empty($this->form_data->action) ) {
@@ -56,8 +58,21 @@ class baseClass {
 
     // Custom methods
     private function validateFormData () {
+        $this->logger->addDebug('Starting baseClass->validateFormData()');
 
+        // Loop all the form field values
         foreach($_POST as $key => $value) {
+
+            //If the field name is a repeat field, ignore it for business logic
+            
+            if (substr($key, 0, 6) == "repeat") {
+                continue;
+            }
+
+            // Validate field key's
+            if (valClass::alnum('')->validate($key) !== true) {
+                echo json_encode(array(false, "Form key ".$key." is not alphanumeric."));
+            }
 
             // Validate form field value a-Z 0-9
             if (valClass::alnum('_-\'. ')->validate($value) !== true
@@ -71,6 +86,8 @@ class baseClass {
             $this->form_data->{$key} = $value;
         }
         
+        $this->form_data->client_ip = $this->getClientIP();
+
 
 
         return true;
@@ -80,36 +97,66 @@ class baseClass {
     private function goAction() {
         $this->logger->addDebug('Starting baseClass->goAction()');
 
-        $return_data;
+
 
     	switch($this->form_data->action) {
-    		case 'add_user':
-
+    		case 'create_user':
+                $this->logger->addDebug('Starting baseClass->goAction()->create_user');
 
                 //Create the user account in the DB
                 require_once __DIR__.'/user_class.php';           
-                $userClass = new userClass($this->logger);
-                echo json_encode(array(true, $userClass->createUser($this->form_data)));
+                $userClass = new userClass();
 
+                //Create user account
+                $return_data = $userClass->createUser($this->form_data);
+                //BOOLEAN true return
+                if ($return_data === true) {
+                    echo json_encode(array("bool" => true, "text" => "User account created."));
+                //false return
+                } else {
+                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                }
 
-                //if the account created correctly
-    			//execute payment first
-    			require_once __DIR__.'/payment_class.php';
-				$paymentClass = new paymentClass($this->logger);
-                
-                //Submit a (CC) payment
-                $paymentClass->createTime($this->form_data);
-                // Process payment (transaction)
-				echo json_encode(array(true, $paymentClass->updateTime($this->form_data)));
-
-                // Done
-                return true;
     		break;
+            case 'create_payment':
+                $this->logger->addDebug('Starting baseClass->goAction()->create_payment');
+            break;
     		default:
     			echo json_encode(array(false, "No valid cation found."));
+            break;
     	}
 
         return true;
+    }
+
+    /**
+     * Get the clients IP.
+     *
+     * @Source: http://stackoverflow.com/questions/15699101/get-client-ip-address-using-php
+     * @Author Sivanesh Govindan
+     * @Author David J Eddy <me@davidjeddy.com>
+     * @data 2014-01-20
+     * @return string $ipaddress
+     */
+    private function getClientIP() {
+        $this->logger->addDebug('Starting baseClass->goAction()->create_payment');
+
+        $ipaddress = NULL;
+        if ( isset($_SERVER['HTTP_CLIENT_IP']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        else if( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if( isset($_SERVER['HTTP_X_FORWARDED']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        else if( isset($_SERVER['HTTP_FORWARDED_FOR']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        else if( isset($_SERVER['HTTP_FORWARDED']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        else if( isset($_SERVER['REMOTE_ADDR']) && $ipaddress == NULL)
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+        else
+            $ipaddress = '0.0.0.0';
+        return $ipaddress; 
     }
 }
 

@@ -19,7 +19,7 @@
     <h5>Step 2 of 3 : Service &amp; Payment Processing</h5>
 
     <!--// 3 step sign up process: general, address, billing option -->
-    <form name="sign_up_2" id="sign_up_2" action="sign_up_3.php">
+    <form>
 
         <div class="well well-lg">
             <h3>Service</h3>
@@ -117,6 +117,7 @@
             </div>
         </div>
 
+        <input type="hidden" name="action" value="create_user">;
         <?php require_once SITEROOT."/templates/form_next.php"; ?>
     </form>
 
