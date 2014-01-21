@@ -18,12 +18,24 @@ define('SHIPRATE', 0.00);
 /* Debug options */
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+define("SITELOG", "../logs/app.log");
 
 /* DB conn info */
-define('DB_ADDY',	"localhost");
-define('DB_NAME',	"");
-define('DB_USRNM',	"");
-define('DB_PASS',	"");
+//Testing host
+if ($_SERVER["SERVER_ADDR"] == "192.168.2.4") {
+    define("DB_HOST",   "127.0.0.1");
+    define("DB_PORT",   "3306");    
+    define("DB_NAME",   "radius");
+    define("DB_USER",   "root");
+    define("DB_PASS",   "Asdf1234");
+//Prod host
+} else {
+    define("DB_HOST",   "10.3.4.127");
+    define("DB_PORT",   "3306");
+    define("DB_NAME",   "radius");
+    define("DB_USER",   "windsnet");
+    define("DB_PASS",   "!6tu94E@A");
+}
 
 /* Edit for your locality */
 date_default_timezone_set("UTC");
