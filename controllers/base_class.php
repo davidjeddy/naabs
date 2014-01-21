@@ -93,6 +93,15 @@ class baseClass {
         return true;
     }
 
+    /**
+     * Goto the class and method dicatated by the form's action pair. If it does not exists and error is returned.
+     *
+     *@author David J Eddy <me@davidjeddy.com>
+     *@version 0.0.1
+     *@since 0.0.2
+     *@date 2014-01-14
+     *@todo Iterate on this, it is crap right now.
+     */
     // Go off and do what the form was submitted to do
     private function goAction() {
         $this->logger->addDebug('Starting baseClass->goAction()');
@@ -168,8 +177,28 @@ class baseClass {
                     echo json_encode(array("bool" => false, "text" => $return_data) );
                 }
     		break;
-            case 'create_payment':
-                $this->logger->addDebug('Starting baseClass->goAction()->create_payment');
+            case 'create_time':
+                $this->logger->addDebug('Starting baseClass->goAction()->create_time');
+
+                //Create the user account in the DB
+                require_once __DIR__.'/time_class.php';           
+                $timeClass = new timeClass();
+
+                //Create user account
+                $return_data = $userClass->timeClass($this->form_data);
+
+                //BOOLEAN true return
+                if ($return_data === true) {
+                    echo json_encode(array(
+                        "bool" => true,
+                        "text" => "Time has been added to your account, directing to `My History`.",
+                        "url"  => SITEROOT."/my_history.php")
+                    );
+                //false return
+                } else {
+                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                }
+
             break;
     		default:
     			echo json_encode(array(false, "No valid action found."));
