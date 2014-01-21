@@ -35,6 +35,7 @@
             <?php 
             if ( isset($_COOKIE['AUTH']) && $_COOKIE['AUTH'] === "true"){
             ?>
+                <li><a href="#"><?= $_COOKIE['USER']; ?></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
