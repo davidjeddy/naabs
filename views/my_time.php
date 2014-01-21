@@ -1,4 +1,7 @@
-<?php require_once "../config.php"; ?>
+<?php
+require_once "../config.php";
+require_once "./templates/auth_check.php";
+?>
 <!DOCTYPE html>
 <html>
 
@@ -51,7 +54,7 @@
             </div>
 
         </div>
-        <?php require_once SITEROOT."/templates/form_dual.php"; ?>
+        <?php require_once SITEROOT."/templates/form_submit.php"; ?>
 
     </form>
 

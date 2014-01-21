@@ -22,7 +22,14 @@ use Monolog\Handler\StreamHandler;
 
 class userClass extends baseClass {
 
-	public function __construct() { parent::__construct(); }
+	private $userModel;
+
+	public function __construct() {
+		parent::__construct();
+		
+		// Instantiate the DB class.
+		$this->userModel = new userModel();
+	}
 
 	/**
 	 * No real business logic to do when creating a user
@@ -30,10 +37,58 @@ class userClass extends baseClass {
 	public function createUser($param_data) {
 		$this->logger->addDebug('Starting baseClass->goAction()');
 
-		// Instantiate the DB class.
-		$userModel = new userModel();
-
 		// Go make a new user
-		return $userModel->createUser($param_data);
+		$return_data = $this->userModel->createUser($param_data);
+
+		//Set cookie data
+		if ( $return_data === true ){
+			return $this->loginUser($param_data);
+		};
+
+		return false;
+	}
+
+	/**
+	 * Log a user into the web application, allows access to the my_* views
+	 *
+	 *@author David J Eddy <me@davidjeddy.com>
+	 *@param object $param_data [requied]
+	 *@return void
+	 */
+	public function loginUser($param_data) {
+		$this->logger->addDebug('Starting baseClass->loginUser()');
+
+		$return_data = $this->userModel->getUserdata($param_data->email, $param_data->password);
+
+		if ( $return_data ) {
+			$time = time()+(60*60);
+
+			setcookie( "AUTH", "true", $time, "/" );
+			setcookie( "USER", $param_data->email, $time,"/" );
+			
+			if (isset($param_data->lotid)) {
+				setcookie( "LOTID",$param_data->lotid, $time,"/" );
+			}
+
+			return true;
+		}
+	}
+
+	/**
+	 * Log out the user from the web portal. Simply make the cookies expired.
+	 */
+	public function logoutUser() {
+		$this->logger->addDebug('Starting baseClass->logoutUser()');
+
+		$time = time()-(60*5);
+
+		try {
+			setcookie( "AUTH", "false", $time, "/" );
+
+			return true;
+		} catch (Excpetion $e) {
+			$this->logger->addError("Could not log out user: ".$e.". For time: ".$time);
+			return $e;
+		}
 	}
 }

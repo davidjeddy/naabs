@@ -19,10 +19,11 @@ define('SHIPRATE', 0.00);
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 define("SITELOG", "../logs/app.log");
+define("DEVIP", "192.168.2.4");
 
 /* DB conn info */
 //Testing host
-if ($_SERVER["SERVER_ADDR"] == "192.168.2.4") {
+if ($_SERVER["SERVER_ADDR"] == DEVIP) {
     define("DB_HOST",   "127.0.0.1");
     define("DB_PORT",   "3306");    
     define("DB_NAME",   "radius");

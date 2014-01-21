@@ -100,7 +100,53 @@ class baseClass {
 
 
     	switch($this->form_data->action) {
-    		case 'create_user':
+    		case 'login_user':
+                $this->logger->addDebug('Starting baseClass->goAction()->login_user');
+
+                //Create the user account in the DB
+                require_once __DIR__.'/user_class.php';           
+                $userClass = new userClass();
+
+                //Create user account
+                $return_data = $userClass->loginUser($this->form_data);
+
+                //BOOLEAN true return
+                if ($return_data === true) {
+                    echo json_encode(array(
+                        "bool" => true,
+                        "text" => "User account signed out.",
+                        "url"  => SITEROOT."/my_time.php")
+                    );
+
+                //false return
+                } else {
+                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                }
+            break;
+            case 'logout_user':
+                $this->logger->addDebug('Starting baseClass->goAction()->logout_user');
+
+                //Create the user account in the DB
+                require_once __DIR__.'/user_class.php';           
+                $userClass = new userClass();
+
+                //Create user account
+                $return_data = $userClass->logoutUser();
+
+                //BOOLEAN true return
+                if ($return_data === true) {
+                    echo json_encode(array(
+                        "bool" => true,
+                        "text" => "User account signed out.",
+                        "url"  => SITEROOT."/sign_out.php")
+                    );
+
+                //false return
+                } else {
+                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                }
+            break;
+            case 'create_user':
                 $this->logger->addDebug('Starting baseClass->goAction()->create_user');
 
                 //Create the user account in the DB
@@ -109,21 +155,24 @@ class baseClass {
 
                 //Create user account
                 $return_data = $userClass->createUser($this->form_data);
+
                 //BOOLEAN true return
                 if ($return_data === true) {
-                    echo json_encode(array("bool" => true, "text" => "User account created."));
+                    echo json_encode(array(
+                        "bool" => true,
+                        "text" => "User account created, directing to `My Time`.",
+                        "url"  => SITEROOT."/my_time.php")
+                    );
                 //false return
                 } else {
                     echo json_encode(array("bool" => false, "text" => $return_data) );
                 }
-
     		break;
             case 'create_payment':
                 $this->logger->addDebug('Starting baseClass->goAction()->create_payment');
             break;
     		default:
-    			echo json_encode(array(false, "No valid cation found."));
-            break;
+    			echo json_encode(array(false, "No valid action found."));
     	}
 
         return true;
