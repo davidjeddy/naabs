@@ -14,29 +14,35 @@
  * @param string type [optional]
  * @param string data [optional]
  * @param string method [optional]
- * @param string url [optional]
+ * @param string action [optional]
  * @return boolean
  */
-function ajaxCall (type, data, dataType) {
+function ajaxCall(type, data, dataType, action) {
 	console.log( 'ajax function called' );
 
 	if ( typeof('type') == 'undefined' ) 	{ type 	= "POST"; } 
 	if ( typeof('data') == 'undefined' ) 	{ data 	= "NULL"; }
 	if ( typeof('dataType') == 'undefined' ){ dataType= "JSON"; } 
+	if ( typeof('action') == 'undefined' )  { action= ""; } 
 
 
 
     var promise = $.ajax({ type: type, data: data, dataType: dataType, url: "../controllers/base_class.php" });
 
     promise.success(function(data) {
-		console.log(data);
+		console.log("promise.success");
 
 		if (data.bool === true) {
-			console.log('AJAX successful.');
+			console.log('data good');
 
+			if ( typeof(data['url']) !== "undefined" ){
+				// Go where the form wants us to
+				window.location.href = data['url'];
+			}
 
+			return true;
 		} else {
-			console.log('AJAX failed.');
+			console.log('data bad');
 
 			return false;
 		}
@@ -44,17 +50,18 @@ function ajaxCall (type, data, dataType) {
     });
 
     promise.error(function(data) {
+		console.log("promise.error: ");
 		console.log(data);
 
         return false;
     });
 
     promise.complete(function(){
+		console.log("promise.complete");
 
 		return true;
     });
 }
-
 
 
 // Form submit logic
@@ -65,9 +72,11 @@ $(document).on("submit", "form", function(e) {
 	// Prevent default	
 	e.preventDefault();
 
+
 	//Do the AJAX call with all the form data
 	ajaxCall("post", form.serialize(), "JSON");
 	
+
 	return true;
 });
 

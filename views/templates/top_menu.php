@@ -7,7 +7,6 @@
  * @since   0.0.1
  * @version 0.0.2
  */
-include_once( __DIR__.'/view_debug.php');
 ?>
 
 <nav class="navbar navbar-default" role="navigation">
@@ -26,11 +25,15 @@ include_once( __DIR__.'/view_debug.php');
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li><a href="<?= SITEROOT; ?>/learn_more.php">Learn More</a></li>
+            <?php 
+            if ( isset($_COOKIE['AUTH']) && $_COOKIE['AUTH'] === "true"){
+            } else {  ?>
             <li><a href="<?= SITEROOT; ?>/create_user.php">Sign up</a></li>
+            <?php }; ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php 
-            if ( isset($_SESSION['IS_AUTH']) && $_SESSION['IS_AUTH'] == true ){
+            if ( isset($_COOKIE['AUTH']) && $_COOKIE['AUTH'] === "true"){
             ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account&nbsp;<b class="caret"></b></a>
