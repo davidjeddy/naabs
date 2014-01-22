@@ -41,7 +41,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
     <form id="mytime" action="my_history.php">
 
         <div class="well well-lg">
-            <h3>Select Service</h3>
+            <h3>Service</h3>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Duration</span>
                 <select class="form-control" name="serviceduration">
@@ -57,7 +57,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             <!--//
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Device Count</span>
-                <select class="form-control" name="devicecount">
+                <select class="form-control" name="device_count">
                     <option>Select One</option>
                     <option value="1"   >1</option>
                     <option value="2"   >2</option>
@@ -74,23 +74,23 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Name</span>
-                <input type="text"    class="form-control" placeholder="First"  name="firstname">
-                <input type="text"    class="form-control" placeholder="Last"   name="lastname">
+                <input type="text"    class="form-control" placeholder="First"      name="firstname" value="Joe">
+                <input type="text"    class="form-control" placeholder="Last"       name="lastname" value="Shopper">
             </div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Billig</br>Address</span>
-                <input type="text"    class="form-control" placeholder="Street"   name="line1">
-                <input type="text"    class="form-control" placeholder="City"       name="city">
-                <input type="text"    class="form-control" placeholder="State"      name="state">
-                <input type="text"    class="form-control" placeholder="ZIP"        name="zip">
+                <input type="text"    class="form-control" placeholder="Street"     name="line1" value="52 N Main ST">
+                <input type="text"    class="form-control" placeholder="City"       name="city" value="Johnstown">
+                <input type="text"    class="form-control" placeholder="State"      name="state" value="OH">
+                <input type="text"    class="form-control" placeholder="ZIP"        name="zip" value="43210">
                 <input type="hidden"  class="form-control" placeholder="Country"    name="country" value="US">
             </div>
 
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Card Number</span>
-                <input type="text"    class="form-control" placeholder="Card Number"  name="cardnumber">
+                <input type="text"    class="form-control" placeholder="Card Number"name="cardnumber" value="4417119669820331">
             </div>
 
             <div class="input-group input-group-lg">
@@ -98,7 +98,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 <select class="form-control" name="cardtype">
                     <option>Select One</option>
                     <option value="mastercard">Mastercard</option>
-                    <option value="visa">Visa</option>
+                    <option value="visa" selected>Visa</option>
                 </select>
             </div>
 
@@ -116,7 +116,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                     <option value="08">08</option>
                     <option value="09">09</option>
                     <option value="10">10</option>
-                    <option value="11">11</option>
+                    <option value="11" selected>11</option>
                     <option value="12">12</option>
                 </select>
                 <!--// Automat this to include this year and then +4 more -->
@@ -126,15 +126,15 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                     <option value="2015">2015</option>
                     <option value="2016">2016</option>
                     <option value="2017">2017</option>
-                    <option value="2018">2018</option>
+                    <option value="2018" selected>2018</option>
                 </select>
             </div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">CVV2</span>
-                <input type="text"    class="form-control" placeholder="CVV2"  name="cardcvv2">
+                <input type="text"    class="form-control" placeholder="CVV2"  name="cardcvv2" value="874">
             </div>
-        </div>
+        
 
         <input type="hidden" name="action" value="create_time">
 
