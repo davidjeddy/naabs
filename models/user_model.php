@@ -19,7 +19,10 @@ require_once (__DIR__.'/base_model.php');
 class userModel extends baseModel {
 
 
-	public function __construct() { parent::__construct(); }
+	public function __construct() {
+		parent::__construct();
+
+	}
 
 	// public methods
 	/**
