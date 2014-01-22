@@ -78,7 +78,7 @@ class timeModel extends baseModel {
 
 	    $qdata->execute();
 			 
-		// Get array containing all of the result rows (should be two)
+		# Get array containing all of the result rows (should be two)
 		$return_data = $qdata->fetchAll(PDO::FETCH_OBJ);
 
 		if (isset($return_data[0]->value)){
@@ -94,19 +94,29 @@ class timeModel extends baseModel {
 	 * User has time, and is current, add more
 	 *
 	 */
-	public function updateTime($param_data, $current_expire_time) {
+	public function updateTime($param_data) {
+
+		# Get the users current expiring time
+		$current_expire_time = $this->readTime($param_data->username);
 
 		if ($current_expire_time < $this->datetime->getTimestamp() ) {
 			$current_expire_time = $this->datetime->getTimestamp();
 		}
 
-		// Add new amount of time to exisiting time
+		# Add new amount of time to exisiting time
 		$ttl_access_time = ($current_expire_time + $param_data->serviceduration);
 
-echo "new extended expire time: ". $ttl_access_time;
-exit;
-		
+		$query = "			
+			UPDATE `".DB_NAME."`.`radcheck`
+			SET `value` = ?
+			WHERE `username` = ? AND `attribute` = 'Access-Expire'	
+		";
 
-		return true;
+		$pstmt = $this->conn->prepare($query);
+
+		return $pstmt->execute(array(
+			$ttl_access_time,
+			$param_data->username
+		));
 	}
 }

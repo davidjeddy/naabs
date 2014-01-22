@@ -42,6 +42,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
 
         <div class="well well-lg">
             <h3>Service</h3>
+
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Duration</span>
                 <select class="form-control" name="serviceduration">
@@ -54,8 +55,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             </div>
 
             <!--// Version 2 will have an option for the number of devices -->
-            <!--//
-            <div class="input-group input-group-lg">
+            <!--// <div class="input-group input-group-lg">
                 <span class="input-group-addon">Device Count</span>
                 <select class="form-control" name="device_count">
                     <option>Select One</option>
@@ -65,8 +65,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                     <option value="4"   >4</option>
                     <option value="5"   >5</option>
                 </select>
-            </div>
-            --> 
+            </div> -->
         </div>
 
         <div class="well well-lg">
@@ -86,7 +85,6 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 <input type="text"    class="form-control" placeholder="ZIP"        name="zip" value="43210">
                 <input type="hidden"  class="form-control" placeholder="Country"    name="country" value="US">
             </div>
-
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Card Number</span>
@@ -134,7 +132,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 <span class="input-group-addon">CVV2</span>
                 <input type="text"    class="form-control" placeholder="CVV2"  name="cardcvv2" value="874">
             </div>
-        
+        </div>
 
         <input type="hidden" name="action" value="create_time">
 

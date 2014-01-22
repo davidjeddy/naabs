@@ -29,18 +29,22 @@ class timeClass extends baseClass {
     private $datetime;
 
     public function __construct() {
+        # start up parent constructor
         parent::__construct();
-        
+
+        $this->logger->addDebug('Starting timeClass->__construct()');
+
         # Instantiate the DB class.
         $this->timeModel = new timeModel();
         $this->datetime  = new Datetime();
+
     }
 
     /**
-     * Fiogure out if s user A) has had time, B) do they have valid time still, C) if we add more time or create new entries
+     * This method is used to create an entry for new time. Typically for firt purchases.
      *
      *@author David J Eddy <me@davidjeddy.com>
-     *@version 0.0.2
+     *@version 0.0.5
      *@since 0.0.4
      *@date 2014-01-21
      *@param object $param_data [required]
@@ -51,31 +55,24 @@ class timeClass extends baseClass {
         $this->logger->addDebug('Starting timeClass->createTime()');
     
 
+
+        # Has the user ever had time with us?
+        $user_time_data = $this->timeModel->readTime($param_data->username);
         
         # Yes, the user has, at some point, had time with us
-        if( is_numeric($this->timeModel->readTime($param_data->username)) ) {
+        if( is_numeric($user_time_data) ) {
 
-            # Has the time expired?
-            # No, the user still has time and is adding more.
-            if ($this->datetime->getTimestamp() < $user_time_data) {
-                
-                echo 'time is still valid.';
+            # Go update the experation time
+            return $this->timeModel->updateTime($param_data);
 
-                return $this->timeModel->updateTime($param_data, true);
-                return true;
-                
-            # Yes, the time is over with            
-            } else {
-                
-                echo 'add new time amount to expired amounts';exit;
-                return false;
-            }
         # No, the user has never had time with us.
         } else {
 
             # Create a Session-Start / Session-Expire entries for a new user
             return $this->timeModel->createTime($param_data, true);
         }
+
+
 
         return false;
     }
@@ -86,12 +83,21 @@ class timeClass extends baseClass {
     public function readTime($user) {
         $this->logger->addDebug('Starting timeClass->readTime()');
 
+
+
         $return_data = $this->timeModel->readTime($user);
 
-        if (is_integer($return_data)) {
-            return date('Y M d, h:m a', $return_data );
+        if (is_numeric($return_data)) {
+
+            $this->datetime->setTimestamp($return_data);
+            return $this->datetime->format('Y M d, h:m a');
         } else {
+
             return false;
         }
+
+
+
+        return false;
     }
 }

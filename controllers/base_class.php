@@ -179,6 +179,7 @@ class baseClass {
     		break;
             case 'create_time':
                 $this->logger->addDebug('Starting baseClass->goAction()->create_time');
+
                 $return_data_paym = false;
                 $return_data_time = false;
 
@@ -190,6 +191,7 @@ class baseClass {
 
                 // Exec payment attempt
                 $return_data_paym = $paymentClass->createPayment($this->form_data);
+
 
 
                 if ( $return_data_paym === true ) {
@@ -218,7 +220,7 @@ class baseClass {
                         echo json_encode(array(
                             "bool" => true,
                             "text" => "Time has been added to your account, directing to `My History`.",
-                            //"url"  => SITEROOT."/my_history.php"
+                            "url"  => SITEROOT."/my_history.php"
                         ) );
                     //false return
                     } else {
@@ -230,10 +232,11 @@ class baseClass {
 
             break;
     		default:
+
     			echo json_encode(array(false, "No valid action found."));
     	}
 
-        return true;
+        exit;
     }
 
     /**
