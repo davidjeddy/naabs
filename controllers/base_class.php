@@ -170,8 +170,8 @@ class baseClass {
                     echo json_encode(array(
                         "bool" => true,
                         "text" => "User account created, directing to `My Time`.",
-                        "url"  => SITEROOT."/my_time.php")
-                    );
+                        "url"  => SITEROOT."/my_time.php"
+                    ) );
                 //false return
                 } else {
                     echo json_encode(array("bool" => false, "text" => $return_data) );
@@ -179,24 +179,53 @@ class baseClass {
     		break;
             case 'create_time':
                 $this->logger->addDebug('Starting baseClass->goAction()->create_time');
+                $return_data_paym = false;
+                $return_data_time = false;
 
                 //Create the user account in the DB
-                require_once __DIR__.'/time_class.php';           
-                $timeClass = new timeClass();
+                require_once __DIR__.'/payment_class.php';  
 
-                //Create user account
-                $return_data = $userClass->timeClass($this->form_data);
+                //Process payment
+                $paymentClass = new paymentClass();
 
-                //BOOLEAN true return
-                if ($return_data === true) {
+                // Exec payment attempt
+                $return_data_paym = $paymentClass->createPayment($this->form_data);
+
+
+                if ( $return_data_paym === true ) {
                     echo json_encode(array(
                         "bool" => true,
-                        "text" => "Time has been added to your account, directing to `My History`.",
-                        "url"  => SITEROOT."/my_history.php")
-                    );
-                //false return
+                        "text" => "Payment processed successfully.",
+                    ) );
+
+
+
+                    // Now attempt to create more time on the users account
+                    //Create the user account in the DB
+                    require_once __DIR__.'/time_class.php';           
+                    $timeClass = new timeClass();
+
+
+
+                    //Create user account
+                    $this->form_data->username = $_COOKIE['USER'];
+                    $return_data_time = $timeClass->createTime($this->form_data);
+
+
+
+                    //BOOLEAN true return
+                    if ($return_data_time === true) {
+                        echo json_encode(array(
+                            "bool" => true,
+                            "text" => "Time has been added to your account, directing to `My History`.",
+                            //"url"  => SITEROOT."/my_history.php"
+                        ) );
+                    //false return
+                    } else {
+                        echo json_encode(array("bool" => false, "text" => $return_data_time) );
+                    }
                 } else {
-                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                    echo json_encode(array("bool" => false, "text" => $return_data_paym) );    
                 }
 
             break;
