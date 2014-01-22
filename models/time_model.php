@@ -21,19 +21,57 @@ require_once (__DIR__.'/base_model.php');
 
 class timeModel extends baseModel {
 
+	private $datetime;
 
 	public function __construct() {
 		parent::__construct();
+
+		$this->datetime = new Datetime;
 	}
 
-	public function readTime($username){
+	/**
+	 * Add a session-start entry to the RADIUS server TBO
+	 *
+	 *@author David J Eddy <me@davidjeddy.com>
+	 *@date 2014-01-22
+	 *@param object $param_data [required]
+	 *@return boolean
+	 */
+	public function createTime($param_data) {
+
+		try {
+			# New Session-Start & #Session-Expire rows
+			$query = "			
+				INSERT INTO `".DB_NAME."`.`radcheck`
+						( `username`, `attribute`, `op`, `value`)
+				VALUES 	( :username, 'Access-Expire', ':=', :value_expire)
+			";
+
+			$pstmt = $this->conn->prepare($query);
+
+		    $pstmt->bindParam(':username'		, $username);
+		    $pstmt->bindParam(':value_expire'	, $value_expire);
+
+		    $username 		= $param_data->username;
+		    $value_expire	= ($this->datetime->getTimestamp() + $param_data->serviceduration);
+
+		    return $pstmt->execute();
+
+		} catch (Exception $e) {
+			$this->logger->AddError("timeModel->createTime() error: ". $e);
+			return false;
+		}
+	}
+
+	/**
+	 * Read the expiration date of the users access time
+	 */
+	public function readTime($username) {
 		$return_data = null;
 		
 		$query = "
 			SELECT `username`,`attribute`,`value` FROM ".DB_NAME.".radcheck
-			WHERE 
-			`username` = '".$username."' AND `attribute` = 'Access-Start'
-			OR `username` = '".$username."' AND `attribute` = 'Access-Period'
+			WHERE  `username` = '".$username."' AND `attribute` = 'Access-Expire'
 		";
 
 	    $qdata = $this->conn->prepare($query);
@@ -43,13 +81,32 @@ class timeModel extends baseModel {
 		// Get array containing all of the result rows (should be two)
 		$return_data = $qdata->fetchAll(PDO::FETCH_OBJ);
 
-		// Using the 'start' and 'length' timestamps we get the timestamp of ending
-		if ( isset($return_data[0]->value) 
-			&& isset($return_data[1]->value)
-		) {
-			return ($return_data[0]->value + $return_data[1]->value);
+		if (isset($return_data[0]->value)){
+
+			return $return_data[0]->value;
 		} else {
+
 			return false;
 		}
+	}
+
+	/**
+	 * User has time, and is current, add more
+	 *
+	 */
+	public function updateTime($param_data, $current_expire_time) {
+
+		if ($current_expire_time < $this->datetime->getTimestamp() ) {
+			$current_expire_time = $this->datetime->getTimestamp();
+		}
+
+		// Add new amount of time to exisiting time
+		$ttl_access_time = ($current_expire_time + $param_data->serviceduration);
+
+echo "new extended expire time: ". $ttl_access_time;
+exit;
+		
+
+		return true;
 	}
 }

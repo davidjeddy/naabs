@@ -13,10 +13,10 @@
  * @since 0.0.2b
  * @date 2014-01-21
  */
-// Include Controllers
+# Include Controllers
 require_once (__DIR__.'/base_class.php');
 require_once (__DIR__.'/payment_class.php');
-// Include the Models
+# Include the Models
 require_once (__DIR__.'/../models/time_model.php');
 
 use Monolog\Logger;
@@ -26,19 +26,21 @@ use Monolog\Handler\StreamHandler;
 class timeClass extends baseClass {
 
     private $timeModel;
+    private $datetime;
 
     public function __construct() {
         parent::__construct();
         
-        // Instantiate the DB class.
+        # Instantiate the DB class.
         $this->timeModel = new timeModel();
+        $this->datetime  = new Datetime();
     }
 
     /**
-     * Add time to an account
+     * Fiogure out if s user A) has had time, B) do they have valid time still, C) if we add more time or create new entries
      *
      *@author David J Eddy <me@davidjeddy.com>
-     *@version 0.0.1
+     *@version 0.0.2
      *@since 0.0.4
      *@date 2014-01-21
      *@param object $param_data [required]
@@ -46,34 +48,36 @@ class timeClass extends baseClass {
      *
      */
     public function createTime($param_data) {
-        //Process payment
-        $paymentClass = new paymentClass();
+        $this->logger->addDebug('Starting timeClass->createTime()');
+    
 
-        // Exec payment attempt
-        $pay_return_data = $paymentClass->applyPayment($param_data);
+        
+        # Yes, the user has, at some point, had time with us
+        if( is_numeric($this->timeModel->readTime($param_data->username)) ) {
 
-        // Good
-        if ( $pay_return_data === true ) {
+            # Has the time expired?
+            # No, the user still has time and is adding more.
+            if ($this->datetime->getTimestamp() < $user_time_data) {
+                
+                echo 'time is still valid.';
 
-            //Has the user ever had time with us?
-            //yes
-            if( $this->timeModel->readTime($user) ) {
+                return $this->timeModel->updateTime($param_data, true);
+                return true;
+                
+            # Yes, the time is over with            
+            } else {
+                
+                echo 'add new time amount to expired amounts';exit;
+                return false;
             }
-            
-                //has the time expired?
-                    //yes: set new access-start & access-period
-                    //no: leave access-start, add current access-period w/ new period. save access-period
-            //no
-            // create access-start & access-period with values
-
-            
-        // payment failed
+        # No, the user has never had time with us.
         } else {
 
-            return $pay_return_data;
+            # Create a Session-Start / Session-Expire entries for a new user
+            return $this->timeModel->createTime($param_data, true);
         }
 
-        return json_encode( array("bool" => false, "text" => "Payment processing failed. Pay Error 1.") );
+        return false;
     }
 
     /**
