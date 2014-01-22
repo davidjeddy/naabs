@@ -28,4 +28,11 @@ class paymentClass extends baseClass {
 	}
 
 	//Public methods as CRUD
+	/**
+	 * Save the payment details in a TBO
+	 */
+	public function createPayment($param_data) {
+
+		return true;
+	}
 }
