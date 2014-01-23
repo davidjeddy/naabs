@@ -142,7 +142,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
 
     <!--// Add some addition methods to the valitor -->
-    <script src="<?= SITEHOME; ?>global_assets/js/jquery_validate/dist/additional-methods.js"></script>
+    <script src="<?= SITEROOT; ?>/../global_assets/js/jquery_validate/dist/additional-methods.js"></script>
 
     <!--// form validation -->
     <script language="javascript">

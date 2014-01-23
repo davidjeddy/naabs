@@ -10,32 +10,35 @@
 define('SITEOWNER', "Winds.net");
 define('SITEEMAIL', "admin@winds.net");
 define('SITETITLE', "RV Park Wireless Network Access");
-define('SITEHOME', 	"../");
 define('SITEROOT', 	"../views");
-define('TAXRATE', 0.07);
-define('SHIPRATE', 0.00);
+define('SITETAX', 0.07);
+define('SITESHIPRATE', 0.00);
+define('SITECONTACT', "Please contact the administrator at phone number 321-321-3210. Sorry for the inconvenience.");
 
 /* Debug options */
 error_reporting(E_ALL);
-ini_set("display_errors", 1);
 define("SITELOG", "../logs/app.log");
 define("DEVIP", "192.168.2.4");
+define("PRODIP", "10.3.4.127");
 
 /* DB conn info */
 //Testing host
-if ($_SERVER["SERVER_ADDR"] == DEVIP) {
+if ($_SERVER["SERVER_ADDR"] == DEVIP
+    || $_SERVER["SERVER_ADDR"] == "127.0.0.1"
+    || $_SERVER["SERVER_ADDR"] == "localhost"
+) {
     define("DB_HOST",   "127.0.0.1");
     define("DB_PORT",   "3306");    
     define("DB_NAME",   "radius");
-    define(".DB_TABL.",   "radcheck");
+    define("DB_TABL",   "radcheck");
     define("DB_USER",   "root");
     define("DB_PASS",   "Asdf1234");
 //Prod host
 } else {
-    define("DB_HOST",   "10.3.4.127");
+    define("DB_HOST",   PRODIP);
     define("DB_PORT",   "3306");
     define("DB_NAME",   "radius");
-    define(".DB_TABL.",   "radcheck");
+    define("DB_TABL",   "radcheck");
     define("DB_USER",   "windsnet");
     define("DB_PASS",   "!6tu94E@A");
 }
@@ -47,15 +50,6 @@ date_default_timezone_set("UTC");
 define('PP_CLIENTID', "AVNj_hDHDYISigTl5T9x08B9Vc9b8kh9zQ_VCzsxvMUNbMrLCfLY2jNBfz4j");
 define('PP_SECRET', "ECXsUBCGcNh7eOwWmNxNh9qchrnqCjB9NDbMMDWA_pZfwPr1lq3tiN1MLJCU");
 define('PP_CONFIG_PATH', __DIR__);
-
-
-
-/* DO NOT CHANGE! */
-define('DATEFORMAT',"YYYY-MM-DD");
-define('TIMEFORMAT',"HH-mm-ss");
-define('NOW_YEAR', 	date("Y"));
-define('NOW_MONTH', date("M"));
-define('NOW_DAY',	date("D"));
 
 
 
