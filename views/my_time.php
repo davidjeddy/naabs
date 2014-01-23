@@ -29,7 +29,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
 
         <?php
             if ( !empty($t_remaining) ) {
-                echo'<h3>Access Ends at</h3><p>'.date('Y-m-d h:i:s a', $t_remaining).'</p>';
+                echo'<h3>Access Ends at</h3><p>'.date('F jS, Y h:i:s a', $t_remaining).'</p>';
             } else {
                 echo '<h4>No time credited.</h4>';
             };

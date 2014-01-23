@@ -40,7 +40,7 @@ $h_data = $historyClass->readHistory($_COOKIE['USER']);
                     echo '
                     <tr>
                         <td>'.$transaction->transaction_id.'</td>
-                        <td>'.date('Y-m-d h:i:s a', $transaction->create_time).'</td>
+                        <td>'.date('F jS, Y h:i:s a', $transaction->create_time).'</td>
                         <td>'.$transaction->intent.'</td>
                         <td>'.$transaction->state.'</td>
                         <td>$'.$transaction->amount.'</td>
