@@ -34,6 +34,7 @@ use PayPal\Api\AmountDetails;
 use PayPal\Api\Amount;
 use PayPal\Api\Transaction;
 use PayPal\Api\Payment;
+use PayPal\Api\Sale;
 
 
 use Monolog\Logger;
@@ -69,12 +70,14 @@ class paymentClass extends baseClass {
 
 
 		try {
+			$apiContext = new ApiContext(new OAuthTokenCredential(PP_CLIENTID, PP_SECRET));
+
 			$addr = new Address();
 			$addr->setLine1($param_data->line1);
 			$addr->setCity($param_data->city);
-			$addr->setCountry_code($param_data->country);
-			$addr->setPostal_code($param_data->zip);
 			$addr->setState($param_data->state);
+			$addr->setPostal_code($param_data->zip);
+			$addr->setCountry_code($param_data->country);
 
 			$card = new CreditCard();
 			$card->setNumber($param_data->cardnumber);
@@ -90,43 +93,47 @@ class paymentClass extends baseClass {
 			$fi->setCredit_card($card);
 
 			$payer = new Payer();
-			$payer->setPayment_method('creditcard');
+			$payer->setPayment_method('credit_card');
 			$payer->setFunding_instruments(array($fi));
-
-			$amountDetails = new AmountDetails();
-			$amountDetails->setSubtotal($this->getAmount($param_data->serviceduration));
-			$amountDetails->setTax(TAXRATE);
-			$amountDetails->setShipping(SHIPRATE);
 
 			$amount = new Amount();
 			$amount->setCurrency('USD');
-			$amount->setTotal($this->getAmount($param_data->serviceduration) * TAXRATE);
-			$amount->setDetails($amountDetails);
+			$amount->setTotal($this->getAmount($param_data->serviceduration));
 
 			$transaction = new Transaction();
 			$transaction->setAmount($amount);
-			$transaction->setDescription('Access to '.SITEOWNER.'\'s network.');
+			$transaction->setDescription('This is the payment transaction description.');
 
 			$payment = new Payment();
 			$payment->setIntent('sale');
 			$payment->setPayer($payer);
 			$payment->setTransactions(array($transaction));
 
-			//$apiContext = new ApiContext(new OAuthTokenCredential( PP_CLIENTID, PP_SECRET ));
 
 
+			### Create Payment
+			# Create a payment by posting to the APIService
+			# using a valid ApiContext
+			# The return object contains the status;
+			try {
+				$payment->create($apiContext);
 
-			# Log transaction for later retieval
-			//$this->paymentModel->createPaymentLog($payment);
+				if ($payment->getState() == "approved") {
 
+					return $this->paymentModel->createPaymentLog($param_data->username, $payment->toArray());
+				} else {
+					$this->logger->addError( "Error with payment information.");
 
+					return false;
+				}
 
-			# Return to calling method
-			if( $payment->getState() == "approved") {
-				return true;
-			} else {
-				return $payment->getState();
+			} catch (\PPConnectionException $e) {
+				$this->logger->addError( "Error while connecting to processing credit card: ".$e->getMessage());
+
+				return false;
 			}
+
+			return false;
 		} catch (Exception $e) {
 
 			$this->logger->addError('paymentClass->createPaymentMethod() failed with an error of '.$e);

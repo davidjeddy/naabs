@@ -2,15 +2,18 @@
 /**
  * Payment model class
  * 
- * @author David J Eddy <me@davidjeddy.com>
- * @since 0.0.2b
- * @package windsnet
+ * Right now this is very tightly coupled with Paypal.
+ *
+ *@author David J Eddy <me@davidjeddy.com>
+ *@since 0.0.2b
+ *@package windsnet
+ *@todo be payment processor agnostic
  */
 
 /**
  * paymentModel
- * @author David J Eddy <me@davidjeddy.com>
- * @since 0.0.1
+ *@author David J Eddy <me@davidjeddy.com>
+ *@since 0.0.1
  */
 require_once (__DIR__.'/base_model.php');
 
@@ -28,49 +31,50 @@ class paymentModel extends baseModel {
 	/**
 	 * Save the transaction log to our transaction table
 	 */
-	public function createPaymentLog($payment_log_obj) {
+	public function createPaymentLog($username, $param_data) {
+		$this->logger->addDebug('paymentModel->createPaymentLog() started.');
 
-return true;
+		try {
+			# New Session-Start & #Session-Expire rows
+			$query = "			
+				INSERT INTO `".DB_NAME."`.`radtransactionlog` (
+					`username`,
+					`transaction_id`,
+					`create_time`,
+					`intent`,
+					`state`,
+					`amount`
+				) VALUES (
+					:username,
+					:transaction_id,
+					:create_time,
+					:intent,
+					:state,
+					:amount
+				)
+			";
 
-		# New Session-Start & #Session-Expire rows
-		$query = "			
-			INSERT INTO `".DB_NAME."`.`".DB_TABL."` (
-				`username`,
-				`transaction_id`,
-				`create_time`,
-				`number`,
-				`state`,
-				`amount`,
-			) VALUES (
-				:username,
-				:transaction_id,
-				:create_time,
-				:number,
-				:state,
-				:amount,
-			)
-		";
+			$pstmt = $this->conn->prepare($query);
 
-		$pstmt = $this->conn->prepare($query);
+		    $pstmt->bindParam(':username', 		$username);
+			$pstmt->bindParam(':transaction_id',$transaction_id);
+			$pstmt->bindParam(':create_time', 	$create_time);
+			$pstmt->bindParam(':intent', 		$intent);
+			$pstmt->bindParam(':state', 		$state);
+			$pstmt->bindParam(':amount', 		$amount);
 
-	    $pstmt->bindParam(':username', 		$username);
-		$pstmt->bindParam(':transaction_id',$transaction_id);
-		$pstmt->bindParam(':create_time', 	$create_time);
-		$pstmt->bindParam(':number', 		$number);
-		$pstmt->bindParam(':state', 		$state);
-		$pstmt->bindParam(':amount', 		$amount);
+		    $username 		= $username;
+		    $transaction_id = $param_data['id'];	
+		    $create_time 	= date("U",strtotime($param_data['create_time'])); //sloppy but works
+		    $intent 		= $param_data['intent'];
+		    $state 			= $param_data['state'];
+		    $amount 		= $param_data['transactions']['0']['amount']['total'];
 
-	    $username 		= null;//null;//$param_data->username;
-	    $transaction_id = null;//$param_data->username;
-	    $create_time 	= null;//$param_data->username;
-	    $number 		= null;//$param_data->username;
-	    $state 			= null;//$param_data->username;
-	    $amount 		= null;//$param_data->username;
+		    return $pstmt->execute();
+		} catch (PDOException $e) {
 
-
-
-	    //return $pstmt->execute();
-
-		return true;
+			$this->logger->addError('paymentModel->createPaymentLog() failed with an error of '.$e);
+			return false;
+		}
 	}
 }

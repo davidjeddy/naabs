@@ -181,6 +181,7 @@ class baseClass {
             case 'create_time':
                 $this->logger->addDebug('Starting baseClass->goAction()->create_time');
 
+                $this->form_data->username = $_COOKIE['USER'];
                 $return_data_paym = false;
                 $return_data_time = false;
 
@@ -196,10 +197,12 @@ class baseClass {
 
 
                 if ( $return_data_paym === true ) {
+                    /*
                     echo json_encode(array(
                         "bool" => true,
                         "text" => "Payment processed successfully.",
                     ) );
+                    */
 
 
 
@@ -211,7 +214,6 @@ class baseClass {
 
 
                     //Create user account
-                    $this->form_data->username = $_COOKIE['USER'];
                     $return_data_time = $timeClass->createTime($this->form_data);
 
 
@@ -225,11 +227,11 @@ class baseClass {
                         ) );
                     //false return
                     } else {
-                        echo json_encode(array("bool" => false, "text" => $return_data_time) );
+                        echo json_encode(array("bool" => false, "text" => "An error occured while crediting your account with the time specified.".SITECONTACT) );
                     }
                 } else {
 
-                    echo json_encode(array("bool" => false, "text" => $return_data_paym) );    
+                    echo json_encode(array("bool" => false, "text" => "There was an error during payment processing. Please check the information and try again." ) );    
                 }
             break;
     		default:
