@@ -17,6 +17,7 @@ require_once (__DIR__.'/../config.php');
 // Autoload all the classes controlled by composer
 require_once (__DIR__.'/../vendor/autoload.php');
 use Respect\Validation\Validator as valClass;
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -227,9 +228,9 @@ class baseClass {
                         echo json_encode(array("bool" => false, "text" => $return_data_time) );
                     }
                 } else {
+
                     echo json_encode(array("bool" => false, "text" => $return_data_paym) );    
                 }
-
             break;
     		default:
 

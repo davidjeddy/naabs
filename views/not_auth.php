@@ -15,7 +15,7 @@
     <?php require_once SITEROOT."/templates/top_menu.php"; ?>
 
     <!--// Page title -->
-    <h3>Learn More</h3>
+    <h3>Not Authorized</h3>
 
     <div class="well well-lg">
             <p style="color:red">You are not authorized to view that content.</p>

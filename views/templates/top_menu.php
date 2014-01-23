@@ -41,8 +41,6 @@
                     <ul class="dropdown-menu">
                         <li><a href="<?= SITEROOT; ?>/my_time.php">My Time</a></li>
                         <li class="divider"></li>
-                        <li><a href="<?= SITEROOT; ?>/my_devices.php">My Device</a></li>
-                        <li class="divider"></li>
                         <li><a href="<?= SITEROOT; ?>/my_history.php">My History</a></li>
                     </ul>
                 </li>
