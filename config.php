@@ -27,6 +27,7 @@ if ($_SERVER["SERVER_ADDR"] == DEVIP) {
     define("DB_HOST",   "127.0.0.1");
     define("DB_PORT",   "3306");    
     define("DB_NAME",   "radius");
+    define(".DB_TABL.",   "radcheck");
     define("DB_USER",   "root");
     define("DB_PASS",   "Asdf1234");
 //Prod host
@@ -34,6 +35,7 @@ if ($_SERVER["SERVER_ADDR"] == DEVIP) {
     define("DB_HOST",   "10.3.4.127");
     define("DB_PORT",   "3306");
     define("DB_NAME",   "radius");
+    define(".DB_TABL.",   "radcheck");
     define("DB_USER",   "windsnet");
     define("DB_PASS",   "!6tu94E@A");
 }
