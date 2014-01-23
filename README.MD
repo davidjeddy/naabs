@@ -31,6 +31,6 @@ Create transatoin log table in your database:
   	PRIMARY KEY (`id`),
   	UNIQUE KEY `id_UNIQUE` (`id`),
   	UNIQUE KEY `transaction_id_UNIQUE` (`transaction_id`)
-	) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci$$
+	) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci
 
 Consume
