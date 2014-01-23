@@ -89,8 +89,7 @@ class timeClass extends baseClass {
 
         if (is_numeric($return_data)) {
 
-            $this->datetime->setTimestamp($return_data);
-            return $this->datetime->format('Y M d, h:m a');
+            return $return_data;
         } else {
 
             return false;
