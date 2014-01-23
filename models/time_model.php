@@ -70,7 +70,7 @@ class timeModel extends baseModel {
 		$return_data = null;
 		
 		$query = "
-			SELECT `username`,`attribute`,`value` FROM ".DB_NAME.".radcheck
+			SELECT `username`,`attribute`,`value` FROM `".DB_NAME."`.`".DB_TABL."`
 			WHERE  `username` = '".$username."' AND `attribute` = 'Access-Expire'
 		";
 
