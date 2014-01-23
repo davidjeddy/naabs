@@ -46,7 +46,7 @@ class userModel extends baseModel {
 		try {
 
 		    $pstmt = $this->conn->prepare("
-		    	INSERT INTO ".DB_NAME.".`radcheck`
+		    	INSERT INTO ".DB_NAME.".`".DB_TABL."`
 				(`username`, `attribute`, `op`, `value`)
 				VALUES( :username, 'Clear-Text', ':=', :value);
 			");

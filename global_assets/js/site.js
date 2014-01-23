@@ -33,7 +33,7 @@ function ajaxCall(type, data, dataType, action) {
 		console.log("promise.success");
 
 		if (data.bool === true) {
-			console.log('data good');
+			console.log('data good: ');
 
 			if ( typeof(data['url']) !== "undefined" ){
 				// Go where the form wants us to
@@ -42,7 +42,8 @@ function ajaxCall(type, data, dataType, action) {
 
 			return true;
 		} else {
-			console.log('data bad');
+			console.log('data bad: ');
+			console.log(data);
 
 			return false;
 		}
