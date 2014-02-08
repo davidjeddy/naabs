@@ -46,11 +46,12 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Duration</span>
                 <select class="form-control" name="serviceduration">
-                    <option value="NULL"        >Select One</option>
-                    <option value="86400"       >One Day ($5.95 USD)</option>
-                    <option value="604800"      >One Week ($11.95 USD)</option>
-                    <option value="18144000"    >One Month (30 days, $24.95 USD)</option>
-                    <option value="54432000"    >Three Month (90 days, $74.85 USD)</option>
+                    <option value="NULL"        >Select Days</option>
+                    <option value="86400"       >1   ($5.95 USD)</option>
+                    <option value="604800"      >7   ($11.95 USD)</option>
+                    <option value="18144000"    >30  ($24.95 USD)</option>
+                    <option value="54432000"    >90  ($74.85 USD)</option>
+                    <option value="108864000"   >180 ($134.95 USD)</option>
                 </select>
             </div>
 
@@ -73,22 +74,22 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Name</span>
-                <input type="text"    class="form-control" placeholder="First"      name="firstname" value="Joe">
-                <input type="text"    class="form-control" placeholder="Last"       name="lastname" value="Shopper">
+                <input type="text"    class="form-control" placeholder="First"      name="firstname">
+                <input type="text"    class="form-control" placeholder="Last"       name="lastname">
             </div>
 
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Billig</br>Address</span>
-                <input type="text"    class="form-control" placeholder="Street"     name="line1" value="52 N Main ST">
-                <input type="text"    class="form-control" placeholder="City"       name="city" value="Johnstown">
-                <input type="text"    class="form-control" placeholder="State"      name="state" value="OH">
-                <input type="text"    class="form-control" placeholder="ZIP"        name="zip" value="43210">
-                <input type="hidden"  class="form-control" placeholder="Country"    name="country" value="US">
+                <span class="input-group-addon">Billing</br>Address</span>
+                <input type="text"    class="form-control" placeholder="Street"     name="line1">
+                <input type="text"    class="form-control" placeholder="City"       name="city">
+                <input type="text"    class="form-control" placeholder="State"      name="state">
+                <input type="text"    class="form-control" placeholder="ZIP"        name="zip">
+                <input type="hidden"  class="form-control" placeholder="Country"    name="country">
             </div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Card Number</span>
-                <input type="text"    class="form-control" placeholder="Card Number"name="cardnumber" value="4417119669820331">
+                <input type="text"    class="form-control" placeholder="Card Number"name="cardnumber">
             </div>
 
             <div class="input-group input-group-lg">
@@ -114,7 +115,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                     <option value="08">08</option>
                     <option value="09">09</option>
                     <option value="10">10</option>
-                    <option value="11" selected>11</option>
+                    <option value="11">11</option>
                     <option value="12">12</option>
                 </select>
                 <!--// Automat this to include this year and then +4 more -->
@@ -124,13 +125,13 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                     <option value="2015">2015</option>
                     <option value="2016">2016</option>
                     <option value="2017">2017</option>
-                    <option value="2018" selected>2018</option>
+                    <option value="2018">2018</option>
                 </select>
             </div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">CVV2</span>
-                <input type="text"    class="form-control" placeholder="CVV2"  name="cardcvv2" value="874">
+                <input type="text"    class="form-control" placeholder="CVV2"  name="cardcvv2">
             </div>
         </div>
 

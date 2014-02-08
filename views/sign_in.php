@@ -22,7 +22,7 @@
         <form id="sign_in">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Email</span>
-                <input type="text"      class="form-control" maxlength="64" placeholder="email" name="email" value="test@user.com">
+                <input type="text"      class="form-control" maxlength="64" placeholder="email" name="email">
             </div>
 
             <div class="input-group input-group-lg">

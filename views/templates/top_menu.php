@@ -18,7 +18,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?= SITEROOT; ?>/">Winds.net</a>
+        <a class="navbar-brand" href="<?= SITEROOT; ?>/"><?= SITEOWNER; ?></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
