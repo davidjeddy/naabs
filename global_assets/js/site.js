@@ -125,4 +125,8 @@ $(document).on("click", ".alert", function(e) {
         console.log("Alert Callback");
     });
 });
+
+jQuery.validator.addMethod("lettersandspace", function(value, element) {
+  return this.optional(element) || /^[ a-z]+$/i.test(value);
+}, "Letters and spaced only please"); 
 -->

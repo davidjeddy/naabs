@@ -103,6 +103,7 @@
                     equalTo: "#password",
                 },
                 "securityquestion": {
+                    lettersandspace: true,
                     required: true,
                 },
                 "securityanswer": {
