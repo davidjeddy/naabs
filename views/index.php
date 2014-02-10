@@ -10,9 +10,6 @@
 </head>
 
 <body>
-
-    <?php require_once SITEROOT."/templates/no_script.php"; ?>
-
     <?php require_once SITEROOT."/templates/top_menu.php"; ?>
 
     <div class="jumbotron">
@@ -23,7 +20,7 @@
 
         <a class="btn btn-primary btn-lg" role="button" href="<?= SITEROOT; ?>/learn_more.php">Learn More</a>
         &nbsp;&nbsp;&nbsp;
-        <a class="btn btn-primary btn-lg" role="button" href="<?= SITEROOT; ?>/create_user.php">Sign Up</a>
+        <a class="btn btn-primary btn-lg" role="button" href="<?= SITEROOT; ?>/sign_up.php">Sign Up</a>
         &nbsp;&nbsp;&nbsp;
         <a class="btn btn-primary btn-lg" role="button" href="<?= SITEROOT; ?>/sign_in.php">Sign In</a>
     </div>

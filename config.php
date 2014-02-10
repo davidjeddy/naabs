@@ -4,7 +4,7 @@
  *
  * @author 	David Eddj <me@davidjeddy.com>
  * @since 	0.0.1
- * @version 0.0.1
+ * @version 0.0.7
  */
 /* Standard configs */
 define('SITEOWNER', "Winds.net");

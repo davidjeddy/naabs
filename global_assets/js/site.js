@@ -94,7 +94,7 @@ $(document).on("click", "button.clear", function(e) {
 	form_val.resetForm();
 
 	//scroll to the top of the page if possible
-	//$().scrollto( '0%', 250);
+	$().scrollto( '0%', 250);
 
 	return true;
 });

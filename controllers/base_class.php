@@ -156,7 +156,7 @@ class baseClass {
                     echo json_encode(array("bool" => false, "text" => $return_data) );
                 }
             break;
-            case 'create_user':
+            case 'sign_up':
                 $this->logger->addDebug('Starting baseClass->goAction()->create_user');
 
                 //Create the user account in the DB
@@ -197,15 +197,6 @@ class baseClass {
 
 
                 if ( $return_data_paym === true ) {
-                    /*
-                    echo json_encode(array(
-                        "bool" => true,
-                        "text" => "Payment processed successfully.",
-                    ) );
-                    */
-
-
-
                     // Now attempt to create more time on the users account
                     //Create the user account in the DB
                     require_once __DIR__.'/time_class.php';           

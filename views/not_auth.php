@@ -21,7 +21,7 @@
             <p style="color:red">You are not authorized to view that content.</p>
         <ul>
             <li>Try to <a href="./sign_in.php">Sign in</a> if you already have an account;</li>
-            <li>or <a href="./create_user.php">Sign up</a> if this is your first visit.</li>
+            <li>or <a href="./sign_up.php">Sign up</a> if this is your first visit.</li>
         </ul>
     </div>
 
