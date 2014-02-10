@@ -27,42 +27,48 @@ class userModel extends baseModel {
 	// public methods
 	/**
 	 * Insert a new FREERadius user into radcheck w/ creditials.
+	 * Also add teriary data to user_data table. Date like: phone, lot id, security recovery options, account, type, etc
 	 *
 	 * @author David J Eddy <me@davidjeddy.com>
-	 * @param array $param_data [required]
+	 * @param object $param_data [required]
 	 * @return boolean
 	 */
 	public function createUser($param_data) {
 		$this->logger->addDebug('Starting userModel->createUser() with data', (array)$param_data);
 
-		// Check is username already exists
+		// Check if username(email) already exists
 		if ( $this->getUserdata( $param_data->email) !== false ) {
-			return "User account already exists.";
+			echo json_encode(array(false, "User account already exists."));
+			return false;
 		}
 
 
 
-		// Try to create the account
+		// Try to create the account in the radcheck tbo
 		try {
 
 		    $pstmt = $this->conn->prepare("
-		    	INSERT INTO ".DB_NAME.".`".DB_TABL."`
+		    	INSERT INTO ".DB_NAME.".`".DB_RAD_TABL."`
 				(`username`, `attribute`, `op`, `value`)
 				VALUES( :username, 'Clear-Text', ':=', :value);
 			");
 
-		    $return_data =  $pstmt->execute(array(
+		    $return_data = $pstmt->execute(array(
 		    	'username' => $param_data->email,
 		    	'value' => $param_data->password
 		    ));
 
-		    return true;
+			$this->logger->AddInfo( $param_data->email." account added to ".DB_RAD_TABL." tbo." );
+
+			return true;
 		} catch(PDOException $e) {
 			
-			return $this->logger->AddError( "Error: ".$e->getMessage());;
+			$this->logger->AddError( "Error: ".$e->getMessage());
+
+			echo json_encode(array(false, "Error: ".$e->getMessage()));
+
+			return false;
 		}
-
-
 
 		return false;
 	}
@@ -81,22 +87,28 @@ class userModel extends baseModel {
 	 */
 	public function getUserdata($username = null, $password = null) {
 
+		// Better way of thing this but eh...
 		$query = "
-			SELECT * FROM ".DB_NAME.".radcheck
+			SELECT `id`,`username` FROM ".DB_NAME.".".DB_RAD_TABL."
 			WHERE `username` = '".$username."'
 		";
 
-	    if ($password != NULL) {
-	    	$query .= "AND `value` = '".$password."';";
-	    }
+	    if ($password != null) { $query .= "AND `value` = '".$password."'"; }
+
+	    $query .="
+	    	ORDER BY `id` ASC
+			LIMIT 1
+		";
 
 	    $qdata = $this->conn->prepare($query);
-
 	    $qdata->execute();
-			 
+
+
+
+
 		// Get array containing all of the result rows
 		$return_data = $qdata->fetchAll(PDO::FETCH_OBJ);
-		 
+
 		// If one or more rows were returned...
 		if ( count($return_data) ) {
 		    // Combine all the objects into one, as the key 'username' as the pivot point
@@ -104,6 +116,5 @@ class userModel extends baseModel {
 		} else {
 		    return false;
 		}
-
 	}
 }
