@@ -47,11 +47,13 @@ class userModel extends baseModel {
 		// Try to create the account in the radcheck tbo
 		try {
 
-		    $pstmt = $this->conn->prepare("
-		    	INSERT INTO ".DB_NAME.".`".DB_RAD_TABL."`
+			$query = "
+				INSERT INTO ".DB_NAME.".`".DB_RAD_TABL."`
 				(`username`, `attribute`, `op`, `value`)
 				VALUES( :username, 'Clear-Text', ':=', :value);
-			");
+			";
+
+		    $pstmt = $this->conn->prepare($query);
 
 		    $return_data = $pstmt->execute(array(
 		    	'username' => $param_data->email,
@@ -59,6 +61,41 @@ class userModel extends baseModel {
 		    ));
 
 			$this->logger->AddInfo( $param_data->email." account added to ".DB_RAD_TABL." tbo." );
+
+
+
+			// Get the last inserted row's ID
+			$new_user_id = $this->conn->lastInsertId();
+
+
+
+			// Add terciary data to user_data tbo.
+			$query = "
+				INSERT INTO `".DB_NAME."`.`".DB_DATA_TABL."`
+				(`user_id`, `attribute`, `op`, `value`, `created`)
+				VALUES(".$new_user_id.", :attribute, '=', :value, '".date("Y-m-d H:i:s")."');
+			";
+
+		    $pstmt = $this->conn->prepare($query);
+
+		    // Loop for every piece of data not username(email)/password
+		    foreach ($param_data as $key => $value) {
+
+		    	if (stristr($key, "email")
+		    		|| stristr($key, "password")
+		    	){
+		    		continue;
+		    	}
+
+			    $return_data = $pstmt->execute(array(
+			    	'attribute' => $key,
+			    	'value'		=> $value,
+			    ));
+
+				$this->logger->AddInfo( $param_data->email." account added to ".DB_RAD_TABL." tbo." );
+			}
+
+
 
 			return true;
 		} catch(PDOException $e) {
