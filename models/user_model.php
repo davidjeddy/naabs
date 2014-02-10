@@ -78,18 +78,19 @@ class userModel extends baseModel {
 
 		    $pstmt = $this->conn->prepare($query);
 
-		    // Loop for every piece of data not username(email)/password
+		    // Loop for every piece of data not username(email)/password OR if the value is blank, skip it
 		    foreach ($param_data as $key => $value) {
 
 		    	if (stristr($key, "email")
 		    		|| stristr($key, "password")
+		    		|| $value == ""
 		    	){
 		    		continue;
 		    	}
 
 			    $return_data = $pstmt->execute(array(
-			    	'attribute' => $key,
-			    	'value'		=> $value,
+			    	'attribute' => strtolower($key),
+			    	'value'		=> strtolower($value),
 			    ));
 
 				$this->logger->AddInfo( $param_data->email." account added to ".DB_RAD_TABL." tbo." );
