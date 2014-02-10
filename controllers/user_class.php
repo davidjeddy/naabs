@@ -91,4 +91,14 @@ class userClass extends baseClass {
 			return $e;
 		}
 	}
+
+	/**
+	 * Reset user login data
+	 * Right now take 
+	 */
+	public function reset($username) {
+		$this->logger->addDebug('Starting baseClass->reset()');
+		
+		return false;
+	}
 }

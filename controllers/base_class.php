@@ -225,6 +225,30 @@ class baseClass {
                     echo json_encode(array("bool" => false, "text" => "There was an error during payment processing. Please check the information and try again." ) );    
                 }
             break;
+            case 'reset_login':
+                $this->logger->addDebug('Starting baseClass->goAction()->reset_login');
+/*
+                //Create the user account in the DB
+                require_once __DIR__.'/user_class.php';           
+                $userClass = new userClass();
+
+                //Create user account
+                $return_data = $userClass->loginUser($this->form_data);
+
+                //BOOLEAN true return
+                if ($return_data === true) {
+                    echo json_encode(array(
+                        "bool" => true,
+                        "text" => "User account signed out.",
+                        "url"  => SITEROOT."/my_time.php")
+                    );
+
+                //false return
+                } else {
+                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                }
+*/
+            break;
     		default:
 
     			echo json_encode(array(false, "No valid action found."));
