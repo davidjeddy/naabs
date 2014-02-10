@@ -155,4 +155,55 @@ class userModel extends baseModel {
 		    return false;
 		}
 	}
+
+	/**
+	 * Account recovery method for use when resetting the password
+	 *
+	 *@author David J Eddy <me@davidjeddy.com>
+	 *@param string $username [optional]
+	 *@param string $answer [optional]
+	 *@return boolean || string
+	 */
+	public function accountRecovery($username, $answer = null) {
+
+		//Get the user ID
+		$query = "
+			SELECT `id` FROM ".DB_NAME.".".DB_RAD_TABL."
+			WHERE `username` = '".$username."'
+	    	ORDER BY `id` ASC
+			LIMIT 1
+		";
+
+	    $qdata = $this->conn->prepare($query);
+	    $qdata->execute();
+		$user_id = $qdata->fetchAll(PDO::FETCH_OBJ);
+
+
+
+		//If the user was not found, return false
+		if (!isset($user_id[0])) {return false; }
+
+
+
+		if ($answer == null) {
+		    // Now get the security question:
+			$query = "
+				SELECT `value` FROM ".DB_NAME.".".DB_DATA_TABL."
+				WHERE `user_id` = ".$user_id[0]->id."
+				&& `attribute` = 'securityquestion'
+				AND `deleted` IS NULL
+			";
+
+		    $qdata = $this->conn->prepare($query);
+		    $qdata->execute();
+			return $qdata->fetchAll(PDO::FETCH_OBJ);
+
+		//An answer is provided. Check if it is correct.
+		} else {
+
+		}
+
+
+		return false;
+	}
 }

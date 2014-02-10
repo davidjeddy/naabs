@@ -94,11 +94,39 @@ class userClass extends baseClass {
 
 	/**
 	 * Reset user login data
-	 * Right now take 
+	 *
+	 *@author David J Eddy <me@davidjeddy.com>
+	 *@param string $username [optional]
+	 *@param string $answer [optional]
+	 *@return boolean || string
 	 */
-	public function reset($username) {
-		$this->logger->addDebug('Starting baseClass->reset()');
-		
+	public function accountRecovery(stdClass $param_data, $answer = null) {
+		$this->logger->addDebug('Starting userClass->accountRecovery()');
+
+
+		//Validate email, return question
+		if ($answer == null) {
+
+			$return_data = $this->userModel->accountRecovery($param_data->email);
+
+			if ($return_data ==false) {
+
+				return array(false, "Email address not found.");
+			} else {
+
+				return array(true, $return_data[0]->value);
+			}
+
+		} else {
+
+			//Validate answer, return true
+			if($answer == null) {
+
+			} else {
+
+			}
+		}
+
 		return false;
 	}
 }

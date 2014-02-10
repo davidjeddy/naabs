@@ -225,36 +225,41 @@ class baseClass {
                     echo json_encode(array("bool" => false, "text" => "There was an error during payment processing. Please check the information and try again." ) );    
                 }
             break;
-            case 'reset_login':
-                $this->logger->addDebug('Starting baseClass->goAction()->reset_login');
-/*
+            case 'account_recovery':
+                $this->logger->addDebug('Starting baseClass->goAction()->account_recovery');
+
                 //Create the user account in the DB
                 require_once __DIR__.'/user_class.php';           
                 $userClass = new userClass();
 
-                //Create user account
-                $return_data = $userClass->loginUser($this->form_data);
+                //Check is username exists
+                $return_data = $userClass->accountRecovery($this->form_data);
 
-                //BOOLEAN true return
-                if ($return_data === true) {
+                if ($return_data[0] !== true) {
+
+                    echo json_encode(array(
+                        "bool" => false,
+                        "text" => "Email address not found."
+                    ) );
+                    return false;
+                } elseif ($return_data[0] === true) {
+
                     echo json_encode(array(
                         "bool" => true,
-                        "text" => "User account signed out.",
-                        "url"  => SITEROOT."/my_time.php")
-                    );
-
-                //false return
-                } else {
-                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                        "text" => "email address valid",
+                        "url"  => SITEROOT."/account_recovery_2.php?question=".urlencode($return_data[1]).""
+                    ) );
+                    return true;
                 }
-*/
+
+                return false;
             break;
     		default:
 
     			echo json_encode(array(false, "No valid action found."));
     	}
 
-        exit;
+        return true;
     }
 
     /**

@@ -1,4 +1,6 @@
 <?php require_once "../config.php"; ?>
+<?php $question = explode("=", $_SERVER['QUERY_STRING']); ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,19 +9,18 @@
 </head>
 
 <body>
-
     <?php require_once SITEROOT."/templates/top_menu.php"; ?>
 
     <!--// Page title -->
     <h3>Reset Login</h3>
 
     <div class="well well-lg">
-
         <form id="account_recovery_step1">
-            <h4>The email used to register with:</h4>
+            <h4>Your security question:</h4>
+            <h4><?= ucfirst(urldecode($question[1]));?>?</h4>
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Email</span>
-                <input type="text" class="form-control" maxlength="64" placeholder="email" name="email">
+                <span class="input-group-addon">Answer</span>
+                <input type="text" class="form-control" maxlength="64" placeholder="answer" name="answer">
             </div>
 
             <input type="text" class="form-control" name="action" value="account_recovery">
@@ -36,7 +37,7 @@
     <script>
         $("#account_recovery_step1").validate({
             rules: {
-                "email": {
+                "answer": {
                   required: true,
                   email: true
                 },
