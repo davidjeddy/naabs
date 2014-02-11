@@ -1,6 +1,6 @@
 {
-    "name": "davidjeddy/RADIUSWebPaymentGateway",
-    "description": "Web based interface for a FreeRADIUS authentication server that accepts payments for access to a (typically Wifi) network.",
+    "name": "davidjeddy/nabs",
+    "description": "Network Acces and Billing System (nabs) is a web based interface for a FreeRADIUS authentication server that accepts payments for access to a (typically Wifi) network.",
     "license": "Creative Commons 4.0",
     "authors": [
         {
@@ -10,18 +10,6 @@
     ],
     "minimum-stability": "RC",
     "repositories": {
-        "balupton": {
-            "type": "package",
-            "package": {
-                "name": "balupton/jquery-scrollto",
-                "version": "1.0.0",
-                "source": {
-                    "url": "https://github.com/balupton/jquery-scrollto.git",
-                    "type": "git",
-                    "reference": "791cc3157956e1319c32aa14d5eaa5fd6bae379f"
-                }
-            }
-        },
         "makeusabrew": {
             "type": "package",
             "package": {
@@ -52,7 +40,6 @@
         "twitter/bootstrap": "3.0.x",
         "monolog/monolog": "1.7.x",
         "respect/validation": "0.5.0",
-        "balupton/jquery-scrollto": "1.0.0",
         "makeusabrew/bootbox": "4.1.0",
         "carhartl/jquery-cookie": "1.4.0",
         "ext-curl": "*",
