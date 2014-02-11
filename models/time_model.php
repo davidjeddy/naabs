@@ -42,7 +42,7 @@ class timeModel extends baseModel {
 		try {
 			# New Session-Start & #Session-Expire rows
 			$query = "			
-				INSERT INTO `".DB_NAME."`.`".DB_TABL."`
+				INSERT INTO `".DB_NAME."`.`".DB_RAD_TABL."`
 						( `username`, `attribute`, `op`, `value`)
 				VALUES 	( :username, 'Access-Expire', ':=', :value_expire)
 			";
@@ -70,7 +70,7 @@ class timeModel extends baseModel {
 		$return_data = null;
 		
 		$query = "
-			SELECT `username`,`attribute`,`value` FROM `".DB_NAME."`.`".DB_TABL."`
+			SELECT `username`,`attribute`,`value` FROM `".DB_NAME."`.`".DB_RAD_TABL."`
 			WHERE  `username` = '".$username."' AND `attribute` = 'Access-Expire'
 		";
 
@@ -107,7 +107,7 @@ class timeModel extends baseModel {
 		$ttl_access_time = ($current_expire_time + $param_data->serviceduration);
 
 		$query = "			
-			UPDATE `".DB_NAME."`.`".DB_TABL."`
+			UPDATE `".DB_NAME."`.`".DB_RAD_TABL."`
 			SET `value` = ?
 			WHERE `username` = ? AND `attribute` = 'Access-Expire'	
 		";

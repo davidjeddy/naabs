@@ -32,7 +32,6 @@
 
             <input type="hidden" name="action" value="login_user" />
             <?php require_once SITEROOT."/templates/form_submit.php"; ?>
-
         </form>
 
     </div>

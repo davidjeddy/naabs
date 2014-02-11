@@ -35,15 +35,26 @@ function ajaxCall(type, data, dataType, action) {
 		if (data.bool === true) {
 			console.log('data good: ');
 
-			if ( typeof(data['url']) !== "undefined" ){
+			if ( typeof(data.callback) !== "undefined" ) {
+
+			    bootbox.alert(data.text, function() {
+					// Go where the form wants us to
+					window.location.href = data.url;
+			    });
+
+			// Callback method to execute on ajax.success
+ 			} else if ( typeof(data.url) !== "undefined" ) {
 				// Go where the form wants us to
-				window.location.href = data['url'];
+				window.location.href = data.url;
 			}
 
 			return true;
 		} else {
 			console.log('data bad: ');
 			console.log(data);
+
+			// Display the error generated on the server side.
+			    bootbox.alert(data.text, function() {});
 
 			return false;
 		}
@@ -125,4 +136,8 @@ $(document).on("click", ".alert", function(e) {
         console.log("Alert Callback");
     });
 });
+
+jQuery.validator.addMethod("lettersandspace", function(value, element) {
+  return this.optional(element) || /^[ a-z]+$/i.test(value);
+}, "Letters and spaced only please"); 
 -->

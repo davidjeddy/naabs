@@ -5,9 +5,10 @@
  * @author  David Eddy <me@davidjeddy.com>
  * @date    2014-01-13
  * @since   0.0.1
- * @version 0.0.2
+ * @version 0.0.3
  */
 ?>
+<?php require_once SITEROOT."/templates/no_script.php"; ?>
 
 <nav class="navbar navbar-default" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -28,7 +29,7 @@
             <?php 
             if ( isset($_COOKIE['AUTH']) && $_COOKIE['AUTH'] === "true"){
             } else {  ?>
-            <li><a href="<?= SITEROOT; ?>/create_user.php">Sign up</a></li>
+            <li><a href="<?= SITEROOT; ?>/sign_up.php">Sign up</a></li>
             <?php }; ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
