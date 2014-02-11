@@ -125,15 +125,7 @@ $(document).on("click", "button.submit", function(e) {
 });
 
 
-
-// BootBox listeners and callbacks
-$(document).on("click", ".alert", function(e) {
-
-    bootbox.alert("Hello world!", function() {
-        console.log("Alert Callback");
-    });
-});
-
+// Custom jQ validator method
 jQuery.validator.addMethod("lettersandspace", function(value, element) {
   return this.optional(element) || /^[ a-z]+$/i.test(value);
 }, "Letters and spaced only please"); 

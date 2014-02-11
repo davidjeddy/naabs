@@ -130,7 +130,7 @@ class baseClass {
 
                 //false return
                 } else {
-                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                    echo json_encode(array("bool" => false, "text" => "Incorrect login information. Please try again.") );
                 }
             break;
             case 'logout_user':
