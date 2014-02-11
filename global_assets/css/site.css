@@ -43,3 +43,17 @@ select.form-control option {
 .submit {
 	margin: 0 10px;
 }
+
+.receipt_cell {
+	width: 1px;
+}
+
+html body div.well table.table thead, .table tbody tr td p {
+	margin-top:10px;
+	vertical-align:middle;
+	text-align: center;
+}
+.table tbody tr td button{
+	margin:5px;
+	vertical-align:middle;
+}

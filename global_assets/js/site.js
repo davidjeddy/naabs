@@ -1,6 +1,5 @@
 /**
- * Windsnet wireless network access web application
- * application javascript
+ * naads application javascript
  */
 <!--//
 //AJAX process function
@@ -37,6 +36,7 @@ function ajaxCall(type, data, dataType, action) {
 
 			if ( typeof(data.callback) !== "undefined" ) {
 
+				// Display the message generated on the server side as a bootbox.alert()
 			    bootbox.alert(data.text, function() {
 					// Go where the form wants us to
 					window.location.href = data.url;
@@ -48,32 +48,52 @@ function ajaxCall(type, data, dataType, action) {
 				window.location.href = data.url;
 			}
 
-			return true;
 		} else {
 			console.log('data bad: ');
 			console.log(data);
-
-			// Display the error generated on the server side.
-			    bootbox.alert(data.text, function() {});
-
-			return false;
+			bootbox.alert(data.text, function() {});
 		}
-        return true;
     });
 
     promise.error(function(data) {
 		console.log("promise.error: ");
 		console.log(data);
 
-        return false;
+
     });
 
     promise.complete(function(){
 		console.log("promise.complete");
-
-		return true;
+		$("body").removeClass("loading");
     });
+
+    return true;
 }
+
+/**
+ * Print the contents of a element
+ *
+ * @author http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
+ * @modified David J Eddy <me@davidjeddy.com>
+ * @param string data [required]
+ * @return boolean
+ */
+function printDiv(data) {
+	console.log( "printDiv stated.");
+
+    var mywindow = window.open('', 'Sale Receipt', 'height=600s,width=800');
+
+	mywindow.document.write('<!DOCTYPE html><html><head><title>Sales Receipt</title>');
+    mywindow.document.write('<link rel="stylesheet" href="../global_assets/css/reset.css" type="text/css" />');
+    mywindow.document.write('<link rel="stylesheet" href="../global_assets/css/print.css" type="text/css" />');
+    mywindow.document.write('</head><body>'+data+'<body></html>');
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+
 
 
 // Form submit logic
@@ -91,8 +111,6 @@ $(document).on("submit", "form", function(e) {
 
 	return true;
 });
-
-// Form button actions
 $(document).on("click", "button.clear", function(e) {
 	console.log( 'btn.clear clicked');
 
@@ -106,7 +124,6 @@ $(document).on("click", "button.clear", function(e) {
 
 	return true;
 });
-
 $(document).on("click", "button.submit", function(e) {
 	console.log( 'button.submit clicked');
 
@@ -123,6 +140,22 @@ $(document).on("click", "button.submit", function(e) {
 
 	return true;
 });
+
+
+
+// Bootbox sales receipt `view`
+$(document).on("click", "button.print", function(e) {
+	console.log("Receipt bootbox called.")
+
+	var print_source = $(this).data("source");
+
+	print_source = $(print_source).html();
+
+	printDiv(print_source);
+
+	return true;
+});
+
 
 
 // Custom jQ validator method

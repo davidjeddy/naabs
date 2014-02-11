@@ -112,69 +112,26 @@
 	"buffers":
 	[
 		{
-			"file": "config.php",
+			"file": "naabs.sublime-project",
 			"settings":
 			{
-				"buffer_size": 1819,
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "global_assets/js/site.js",
+			"file": "nsabs.sublime-workspace",
 			"settings":
 			{
-				"buffer_size": 2797,
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/account_recovery.php",
+			"file": "composer.json",
 			"settings":
 			{
-				"buffer_size": 1203,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/account_recovery_2.php",
-			"settings":
-			{
-				"buffer_size": 1579,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/rest_password.php",
-			"settings":
-			{
-				"buffer_size": 1934,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/base_class.php",
-			"settings":
-			{
-				"buffer_size": 12292,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/user_class.php",
-			"settings":
-			{
-				"buffer_size": 3469,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "<?php\n/**\n * Windsnet user model class\n * \n * @author David J Eddy <me@davidjeddy.com>\n * @since 0.0.2b\n * @package windsnet\n */\n\n/**\n * userModel\n * @author David J Eddy <me@davidjeddy.com>\n * @since 0.0.1\n */\nrequire_once (__DIR__.'/base_model.php');\n\n\n\nclass userModel extends baseModel {\n\n\n	public function __construct() {\n		parent::__construct();\n\n	}\n\n	// public methods\n	/**\n	 * Insert a new FREERadius user into radcheck w/ creditials.\n	 * Also add teriary data to user_data table. Date like: phone, lot id, security recovery options, account, type, etc\n	 *\n	 * @author David J Eddy <me@davidjeddy.com>\n	 * @param object $param_data [required]\n	 * @return boolean\n	 */\n	public function createUser($param_data) {\n		$this->logger->addDebug('Starting userModel->createUser() with data', (array)$param_data);\n\n		// Check if username(email) already exists\n		if ( $this->getUserdata( $param_data->email) !== false ) {\n			echo json_encode(array(false, \"User account already exists.\"));\n			return false;\n		}\n\n\n\n		// Try to create the account in the radcheck tbo\n		try {\n\n			$query = \"\n				INSERT INTO \".DB_NAME.\".`\".DB_RAD_TABL.\"`\n				(`username`, `attribute`, `op`, `value`)\n				VALUES( :username, 'Clear-Text', ':=', :value);\n			\";\n\n		    $pstmt = $this->conn->prepare($query);\n\n		    $return_data = $pstmt->execute(array(\n		    	'username' => $param_data->email,\n		    	'value' => $param_data->password\n		    ));\n\n			$this->logger->AddInfo( $param_data->email.\" account added to \".DB_RAD_TABL.\" tbo.\" );\n\n\n\n			// Get the last inserted row's ID\n			$new_user_id = $this->conn->lastInsertId();\n\n\n\n			// Add terciary data to user_data tbo.\n			$query = \"\n				INSERT INTO `\".DB_NAME.\"`.`\".DB_DATA_TABL.\"`\n				(`user_id`, `attribute`, `op`, `value`, `created`)\n				VALUES(\".$new_user_id.\", :attribute, '=', :value, '\".date(\"Y-m-d H:i:s\").\"');\n			\";\n\n		    $pstmt = $this->conn->prepare($query);\n\n		    // Loop for every piece of data not username(email)/password OR if the value is blank, skip it\n		    foreach ($param_data as $key => $value) {\n\n		    	if (stristr($key, \"email\")\n		    		|| stristr($key, \"password\")\n		    		|| $value == \"\"\n		    	){\n		    		continue;\n		    	}\n\n			    $return_data = $pstmt->execute(array(\n			    	'attribute' => strtolower($key),\n			    	'value'		=> strtolower($value),\n			    ));\n\n				$this->logger->AddInfo( $param_data->email.\" account added to \".DB_RAD_TABL.\" tbo.\" );\n			}\n\n\n\n			return true;\n		} catch(PDOException $e) {\n			\n			$this->logger->AddError( \"Error: \".$e->getMessage());\n\n			echo json_encode(array(false, \"Error: \".$e->getMessage()));\n\n			return false;\n		}\n\n		return false;\n	}\n\n	/**\n	 * Check that the username (email) is not already registered with the system\n	 *\n	 *@author David J Eddy <me@davidjeddy.com>\n	 *@param string $username [optional]\n	 *@param string $password [optional]\n	 *@return object | boolean\n	 *@todo iterate on this\n	 */\n	public function getUserdata($username = null, $password = null) {\n\n		// Better way of thing this but eh...\n		$query = \"\n			SELECT `id`,`username` FROM \".DB_NAME.\".\".DB_RAD_TABL.\"\n			WHERE `username` = '\".$username.\"'\n		\";\n\n	    if ($password != null) { $query .= \"AND `value` = '\".$password.\"'\"; }\n\n	    $query .=\"\n	    	ORDER BY `id` ASC\n			LIMIT 1\n		\";\n\n	    $qdata = $this->conn->prepare($query);\n	    $qdata->execute();\n\n\n\n\n		// Get array containing all of the result rows\n		$return_data = $qdata->fetchAll(PDO::FETCH_OBJ);\n\n		// If one or more rows were returned...\n		if ( count($return_data) ) {\n		    // Combine all the objects into one, as the key 'username' as the pivot point\n			return $return_data;\n		} else {\n		    return false;\n		}\n	}\n\n	/**\n	 *\n	 *@author David J Eddy <me@davidjeddy.com>\n	 *@param string $param_data [required]\n	 *@return boolean\n	 *@todo needs MASSIVE security iterations. Like MD5 w/ slat hashing for one thing.\n	 */\n	public function updatePassword(stdclass $param_data) {\n			\n		$query = \"\n			UPDATE`\".DB_NAME.\"`.`\".DB_RAD_TABL.\"`\n			(`username`, `attribute`, `op`, `value`)\n			VALUES( :username, 'Clear-Text', ':=', :value);\n			WHERE `username` == :username\n		\";\n\n	    $pstmt = $this->conn->prepare($query);\n\n	    $return_data = $pstmt->execute(array(\n	    	'username' => $param_data->email,\n	    	'value' => $param_data->password\n	    ));\n\n		$this->logger->AddInfo( $param_data->email.\" password has been modified.\" );\n	}\n\n\n\n	//Non CRUD public methods\n	/**\n	 * Account recovery method for use when resetting the password\n	 *\n	 *@author David J Eddy <me@davidjeddy.com>\n	 *@param object $param_data [required]\n	 *@return boolean\n	 */\n	public function accountRecovery(stdClass $param_data) {\n\n		//Get the user ID\n		$query = \"\n			SELECT `id` FROM \".DB_NAME.\".\".DB_RAD_TABL.\"\n			WHERE `username` = '\".$param_data->email.\"'\n	    	ORDER BY `id` ASC\n			LIMIT 1\n		\";\n\n	    $qdata = $this->conn->prepare($query);\n	    $qdata->execute();\n		$user_id = $qdata->fetchAll(PDO::FETCH_OBJ);\n\n\n\n		//If the user was not found, return false\n		if (!isset($user_id[0])) { return false; }\n\n\n\n		//TODO compress this logic block\n		if (isset($param_data->email) && !isset($param_data->answer)) {\n\n		    // Now get the security question:\n			$query = \"\n				SELECT `value` FROM \".DB_NAME.\".\".DB_DATA_TABL.\"\n				WHERE `user_id` = \".$user_id[0]->id.\"\n				&& `attribute` = 'securityquestion'\n				AND `deleted` IS NULL\n			\";\n\n		    $qdata = $this->conn->prepare($query);\n		    $qdata->execute();\n\n			return $qdata->fetchAll(PDO::FETCH_OBJ);\n\n		} elseif (isset($param_data->email) && isset($param_data->answer)) {\n\n		    // Now get the security question:\n			$query = \"\n				SELECT `value` FROM \".DB_NAME.\".\".DB_DATA_TABL.\"\n				WHERE `user_id` = \".$user_id[0]->id.\"\n				&& `attribute` = 'securityanswer'\n				AND `deleted` IS NULL\n			\";\n\n		    $qdata = $this->conn->prepare($query);\n		    $qdata->execute();\n\n			return $qdata->fetchAll(PDO::FETCH_OBJ);\n\n		} else {\n\n			return false;\n		}\n\n\n		return false;\n	}\n}\n",
-			"file": "models/user_model.php",
-			"file_size": 6121,
-			"file_write_time": 130365602829891785,
-			"settings":
-			{
-				"buffer_size": 5899,
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -203,34 +160,49 @@
 	},
 	"file_history":
 	[
+		"/Z/windsnet/naabs.sublime-project",
+		"/Z/windsnet/controllers/base_class.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/global_assets/js/site.js",
+		"//ARMOR-LAPPY-SSD/www/windsnet/config.php",
+		"/Z/windsnet/install/install.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/base_class.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/install/install.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/models/base_model.php",
+		"/Z/windsnet/README.MD",
+		"/Z/windsnet/composer.json",
+		"/Z/windsnet/config.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/bottom.php",
+		"/Z/windsnet/views/templates/top.php",
+		"/Z/windsnet/install/user_data_tbo.sql",
+		"/Z/windsnet/global_assets/js/site.js",
+		"/Z/windsnet/TODO.md",
+		"/Z/windsnet/sdk_config.ini",
+		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/composer.json",
+		"/Z/windsnet/install/logrotate.conf",
+		"/Z/windsnet/models/user_model.php",
+		"/Z/windsnet/controllers/user_class.php",
+		"/Z/windsnet/views/rest_password.php",
+		"/Z/windsnet/views/account_recovery_2.php",
+		"/Z/windsnet/views/account_recovery.php",
+		"/Z/windsnet/install.php",
 		"/Z/windsnet/views/sign_up.php",
 		"/Z/windsnet/views/account_recovery_3.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/user_class.php",
 		"/Z/windsnet/logs/app.log",
-		"/Z/windsnet/global_assets/js/site.js",
-		"/Z/windsnet/controllers/user_class.php",
-		"/Z/windsnet/models/user_model.php",
-		"/Z/windsnet/views/account_recovery.php",
 		"/Z/windsnet/views/templates/form_submit.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/models/time_model.php",
-		"//ARMOR-LAPPY-SSD/www/windsnet/config.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/models/user_model.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/logs/app.log",
 		"//ARMOR-LAPPY-SSD/www/windsnet/models/history_model.php",
-		"//ARMOR-LAPPY-SSD/www/windsnet/models/base_model.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/kriswallsmith/assetic/src/Assetic/Filter/GoogleClosure/CompilerApiFilter.php",
-		"/Z/windsnet/config.php",
 		"/Z/windsnet/views/reset.php",
 		"/Z/windsnet/views/sign_in.php",
 		"/Z/windsnet/views/templates/top_menu.php",
-		"/Z/windsnet/controllers/base_class.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/priv_docs/notes.txt",
-		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/base_class.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/views/index.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/views/not_auth.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_up.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/top_menu.php",
-		"/Z/windsnet/views/templates/top.php",
 		"/Z/windsnet/views/create_user.php",
 		"/Z/windsnet/views/learn_more.php",
 		"/Z/windsnet/views/my_history.php",
@@ -270,9 +242,7 @@
 		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/history_class.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/payment_class.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/README.MD",
-		"//ARMOR-LAPPY-SSD/www/windsnet/global_assets/js/site.js",
 		"//ARMOR-LAPPY-SSD/www/windsnet/views/create_payment.php",
-		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/bottom.php",
 		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/sample/payments/CreatePayment.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/paypal/rest-api-sdk-php/sample/sale/GetSale.php",
 		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/paypal/rest-api-sdk-php/sample/payments/GetPayment.php",
@@ -303,7 +273,6 @@
 		"/Z/windsnet/views/templates/form_Submit.php",
 		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/Payment.php",
 		"/Z/windsnet/controllers/payment_class.php",
-		"/Z/windsnet/sdk_config.ini",
 		"/Z/windsnet/views/sign_up_2.php",
 		"/Z/windsnet/logs/PayPal.log",
 		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Rest/Call.php",
@@ -316,21 +285,9 @@
 		"/Z/windsnet/priv_docs/rest-api-sample-app-php-master/composer.json",
 		"/Z/windsnet/priv_docs/rest-api-sample-app-php-master/app/common/order.php",
 		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Rest/ApiContext.php",
-		"/Z/windsnet/composer.json",
 		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Auth/OAuthTokenCredential.php",
 		"/Z/windsnet/vendor/composer/autoload_namespaces.php",
-		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_up_2.php",
-		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_up_3.php",
-		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/composer.json",
-		"/Z/windsnet/vendor/paypal/sdk-core-php/composer.json",
-		"//ARMOR-LAPPY-SSD/www/windsnet/composer.json",
-		"/Z/windsnet/vendor/returndata/returndata/composer.json",
-		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/return_data_class.php",
-		"/Z/windsnet/vendor/Respect/Validation/library/Respect/Validation/Validator.php",
-		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/autoload.php",
-		"/Z/windsnet/vendor/autoload.php",
-		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/sign_up_class.php",
-		"/C/Users/Pheagey/Desktop/phpradius/radius.demo.php"
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_up_2.php"
 	],
 	"find":
 	{
@@ -338,9 +295,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 105.0,
+		"height": 0.0,
 		"where_history":
 		[
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\",
 			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\vendor\\*,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\components\\*",
 			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\vendor\\*",
 			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\components\\*",
@@ -361,6 +319,24 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SITELOG",
+			"scrollTo",
+			"one",
+			"scroll",
+			"scrollTo",
+			"SITELOG",
+			"validate",
+			"data['url']",
+			"bootbox",
+			"bootbos",
+			"updatePassword",
+			"catch",
+			"excep",
+			"exep",
+			"Timeout-Session",
+			"Session-Timeout",
+			"timeout",
+			"Expire",
 			"UPDATE",
 			"accountRecovery",
 			"redirect",
@@ -470,25 +446,7 @@
 			"$return_data[0]->value",
 			"createTime",
 			"updateTime",
-			"getTime",
-			"getDate",
-			"getDAte",
-			"get",
-			"createTime",
-			"readTime",
-			"createTime",
-			"updateTime",
-			"#  ",
-			"//",
-			"date",
-			"createTime",
-			"datetime",
-			"updateTime",
-			"createTime",
-			"readTime",
-			"createTime",
-			"readTime",
-			"createTime"
+			"getTime"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -496,6 +454,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"data.url",
 			"#\n",
 			"DB_RAD_TABL",
 			"jgExample",
@@ -572,110 +531,28 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "config.php",
+					"file": "naabs.sublime-project",
 					"settings":
 					{
-						"buffer_size": 1819,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								449,
-								460
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 69.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "global_assets/js/site.js",
-					"settings":
-					{
-						"buffer_size": 2797,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2057,
-								2057
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 889.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "views/account_recovery.php",
-					"settings":
-					{
-						"buffer_size": 1203,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								614,
-								609
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 276.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "views/account_recovery_2.php",
-					"settings":
-					{
-						"buffer_size": 1579,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								214,
-								39
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -684,111 +561,53 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "views/rest_password.php",
+					"buffer": 1,
+					"file": "nsabs.sublime-workspace",
 					"settings":
 					{
-						"buffer_size": 1934,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1143,
-								1143
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 138.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "controllers/base_class.php",
+					"buffer": 2,
+					"file": "composer.json",
 					"settings":
 					{
-						"buffer_size": 12292,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10685,
-								10685
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2595.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "controllers/user_class.php",
-					"settings":
-					{
-						"buffer_size": 3469,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3449,
-								3449
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2039.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "models/user_model.php",
-					"settings":
-					{
-						"buffer_size": 5899,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3997,
-								3997
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 475.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

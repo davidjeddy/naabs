@@ -1,0 +1,573 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"account_re",
+				"account_recovery_2"
+			],
+			[
+				"url",
+				"urldecode"
+			],
+			[
+				"strto",
+				"strtolower"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"pan",
+				"panel_count"
+			],
+			[
+				"curr",
+				"current_expire_time"
+			],
+			[
+				"trans",
+				"transaction_id"
+			],
+			[
+				"pa",
+				"payment_obj"
+			],
+			[
+				"user",
+				"user_time_data"
+			],
+			[
+				"is_int",
+				"is_integer"
+			],
+			[
+				"end",
+				"ending_timestamp"
+			],
+			[
+				"json_",
+				"json_encode"
+			],
+			[
+				"param",
+				"param_data"
+			],
+			[
+				"return",
+				"return_data"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"crea",
+				"createPaymentMethod"
+			],
+			[
+				"form",
+				"form_data"
+			],
+			[
+				"PRe",
+				"preventDefault"
+			],
+			[
+				"accou",
+				"account_elem"
+			],
+			[
+				"Pre",
+				"preventDefault"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"syste",
+				"system_path"
+			],
+			[
+				"sc",
+				"script"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"init",
+				"init_request"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 174.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Z/windsnet/controllers/base_class.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/global_assets/js/site.js",
+		"//ARMOR-LAPPY-SSD/www/windsnet/config.php",
+		"/Z/windsnet/install/install.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/base_class.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/install/install.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/models/base_model.php",
+		"/Z/windsnet/README.MD",
+		"/Z/windsnet/composer.json",
+		"/Z/windsnet/config.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/bottom.php",
+		"/Z/windsnet/views/templates/top.php",
+		"/Z/windsnet/install/user_data_tbo.sql",
+		"/Z/windsnet/global_assets/js/site.js",
+		"/Z/windsnet/TODO.md",
+		"/Z/windsnet/sdk_config.ini",
+		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/composer.json",
+		"/Z/windsnet/install/logrotate.conf",
+		"/Z/windsnet/models/user_model.php",
+		"/Z/windsnet/controllers/user_class.php",
+		"/Z/windsnet/views/rest_password.php",
+		"/Z/windsnet/views/account_recovery_2.php",
+		"/Z/windsnet/views/account_recovery.php",
+		"/Z/windsnet/install.php",
+		"/Z/windsnet/views/sign_up.php",
+		"/Z/windsnet/views/account_recovery_3.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/user_class.php",
+		"/Z/windsnet/logs/app.log",
+		"/Z/windsnet/views/templates/form_submit.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/models/time_model.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/models/user_model.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/logs/app.log",
+		"//ARMOR-LAPPY-SSD/www/windsnet/models/history_model.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/kriswallsmith/assetic/src/Assetic/Filter/GoogleClosure/CompilerApiFilter.php",
+		"/Z/windsnet/views/reset.php",
+		"/Z/windsnet/views/sign_in.php",
+		"/Z/windsnet/views/templates/top_menu.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/priv_docs/notes.txt",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/index.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/not_auth.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_up.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/top_menu.php",
+		"/Z/windsnet/views/create_user.php",
+		"/Z/windsnet/views/learn_more.php",
+		"/Z/windsnet/views/my_history.php",
+		"/Z/windsnet/views/my_time.php",
+		"/Z/windsnet/views/not_auth.php",
+		"/Z/windsnet/views/sign_out.php",
+		"/Z/windsnet/views/index.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/my_time.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/no_script.php",
+		"/C/Users/Pheagey/AppData/Local/Temp/scp31398/home/windwifi/www/windsnet/config.php",
+		"/H/xampp/htdocs/windsnet/config.php",
+		"/Z/portfolio/global_assets/js/portfolio.js",
+		"/Z/portfolio/composer.json",
+		"/Z/portfolio/config.php",
+		"/Z/portfolio/models/database.php",
+		"/Z/portfolio/global_assets/css/portfolio.css",
+		"/Z/portfolio/vendor/toorshia/justgage/R&D/donut/index.html",
+		"/Z/portfolio/views/index.php",
+		"/F/KSP/KMP/README.txt",
+		"/F/KSP/KMP/KMPServerConfig.txt",
+		"/F/KSP/KMP/KMPModControl.txt",
+		"/F/KSP/KMP/logs/kmpserver 2014-01-23 21-20-50.log",
+		"/F/KSP/KMP/logs/kmpserver 2014-01-23 21-13-52.log",
+		"/Z/portfolio/vendor/toorshia/justgage/R&D/format-number/index.html",
+		"/Z/portfolio/vendor/toorshia/justgage/R&D/counter/index.html",
+		"/Z/portfolio/vendor/toorshia/justgage/R&D/lib/style.css",
+		"/Z/portfolio/docs/examples/index.html",
+		"/Z/portfolio/docs/examples/radial_fill.js",
+		"/Z/portfolio/index.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/create_user.php",
+		"/C/Users/Pheagey/AppData/Local/Temp/scp34094/home/windwifi/www/windsnet/logs/Paypal.log",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/my_history.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/ajax_loader.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/top.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/time_class.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/models/payment_model.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/history_class.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/payment_class.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/README.MD",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/create_payment.php",
+		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/sample/payments/CreatePayment.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/paypal/rest-api-sdk-php/sample/sale/GetSale.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/paypal/rest-api-sdk-php/sample/payments/GetPayment.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/Address.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/Payment.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/Payer.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/Payee.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/logs/PayPal.log",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_out.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_in.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/auth_check.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/view_debug.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/learn_more.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/my_devices.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/reset.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/controllers/database_class.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/templates/debug_footer.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/phpinfo.pjp",
+		"//ARMOR-LAPPY-SSD/www/windsnet/logs/App.log",
+		"//ARMOR-LAPPY-SSD/www/windsnet/README.md",
+		"/C/Users/Pheagey/AppData/Local/Temp/scp58511/home/windwifi/www/windsnet/logs/App.log",
+		"//ARMOR-LAPPY-SSD/www/windsnet/vendor/balupton/jquery-scrollto/src/documents/lib/jquery-scrollto.js",
+		"/C/Users/Pheagey/AppData/Local/Temp/scp19858/var/www/daloradius/mng-new.php",
+		"/Z/windsnet/logs/App.log",
+		"/Z/windsnet/views/create_payment.php",
+		"/Z/windsnet/views/old_delete_me.php",
+		"/Z/windsnet/views/sign_up_3.php",
+		"/Z/windsnet/views/templates/form_Submit.php",
+		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/Payment.php",
+		"/Z/windsnet/controllers/payment_class.php",
+		"/Z/windsnet/views/sign_up_2.php",
+		"/Z/windsnet/logs/PayPal.log",
+		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Rest/Call.php",
+		"/Z/windsnet/priv_docs/rest-api-sample-app-php-master/app/common/paypal.php",
+		"/Z/windsnet/priv_docs/rest-api-sample-app-php-master/app/bootstrap.php",
+		"/Z/windsnet/priv_docs/rest-api-sample-app-php-master/app/common/util.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/priv_docs/rest-api-sample-app-php-master/app/order/order_place.php",
+		"/Z/windsnet/priv_docs/rest-api-sample-app-php-master/sdk_config.ini",
+		"//ARMOR-LAPPY-SSD/www/windsnet/priv_docs/rest-api-sample-app-php-master/app/bootstrap.php",
+		"/Z/windsnet/priv_docs/rest-api-sample-app-php-master/composer.json",
+		"/Z/windsnet/priv_docs/rest-api-sample-app-php-master/app/common/order.php",
+		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Rest/ApiContext.php",
+		"/Z/windsnet/vendor/paypal/rest-api-sdk-php/lib/PayPal/Auth/OAuthTokenCredential.php",
+		"/Z/windsnet/vendor/composer/autoload_namespaces.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_up_2.php",
+		"//ARMOR-LAPPY-SSD/www/windsnet/views/sign_up_3.php"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\vendor\\*,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\components\\*",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\vendor\\*",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\components\\*",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\vendor,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\components",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\,-\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\vendor",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\priv_docs\\",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\views\\",
+			"\\\\ARMOR-LAPPY-SSD\\www\\windsnet\\",
+			"\\\\ARMOR-LAPPY-SSD\\www\\portfolio",
+			"H:\\xampp\\htdocs\\eve\\fconroot\\fconsrp\\",
+			"H:\\xampp\\htdocs\\qdi"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"SITELOG",
+			"scrollTo",
+			"one",
+			"scroll",
+			"scrollTo",
+			"SITELOG",
+			"validate",
+			"data['url']",
+			"bootbox",
+			"bootbos",
+			"updatePassword",
+			"catch",
+			"excep",
+			"exep",
+			"Timeout-Session",
+			"Session-Timeout",
+			"timeout",
+			"Expire",
+			"UPDATE",
+			"accountRecovery",
+			"redirect",
+			"redirect(",
+			"cookie",
+			"readcookie",
+			"accountRecovery",
+			"password",
+			"accountRecovery",
+			"answer",
+			"accountRecovery",
+			"account_recovery_2",
+			"accountRecovery",
+			"url",
+			"scroll",
+			"account_recovery",
+			"setcoo",
+			"setcookie",
+			"redirect",
+			"redirec( ",
+			"json",
+			"redirect",
+			"#\n",
+			"accountRecovery",
+			"SELECT",
+			"accountRecovery",
+			"reset.php",
+			"loginUser",
+			"getUserdata",
+			"INSERT INTO `\".DB_NAME.\"",
+			"execute()",
+			"getUserdata",
+			"DB_TABL",
+			"securityanswer",
+			"validate",
+			"DB_TABL",
+			"securityanswer",
+			"securityquestion",
+			"print_r(",
+			"create_user",
+			"array",
+			"getUserdata",
+			"select",
+			"DB_TABL",
+			"DB_TBL",
+			"Networks",
+			"DB_TABL",
+			"value",
+			"bill",
+			"billng",
+			"goAction",
+			"scrollTo",
+			"Tools",
+			"gauge",
+			"autoDekessler",
+			"verb",
+			"timeout",
+			" gauge( $(\"div#\"+panel",
+			"gauge",
+			"first_panel_heading",
+			"jgExample_refresh",
+			"gg1",
+			"quick_menu",
+			"button.quick_menu clicked",
+			"panel_count",
+			"SITEHOME",
+			"include_",
+			"required_",
+			"update",
+			"createTime",
+			"setTimestamp",
+			"read",
+			"select",
+			"time",
+			"SITEHOME; ?>",
+			"SITEHOME",
+			"display_errors",
+			"INSERT INTO",
+			"INSERT",
+			"fromJson",
+			"createPayment",
+			"_",
+			"DB_TABL",
+			"state",
+			"\"DB_TABL\"",
+			"`\"DB_TABL\"`",
+			"state",
+			"$param_data->username;",
+			"setPayment_method",
+			"getPayer",
+			"`radcheck`",
+			"createPaymentLog",
+			"asdf",
+			"createPaymentLog",
+			"setCountrycode",
+			"paramdata",
+			"_",
+			"createPayment",
+			"addTime",
+			"readTime",
+			"No time credited",
+			"// ",
+			"INSERT",
+			"UPDATE",
+			"updateTime",
+			"createTime",
+			"$return_data[0]->value",
+			"createTime",
+			"updateTime",
+			"getTime"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"data.url",
+			"#\n",
+			"DB_RAD_TABL",
+			"jgExample",
+			"history",
+			"SITEROOT; ?>/../",
+			"",
+			"\".DB_TABL.\"",
+			"`\".DB_TABL.\"`",
+			"null;//$param_data->username;",
+			"`\"DB_TABL\"`",
+			"param_data",
+			"",
+			"# ",
+			"require_once",
+			"",
+			"\"",
+			"$_COOKIE['AUTH'] === \"true\"",
+			"AUTH",
+			"_COOKIE",
+			"\"",
+			"    ",
+			"\"",
+			"",
+			"\"",
+			"'",
+			"    ",
+			"billing",
+			"",
+			"/",
+			"    ",
+			"../../vendor/twitter/bootstrap/fonts/glyphicons",
+			"../../vendor/twitter/bootstrap/fonts/",
+			"text",
+			"    ",
+			"<?= SITEHOME; ?>",
+			"    ",
+			"./",
+			"",
+			"			",
+			"		   $",
+			"		//",
+			"				i",
+			"				}",
+			"			$",
+			"			",
+			"		//",
+			"		 //",
+			"array(",
+			"",
+			"	 *",
+			"	 * ",
+			"	/**",
+			"	 *",
+			"} else {",
+			"define (",
+			"if (",
+			") {",
+			"",
+			"	//",
+			".html(data.msg[0]);",
+			"\".db_table.\"",
+			"false",
+			"'",
+			"\\\"",
+			"url_root;",
+			"    "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}
