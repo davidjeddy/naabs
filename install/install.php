@@ -7,7 +7,10 @@ require_once( "../config.php" );
 
 echo "Attempting to create application log files...\n";
 exec( "mkdir -p ".SITEDIR." 2>&1");
+// Application log
 exec( "touch ".SITEDIR.SITELOG );
+// Paypal log
+exec( "touch ".SITEDIR."Paypal.log" );
 exec( "chmod -R 0644 ".SITEDIR );
 exec( "chown -R www-data:www-data ".SITEDIR );
 
