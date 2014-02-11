@@ -25,6 +25,7 @@ function ajaxCall(type, data, dataType, action) {
 	if ( typeof('action') == 'undefined' )  { action= ""; } 
 
 
+	$("body").addClass("loading");
 
     var promise = $.ajax({ type: type, data: data, dataType: dataType, url: "../controllers/base_class.php" });
 

@@ -32,7 +32,7 @@ Then we position it in relation to the viewport window
 with position:fixed. Width, height, top and left speak
 speak for themselves. Background we set to 80% white with
 our animation centered, and no-repeating */
-.modal {
+.loading_overlay {
     display:    none;
     position:   fixed;
     z-index:    1000;
@@ -54,16 +54,8 @@ body.loading {
 
 /* Anytime the body has the loading class, our
    modal element will be visible */
-body.loading .modal {
+body.loading .loading_overlay {
     display: block;
 }
 </style>
-    <div class="modal"><!-- Place at bottom of page --></div>
-<script>
-$body = $("body");
-
-$(document).on({
-    ajaxStart: function() { $body.addClass("loading");    },
-    ajaxStop: function() { $body.removeClass("loading"); }    
-});
-</script>
+<div class="loading_overlay"><!-- Place at bottom of page --></div>
