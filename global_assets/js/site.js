@@ -91,8 +91,6 @@ $(document).on("submit", "form", function(e) {
 
 	return true;
 });
-
-// Form button actions
 $(document).on("click", "button.clear", function(e) {
 	console.log( 'btn.clear clicked');
 
@@ -106,7 +104,6 @@ $(document).on("click", "button.clear", function(e) {
 
 	return true;
 });
-
 $(document).on("click", "button.submit", function(e) {
 	console.log( 'button.submit clicked');
 
@@ -124,9 +121,49 @@ $(document).on("click", "button.submit", function(e) {
 	return true;
 });
 
+$(document).on("click", "html body div.well table.table tbody tr td a")
+// Receipt `view`
+			    bootbox.alert(data.text, function() {
+					// Go where the form wants us to
+					window.location.href = data.url;
+			    });
+
+
 
 // Custom jQ validator method
 jQuery.validator.addMethod("lettersandspace", function(value, element) {
   return this.optional(element) || /^[ a-z]+$/i.test(value);
 }, "Letters and spaced only please"); 
+
+
+/*
+// Bootbox Custome Dialog for printable receipts
+bootbox.dialog({
+  message: "I am a custom dialog",
+  title: "Custom title",
+  buttons: {
+    success: {
+      label: "Success!",
+      className: "btn-success",
+      callback: function() {
+        Example.show("great success");
+      }
+    },
+    danger: {
+      label: "Danger!",
+      className: "btn-danger",
+      callback: function() {
+        Example.show("uh oh, look out!");
+      }
+    },
+    main: {
+      label: "Click ME!",
+      className: "btn-primary",
+      callback: function() {
+        Example.show("Primary button");
+      }
+    }
+  }
+});
+*/
 -->

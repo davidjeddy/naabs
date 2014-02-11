@@ -27,13 +27,29 @@ $h_data = $historyClass->readHistory($_COOKIE['USER']);
     <div class="well well-lg">
         <p>My Transactions</p>
         <table class="table table-striped table-bordered table-hover table-responsiv">
+            <thead>
+                <tr>
+                    <td width="25%">ID</td>
+                    <td width="20%">Time (GMT)</td>
+                    <td width="15%">Intent</td>
+                    <td width="15%">State</td>
+                    <td width="15%">Amount (USD)</td>
+                    <td width="1%">Receipt</td>
+                </tr>
+            </thead>
             <tbody>
                 <tr>
-                    <td>ID</td>
-                    <td>Time (GMT)</td>
-                    <td>Intent</td>
-                    <td>State</td>
-                    <td>Amount (USD)</td>
+                    <td><p>PAY-TEST1234</p></td>
+                    <td><p>2014-01-27 2:35 pm</p></td>
+                    <td><p>SALE</p></td>
+                    <td><p>COMPLETED</p></td>
+                    <td><p>$14.95</p></td>
+                    <td>
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-xs btn-bootbox"
+                        >View</button>
+                    </td>
                 </tr>
             <?php
                 foreach ($h_data as $transaction) {
@@ -47,7 +63,9 @@ $h_data = $historyClass->readHistory($_COOKIE['USER']);
                     </tr>';
                 }
             ?>
-        </tbody>
+            </tbody>
+            <tfood>
+            </tfood>
         </table>
     </div>
 

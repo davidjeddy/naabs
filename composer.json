@@ -1,6 +1,6 @@
 {
-    "name": "davidjeddy/nabs",
-    "description": "Network Acces and Billing System (nabs) is a web based interface for a FreeRADIUS authentication server that accepts payments for access to a (typically Wifi) network.",
+    "name": "davidjeddy/naabs",
+    "description": "Network Access And Billing System (naabs) is a web based interface for a FreeRADIUS authentication server that accepts payments for access to a (typically Wifi) network.",
     "license": "Creative Commons 4.0",
     "authors": [
         {
