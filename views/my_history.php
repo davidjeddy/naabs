@@ -29,40 +29,36 @@ $h_data = $historyClass->readHistory($_COOKIE['USER']);
         <table class="table table-striped table-bordered table-hover table-responsiv">
             <thead>
                 <tr>
-                    <td width="25%">ID</td>
-                    <td width="20%">Time (GMT)</td>
-                    <td width="15%">Intent</td>
-                    <td width="15%">State</td>
-                    <td width="15%">Amount (USD)</td>
-                    <td width="1%">Receipt</td>
+                    <td>ID</td>
+                    <td>Time (GMT)</td>
+                    <td>Purpose</td>
+                    <td>Intent</td>
+                    <td>Amount (USD)</td>
+                    <td>State</td>
+                    <td class="receipt_cell">Receipt</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><p>PAY-TEST1234</p></td>
                     <td><p>2014-01-27 2:35 pm</p></td>
+                    <td><p>WAN access via local private WiFi network.</p></td>
                     <td><p>SALE</p></td>
-                    <td><p>COMPLETED</p></td>
                     <td><p>$14.95</p></td>
+                    <td><p>COMPLETED</p></td>
                     <td>
                         <button
                             type="button"
                             class="btn btn-primary btn-xs btn-bootbox"
+                            data-id="PAY-TEST1234"
+                            data-time="2014-01-27 2:35 pm"
+                            data-purpose="WAN access via local private WiFi network." 
+                            data-intent="SALE"
+                            data-amount="$14.95"
+                            data-state="COMPLETED"
                         >View</button>
                     </td>
                 </tr>
-            <?php
-                foreach ($h_data as $transaction) {
-                    echo '
-                    <tr>
-                        <td>'.$transaction->transaction_id.'</td>
-                        <td>'.date('F jS, Y h:i:s a', $transaction->create_time).'</td>
-                        <td>'.$transaction->intent.'</td>
-                        <td>'.$transaction->state.'</td>
-                        <td>$'.$transaction->amount.'</td>
-                    </tr>';
-                }
-            ?>
             </tbody>
             <tfood>
             </tfood>

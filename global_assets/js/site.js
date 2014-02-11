@@ -1,6 +1,5 @@
 /**
- * Windsnet wireless network access web application
- * application javascript
+ * naads application javascript
  */
 <!--//
 //AJAX process function
@@ -75,6 +74,27 @@ function ajaxCall(type, data, dataType, action) {
     });
 }
 
+/**
+ * Print the contents of a element
+ *
+ * @author http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
+ * @modified David J Eddy <me@davidjeddy.com>
+ * @param string data [required]
+ * @return boolean
+ */
+function printDiv(data) {
+        var mywindow = window.open('', 'my div', 'height=400,width=600');
+        mywindow.document.write('<html><head><title>my div</title>');
+        /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+        mywindow.document.write('</head><body>'+data+'</head><body>');
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+}
+
+
 
 // Form submit logic
 $(document).on("submit", "form", function(e) {
@@ -121,12 +141,38 @@ $(document).on("click", "button.submit", function(e) {
 	return true;
 });
 
-$(document).on("click", "html body div.well table.table tbody tr td a")
-// Receipt `view`
-			    bootbox.alert(data.text, function() {
-					// Go where the form wants us to
-					window.location.href = data.url;
-			    });
+
+
+// Bootbox sales receipt `view`
+$(document).on("click", "button.btn-bootbox", function(e) {
+	console.log("Receipt bootbox called.")
+
+	var this_obj = $(this);
+
+	var receipt_print = '<div id="receipt_print">'+this_obj.data('id')+'</div>';
+
+	bootbox.dialog({
+	  title: "Receipt",
+	  message: receipt_print,
+	  buttons: {
+	    ok: {
+	        label: "Ok",
+	        className: "btn-success"
+	    },
+	    close: {
+	        label: "Close",
+	        className: "btn-primary"
+	    },
+	    print: {
+	        label: "Print",
+	    	className: "btn-info",
+	    	callback: function() {
+	    		printDiv(receipt_print);
+	    	}
+	    },
+	  }
+	});
+});
 
 
 
@@ -134,36 +180,4 @@ $(document).on("click", "html body div.well table.table tbody tr td a")
 jQuery.validator.addMethod("lettersandspace", function(value, element) {
   return this.optional(element) || /^[ a-z]+$/i.test(value);
 }, "Letters and spaced only please"); 
-
-
-/*
-// Bootbox Custome Dialog for printable receipts
-bootbox.dialog({
-  message: "I am a custom dialog",
-  title: "Custom title",
-  buttons: {
-    success: {
-      label: "Success!",
-      className: "btn-success",
-      callback: function() {
-        Example.show("great success");
-      }
-    },
-    danger: {
-      label: "Danger!",
-      className: "btn-danger",
-      callback: function() {
-        Example.show("uh oh, look out!");
-      }
-    },
-    main: {
-      label: "Click ME!",
-      className: "btn-primary",
-      callback: function() {
-        Example.show("Primary button");
-      }
-    }
-  }
-});
-*/
 -->
