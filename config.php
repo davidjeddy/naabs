@@ -20,7 +20,7 @@ define('SITECONTACT', "Please contact the administrator at phone number ".SITEPH
 error_reporting(E_ALL);
 #SITEDIR must be from the root of the file system
 define("SITEDIR",	"/home/pheagey/www/windsnet/logs/");
-define("SITELOG",	"application.log");
+define("SITELOG",	"Application.log");
 define("DEVIP",     "192.168.2.3");
 define("PRODIP",    "10.3.4.127");
 

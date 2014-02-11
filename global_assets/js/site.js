@@ -36,6 +36,7 @@ function ajaxCall(type, data, dataType, action) {
 
 			if ( typeof(data.callback) !== "undefined" ) {
 
+				// Display the message generated on the server side as a bootbox.alert()
 			    bootbox.alert(data.text, function() {
 					// Go where the form wants us to
 					window.location.href = data.url;
@@ -47,31 +48,26 @@ function ajaxCall(type, data, dataType, action) {
 				window.location.href = data.url;
 			}
 
-			return true;
 		} else {
 			console.log('data bad: ');
 			console.log(data);
-
-			// Display the error generated on the server side.
-			    bootbox.alert(data.text, function() {});
-
-			return false;
+			bootbox.alert(data.text, function() {});
 		}
-        return true;
     });
 
     promise.error(function(data) {
 		console.log("promise.error: ");
 		console.log(data);
 
-        return false;
+
     });
 
     promise.complete(function(){
 		console.log("promise.complete");
-
-		return true;
+		$("body").removeClass("loading");
     });
+
+    return true;
 }
 
 /**
@@ -83,15 +79,19 @@ function ajaxCall(type, data, dataType, action) {
  * @return boolean
  */
 function printDiv(data) {
-        var mywindow = window.open('', 'my div', 'height=400,width=600');
-        mywindow.document.write('<html><head><title>my div</title>');
-        /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
-        mywindow.document.write('</head><body>'+data+'</head><body>');
+	console.log( "printDiv stated.");
 
-        mywindow.print();
-        mywindow.close();
+    var mywindow = window.open('', 'Sale Receipt', 'height=600s,width=800');
 
-        return true;
+	mywindow.document.write('<!DOCTYPE html><html><head><title>Sales Receipt</title>');
+    mywindow.document.write('<link rel="stylesheet" href="../global_assets/css/reset.css" type="text/css" />');
+    mywindow.document.write('<link rel="stylesheet" href="../global_assets/css/print.css" type="text/css" />');
+    mywindow.document.write('</head><body>'+data+'<body></html>');
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
 }
 
 
@@ -144,34 +144,16 @@ $(document).on("click", "button.submit", function(e) {
 
 
 // Bootbox sales receipt `view`
-$(document).on("click", "button.btn-bootbox", function(e) {
+$(document).on("click", "button.print", function(e) {
 	console.log("Receipt bootbox called.")
 
-	var this_obj = $(this);
+	var print_source = $(this).data("source");
 
-	var receipt_print = '<div id="receipt_print">'+this_obj.data('id')+'</div>';
+	print_source = $(print_source).html();
 
-	bootbox.dialog({
-	  title: "Receipt",
-	  message: receipt_print,
-	  buttons: {
-	    ok: {
-	        label: "Ok",
-	        className: "btn-success"
-	    },
-	    close: {
-	        label: "Close",
-	        className: "btn-primary"
-	    },
-	    print: {
-	        label: "Print",
-	    	className: "btn-info",
-	    	callback: function() {
-	    		printDiv(receipt_print);
-	    	}
-	    },
-	  }
-	});
+	printDiv(print_source);
+
+	return true;
 });
 
 
