@@ -35,7 +35,7 @@ class baseClass {
         // create a log channel
         $this->logger = new Logger('AppLogger');
         
-        $this->logger->pushHandler(new StreamHandler(''.SITELOG.'', Logger::DEBUG));
+        $this->logger->pushHandler(new StreamHandler(''.SITEDIR.SITELOG.'', Logger::DEBUG));
 
 
 
@@ -130,7 +130,7 @@ class baseClass {
 
                 //false return
                 } else {
-                    echo json_encode(array("bool" => false, "text" => $return_data) );
+                    echo json_encode(array("bool" => false, "text" => "Incorrect login information. Please try again.") );
                 }
             break;
             case 'logout_user':

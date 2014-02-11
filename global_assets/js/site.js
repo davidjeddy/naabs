@@ -104,9 +104,6 @@ $(document).on("click", "button.clear", function(e) {
 	var form_val = form.validate();
 	form_val.resetForm();
 
-	//scroll to the top of the page if possible
-	//$().scrollto( '0%', 250);
-
 	return true;
 });
 
@@ -128,15 +125,7 @@ $(document).on("click", "button.submit", function(e) {
 });
 
 
-
-// BootBox listeners and callbacks
-$(document).on("click", ".alert", function(e) {
-
-    bootbox.alert("Hello world!", function() {
-        console.log("Alert Callback");
-    });
-});
-
+// Custom jQ validator method
 jQuery.validator.addMethod("lettersandspace", function(value, element) {
   return this.optional(element) || /^[ a-z]+$/i.test(value);
 }, "Letters and spaced only please"); 

@@ -1,7 +1,6 @@
 <!--// jQ and other jQ libas added via composer -->
 <script language="javascript" src="<?= SITEROOT; ?>/../vendor/components/jquery/jquery.min.js"></script>
 <script language="javascript" src="<?= SITEROOT; ?>/../vendor/twitter/bootstrap/dist/js/bootstrap.min.js"></script>
-<script language="javascript" src="<?= SITEROOT; ?>/../vendor/balupton/jquery-scrollto/src/documents/lib/jquery-scrollto.js"></script>
 <script language="javascript" src="<?= SITEROOT; ?>/../vendor/makeusabrew/bootbox/bootbox.js"></script>
 <script language="javascript" src="<?= SITEROOT; ?>/../vendor/carhartl/jquery-cookie/jquery.cookie.js"></script>
 
