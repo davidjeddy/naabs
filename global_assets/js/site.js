@@ -104,9 +104,6 @@ $(document).on("click", "button.clear", function(e) {
 	var form_val = form.validate();
 	form_val.resetForm();
 
-	//scroll to the top of the page if possible
-	//$().scrollto( '0%', 250);
-
 	return true;
 });
 
