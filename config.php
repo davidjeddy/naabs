@@ -18,7 +18,9 @@ define('SITECONTACT', "Please contact the administrator at phone number ".SITEPH
 
 /* Debug options */
 error_reporting(E_ALL);
-define("SITELOG",   "../logs/app.log");
+#SITEDIR must be from the root of the file system
+define("SITEDIR",	"/home/pheagey/www/windsnet/logs/");
+define("SITELOG",	"application.log");
 define("DEVIP",     "192.168.2.3");
 define("PRODIP",    "10.3.4.127");
 
@@ -32,9 +34,12 @@ define("DB_DTFORMAT","Y-m-d H:i:s");
 
 /* DB conn info */
 //Testing host
-if ($_SERVER["SERVER_ADDR"] == DEVIP
-    || $_SERVER["SERVER_ADDR"] == "127.0.0.1"
-    || $_SERVER["SERVER_ADDR"] == "localhost"
+if (!defined('STDIN')
+	&& (
+		$_SERVER["SERVER_ADDR"] == DEVIP
+    	|| $_SERVER["SERVER_ADDR"] == "127.0.0.1"
+    	|| $_SERVER["SERVER_ADDR"] == "localhost"
+    	)
 ) {
     define("DB_USER",       "root");
     define("DB_PASS",       "Asdf1234");
@@ -54,7 +59,9 @@ define('PP_CONFIG_PATH',    __DIR__);
 
 
 
-if ( !is_dir( "../vendor" ) ) {
+if ( !defined('STDIN')
+	&& !is_dir( "../vendor" )
+) {
     print_r( "Install process not run or vendor directory moved.\nPlease see README file for details.");
     exit;
 }
@@ -62,4 +69,6 @@ if ( !is_dir( "../vendor" ) ) {
 
 
 //Start session if not already active
-session_start();
+if (!defined('STDIN')) {
+	session_start();
+}
