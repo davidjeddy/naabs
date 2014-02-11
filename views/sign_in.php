@@ -26,7 +26,7 @@
                 <input type="password"  class="form-control" maxlength="32" placeholder="password" name="password">
             </div>
 
-            <input type="hidden" name="action" value="login_user" />
+            <input type="hidden" name="action" value="sign_in" />
             <?php require_once SITEROOT."/templates/form_submit.php"; ?>
         </form>
 

@@ -110,7 +110,7 @@ class baseClass {
 
 
     	switch($this->form_data->action) {
-    		case 'login_user':
+    		case 'sign_in':
                 $this->logger->addDebug('Starting baseClass->goAction()->login_user');
 
                 //Create the user account in the DB
@@ -127,13 +127,12 @@ class baseClass {
                         "text" => "User account signed out.",
                         "url"  => SITEROOT."/my_time.php")
                     );
-
                 //false return
                 } else {
                     echo json_encode(array("bool" => false, "text" => "Incorrect login information. Please try again.") );
                 }
             break;
-            case 'logout_user':
+            case 'sign_out':
                 $this->logger->addDebug('Starting baseClass->goAction()->logout_user');
 
                 //Create the user account in the DB

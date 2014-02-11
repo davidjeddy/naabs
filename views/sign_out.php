@@ -25,8 +25,8 @@
         <p>Thank you.</p>
     </div>
 
-    <form name="logout_user" id="logout_user">
-        <input type="hidden" name="action" value="logout_user" />
+    <form id="sign_out">
+        <input type="hidden" name="action" value="sign_out" />
     </form>
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
@@ -35,7 +35,7 @@
     // Trigger the ajax call to sign the user out once the page has loaded.
     $(document).ready(function(){
         if ( $.cookie('AUTH') ) {
-            $("#logout_user").trigger("submit");
+            $("form#sign_out").trigger("submit");
         };
     });
     </script>
