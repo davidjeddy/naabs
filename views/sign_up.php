@@ -31,7 +31,7 @@
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Password</span>
                 <input type="password"    class="form-control" placeholder="Password"           name="password"         id="password">
-                <input type="password"    class="form-control" placeholder="Repeat password"    name="repeatpassword"  id="repeatpassword">
+                <input type="password"    class="form-control" placeholder="Repeat password"    name="repeatpassword"   id="repeatpassword">
             </div>
         </div>
 
@@ -125,7 +125,7 @@
                     equalTo: "Email address must match.",
                 },
                 "repeatpassword": {
-                    equalTo: "Password does not match.",
+                    equalTo: "Password fields do not match.",
                 },
                 "securityquestion": {
                     equalTo: "Must provide a security question.",

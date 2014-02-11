@@ -15,14 +15,15 @@
 
     <div class="well well-lg">
 
-        <form id="account_recovery_step1">
+        <form id="account_recovery">
             <h4>The email used to register with:</h4>
+
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Email</span>
-                <input type="text" class="form-control" maxlength="64" placeholder="email" name="email">
+                <input type="text" class="form-control" maxlength="64" placeholder="account@provider.com" name="email" value="test1@email.com">
             </div>
 
-            <input type="text" class="form-control" name="action" value="account_recovery">
+            <input type="hidden" class="form-control" name="action" value="account_recovery">
 
             <?php require_once SITEROOT."/templates/form_submit.php"; ?>
         </form>
@@ -34,7 +35,7 @@
 
     <?php require_once SITEROOT."/templates/bottom.php"; ?>
     <script>
-        $("#account_recovery_step1").validate({
+        $("#account_recovery").validate({
             rules: {
                 "email": {
                   required: true,

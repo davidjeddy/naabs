@@ -18,13 +18,14 @@ require_once (__DIR__.'/base_model.php');
 
 class userModel extends baseModel {
 
-
+	/**
+	 * construct this, construct that...
+	 */
 	public function __construct() {
-		parent::__construct();
 
+		parent::__construct();
 	}
 
-	// public methods
 	/**
 	 * Insert a new FREERadius user into radcheck w/ creditials.
 	 * Also add teriary data to user_data table. Date like: phone, lot id, security recovery options, account, type, etc
@@ -111,9 +112,6 @@ class userModel extends baseModel {
 		return false;
 	}
 
-
-
-	// private method
 	/**
 	 * Check that the username (email) is not already registered with the system
 	 *
@@ -157,19 +155,59 @@ class userModel extends baseModel {
 	}
 
 	/**
+	 *
+	 *@author David J Eddy <me@davidjeddy.com>
+	 *@param string $param_data [required]
+	 *@return boolean
+	 *@todo needs MASSIVE security iterations. Like MD5 w/ slat hashing for one thing.
+	 */
+	public function updatePassword(stdclass $param_data) {
+		
+		try {
+			$query = "
+				UPDATE `".DB_NAME."`.`".DB_RAD_TABL."`
+				SET `value` = :value
+				WHERE `username` = :username
+				AND `attribute` = 'Clear-Text'
+			";
+
+
+		    $pstmt = $this->conn->prepare($query);
+
+		    $return_data = $pstmt->execute(array(
+		    	'username' => $param_data->email,
+		    	'value' => $param_data->password
+		    ));
+
+			$this->logger->AddInfo( $param_data->email." password has been modified." );
+
+			return true;
+		} catch(PDOException $e) {
+			
+			$this->logger->AddError( "Error: ".$e->getMessage());
+
+			echo json_encode(array(false, "Error: ".$e->getMessage()));
+
+			return false;
+		}
+	}
+
+
+
+	//Non CRUD public methods
+	/**
 	 * Account recovery method for use when resetting the password
 	 *
 	 *@author David J Eddy <me@davidjeddy.com>
-	 *@param string $username [optional]
-	 *@param string $answer [optional]
-	 *@return boolean || string
+	 *@param object $param_data [required]
+	 *@return boolean
 	 */
-	public function accountRecovery($username, $answer = null) {
+	public function accountRecovery(stdClass $param_data) {
 
 		//Get the user ID
 		$query = "
 			SELECT `id` FROM ".DB_NAME.".".DB_RAD_TABL."
-			WHERE `username` = '".$username."'
+			WHERE `username` = '".$param_data->email."'
 	    	ORDER BY `id` ASC
 			LIMIT 1
 		";
@@ -181,28 +219,51 @@ class userModel extends baseModel {
 
 
 		//If the user was not found, return false
-		if (!isset($user_id[0])) {return false; }
+		if (!isset($user_id[0])) { return false; }
 
 
 
-		if ($answer == null) {
+		//TODO compress this logic block
+		if (isset($param_data->email) && !isset($param_data->answer)) {
+
 		    // Now get the security question:
 			$query = "
-				SELECT `value` FROM ".DB_NAME.".".DB_DATA_TABL."
+				SELECT `value` FROM `".DB_NAME."`.`".DB_DATA_TABL."`
 				WHERE `user_id` = ".$user_id[0]->id."
-				&& `attribute` = 'securityquestion'
+				AND `attribute` = 'securityquestion'
 				AND `deleted` IS NULL
 			";
 
 		    $qdata = $this->conn->prepare($query);
-		    $qdata->execute();
-			return $qdata->fetchAll(PDO::FETCH_OBJ);
 
-		//An answer is provided. Check if it is correct.
+		    $qdata->execute();
+
+			$return_data = $qdata->fetchAll(PDO::FETCH_OBJ);
+
+			return $return_data;
+
+		} elseif (isset($param_data->email) && isset($param_data->answer)) {
+
+		    // Now get the security question:
+			$query = "
+				SELECT `value` FROM ".DB_NAME.".".DB_DATA_TABL."
+				WHERE `user_id` = ".$user_id[0]->id."
+				&& `attribute` = 'securityanswer'
+				AND `deleted` IS NULL
+			";
+
+		    $qdata = $this->conn->prepare($query);
+
+		    $qdata->execute();
+
+			$return_data = $qdata->fetchAll(PDO::FETCH_OBJ);
+
+			return $return_data;
+
 		} else {
 
+			return false;
 		}
-
 
 		return false;
 	}

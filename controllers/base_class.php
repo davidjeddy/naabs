@@ -235,20 +235,89 @@ class baseClass {
                 //Check is username exists
                 $return_data = $userClass->accountRecovery($this->form_data);
 
-                if ($return_data[0] !== true) {
+                if ($return_data === false) {
 
                     echo json_encode(array(
                         "bool" => false,
                         "text" => "Email address not found."
                     ) );
                     return false;
-                } elseif ($return_data[0] === true) {
+                } elseif ($return_data === true) {
+                    
+                    echo json_encode(array(
+                        "bool" => true,
+                        "text" => "Email address valid",
+                        "url"  => SITEROOT."/account_recovery_2.php",
+                    ) );
+                    return true;
+                } else {
+
+                    return false;
+                }
+
+                return false;
+            break;
+            case 'account_recovery_2':
+                $this->logger->addDebug('Starting baseClass->goAction()->account_recovery_2');
+
+                //Create the user account in the DB
+                require_once __DIR__.'/user_class.php';           
+                $userClass = new userClass();
+
+
+
+                //Check if the answer provided is correct
+                $return_data = $userClass->accountRecovery($this->form_data);
+
+                if ($return_data === false) {
+
+                    echo json_encode(array(
+                        "bool" => false,
+                        "text" => "Answer did not match what we have on file. Please try again."
+                    ) );
+                    return false;
+                } elseif ($return_data === true) {
+                    
+                    echo json_encode(array(
+                        "bool" => true,
+                        "text" => "Answer correct.",
+                        "url"  => SITEROOT."/rest_password.php",
+                    ) );
+                    return true;
+                } else {
+
+                    return false;
+                }
+            break;
+            case 'update_password':
+                $this->logger->addDebug('Starting baseClass->goAction()->update_password');
+
+                //Create the user account in the DB
+                require_once __DIR__.'/user_class.php';           
+                $userClass = new userClass();
+
+                $return_data = $userClass->updatePassword($this->form_data);
+
+
+
+                //Report on how the password update operation went
+                if ($return_data === false) {
+
+                    echo json_encode(array(
+                        "bool" => false,
+                        "text" => "Unable to update password. ". SITECONTACT,
+                    ) );
+
+                    return false;
+                } elseif ($return_data === true) {
 
                     echo json_encode(array(
                         "bool" => true,
-                        "text" => "email address valid",
-                        "url"  => SITEROOT."/account_recovery_2.php?question=".urlencode($return_data[1]).""
+                        "text" => "Password updated. You can now log in with the updated information.",
+                        "url"  => SITEROOT."/sign_in.php",
+                        "callback" => true,
                     ) );
+
                     return true;
                 }
 

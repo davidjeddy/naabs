@@ -98,35 +98,60 @@ class userClass extends baseClass {
 	 *@author David J Eddy <me@davidjeddy.com>
 	 *@param string $username [optional]
 	 *@param string $answer [optional]
-	 *@return boolean || string
+	 *@return boolean
 	 */
-	public function accountRecovery(stdClass $param_data, $answer = null) {
+	public function accountRecovery(stdClass $param_data) {
 		$this->logger->addDebug('Starting userClass->accountRecovery()');
 
 
+
+		//TODO compress these two blocks into one.
 		//Validate email, return question
-		if ($answer == null) {
+		if ($param_data->action == "account_recovery") {
 
-			$return_data = $this->userModel->accountRecovery($param_data->email);
+			$return_data = $this->userModel->accountRecovery($param_data);
 
-			if ($return_data ==false) {
+			if ($return_data === false) {
 
-				return array(false, "Email address not found.");
+				return false;
 			} else {
 
-				return array(true, $return_data[0]->value);
+            	//Set a cookie data pair that is only good for 10seconds
+            	setcookie( "EMAIL", 	(string)$param_data->email, 		time()+60, "/" );
+            	setcookie( "QUESTION", 	(string)$return_data[0]->value, 	time()+60, "/" );
+
+				return true;
 			}
 
+		//Validate answer, return access
+		} elseif ($param_data->action == "account_recovery_2") {
+
+			//Get data from db
+			$return_data = $this->userModel->accountRecovery($param_data);
+
+			if ($return_data[0]->value == strtolower($param_data->answer)) {
+
+				//Give the user 2 minutes to reset the p/w or the cookie data expires.
+            	setcookie( "EMAIL", (string)$param_data->email, time()+120, "/" );
+
+				return true;
+			}
+
+			return false;
 		} else {
 
-			//Validate answer, return true
-			if($answer == null) {
-
-			} else {
-
-			}
+			return false;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Reset a users email or passwod
+	 */
+	public function updatePassword($param_data) {
+
+		//Execute change password SQL
+		return $this->userModel->updatePassword($param_data);
 	}
 }

@@ -23,14 +23,15 @@ if (!$_COOKIE['EMAIL']) {
     <div class="well well-lg">
 
         <form id="account_recovery">
-            <h4><?= ucfirst($_COOKIE['QUESTION']); ?>?</h4>
+            <h4>Reset your password</h4>
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Answer</span>
-                <input type="text" class="form-control" maxlength="64" placeholder="Your answer" name="answer">
+                <span class="input-group-addon">Password</span>
+                <input type="password"    class="form-control" placeholder="Password"           name="password"         id="password">
+                <input type="password"    class="form-control" placeholder="Repeat password"    name="repeatpassword"   fid="repeatpassword">
             </div>
 
             <input type="hidden" class="form-control" name="email"    value="<?= $_COOKIE['EMAIL']; ?>">
-            <input type="hidden" class="form-control" name="action"   value="account_recovery_2">
+            <input type="hidden" class="form-control" name="action"   value="update_password">
 
             <?php require_once SITEROOT."/templates/form_submit.php"; ?>
         </form>
@@ -44,11 +45,21 @@ if (!$_COOKIE['EMAIL']) {
     <script>
         $("#account_recovery").validate({
             rules: {
-                "answer": {
-                  required: true,
-                  lettersandspace: true
+                "password": {
+                    required: true,
+                    minlength: 8,
                 },
-            }
+                "repeatpassword": {
+                    required: true,
+                    minlength: 8,
+                    equalTo: "#password",
+                },
+            },
+            messages: {
+                "repeatpassword": {
+                    equalTo: "Password fields do not match.",
+                },
+            },
         });
     </script>
 
