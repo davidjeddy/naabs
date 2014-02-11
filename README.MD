@@ -1,52 +1,20 @@
-Network Access Billing System (nabs)
+Network Access And Billing System (naabs)
 
 ###Dependances:###
-PHP, MySQL 5+, root access (for automated install)
+PHP, MySQL 5+, root/sudo access (for install)
 
 
 
 ###Install###
-###utomated###
+###Easy###
 
-Create a home dir for the application. 
 
-Unpackage application into said directory.
+Create a home dir for the application (/var/www/html/naabs for example). 
 
 Populate config.php with correct information.
+At the terminal run: `sudo php install.php` from the applications home dir.
 
-At the terminal run: php install.php
-
-Wait...
+Log ito your RDBM of choice, select your radius DB.
+Run the user data SQL file (./install/user_data_tbo.sql).
 
 Consune
-
-
-
-###Manual###
-Ensure application directory is accessible by your web server and sql server.
-
-Setup application logs and log rotation schedule:
-  'chmod -R 0644 ./logs/'
-  'chown -R www-data:www-data ./logs/'
-
-
-Install/Update cURL and Composer
-`sudo apt-get install php5-curl`
-
-Run 'composer install' from the applications home dir.
-
-Create the user data table:
-CREATE TABLE `user_data` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `attribute` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `op` varchar(2) COLLATE utf8_unicode_ci DEFAULT '=',
-  `value` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `created` datetime NOT NULL,
-  `updated` datetime DEFAULT NULL,
-  `deleted` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Secondary user account data.'
-
-Consume
