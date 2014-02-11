@@ -30,7 +30,7 @@ class baseModel {
 	public function __construct () {
         // Create a log channel
         $this->logger = new Logger('AppLogger');
-        $this->logger->pushHandler(new StreamHandler(SITELOG, Logger::DEBUG));
+        $this->logger->pushHandler(new StreamHandler(SITEDIR.SITELOG, Logger::DEBUG));
 
 		$this->logger->addDebug('Starting baseModel->__construct()');
 
