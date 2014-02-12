@@ -13,7 +13,7 @@
 
 <?php
 //If localhost, show debug
-if ($_SERVER["SERVER_ADDR"] == DEVIP) {
+if ($_SERVER["SERVER_ADDR"] == "127.0.0.1" || $_SERVER["SERVER_ADDR"] == "localhost") {
 	echo'<hr /><h1>DEBUG DATA:</h1>';
 	include_once( __DIR__.'/view_debug.php');
 }

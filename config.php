@@ -33,11 +33,7 @@ define("DB_DTFORMAT","Y-m-d H:i:s");
 /* DB conn info */
 //Testing host
 if (!defined('STDIN')
-	&& (
-		$_SERVER["SERVER_ADDR"] == DEVIP
-    	|| $_SERVER["SERVER_ADDR"] == "127.0.0.1"
-    	|| $_SERVER["SERVER_ADDR"] == "localhost"
-    	)
+	&& ( $_SERVER["SERVER_ADDR"] == "127.0.0.1" || $_SERVER["SERVER_ADDR"] == "localhost")
 ) {
     define("DB_USER",       "root");
     define("DB_PASS",       "Asdf1234");
