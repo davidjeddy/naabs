@@ -71,7 +71,7 @@ class timeModel extends baseModel {
 		
 		$query = "
 			SELECT `username`,`attribute`,`value` FROM `".DB_NAME."`.`".DB_RAD_TABL."`
-			WHERE  `username` = '".$username."' AND `attribute` = 'Access-Expire'
+			WHERE  `username` = '".$username."' AND `attribute` = 'Expiration'
 		";
 
 	    $qdata = $this->conn->prepare($query);
