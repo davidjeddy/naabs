@@ -17,4 +17,4 @@ At the terminal run: `sudo php install.php` from the applications home dir.
 Log ito your RDBM of choice, select your radius DB.
 Run the user data SQL file (./install/user_data_tbo.sql).
 
-Consune
+If this does not work. Open install.php and manually step through the process.

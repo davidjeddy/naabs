@@ -18,13 +18,17 @@ exec( "chown -R www-data:www-data ".SITEDIR );
 //TODO add log rotation as part of the install script
 
 // Install dependances
+//update apt-get
+echo "Attempting to update apt-get...\n";
+exec( "apt-get update" );
+
 //install composer
 echo "Attempting `composer` install...\n";
-exec( "apt-get update && apt-get install composer" );
+exec( "apt-get install composer" );
 
 // Install php5 cURL
 echo "Attempting `PHP5 cURL` install...\n";
-exec( "apt-get update && apt-get install php5-curl" );
+exec( "apt-get install php5-curl" );
 
 
 //run composer at the application root
@@ -32,6 +36,7 @@ echo "Attempting to install application dependancies. This could take several mi
 chdir("../");
 exec("composer self-update");
 exec("composer install");
+exec("composer update");
 chdir("./install/");
 
 echo "Done. Make sure you install the database table(s).\n";
