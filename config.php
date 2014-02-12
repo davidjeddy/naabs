@@ -21,8 +21,6 @@ error_reporting(E_ALL);
 #SITEDIR must be from the root of the file system
 define("SITEDIR",	"/home/pheagey/www/windsnet/logs/");
 define("SITELOG",	"Application.log");
-define("DEVIP",     "192.168.2.3");
-define("PRODIP",    "10.3.4.127");
 
 /* DB config */
 define("DB_HOST",   "127.0.0.1");
