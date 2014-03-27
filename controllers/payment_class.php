@@ -171,6 +171,9 @@ class paymentClass extends baseClass {
         	case "54432000":
         		return "74.85";
         		break;
+        	case "108864000":
+        		return "134.95";
+        		break;
         	default:
         		return "0.0";
         		break;

@@ -51,7 +51,7 @@ class userModel extends baseModel {
 			$query = "
 				INSERT INTO ".DB_NAME.".`".DB_RAD_TABL."`
 				(`username`, `attribute`, `op`, `value`)
-				VALUES( :username, 'Cleartext-Password', ':=', :value);
+				VALUES( :username, 'Cleartest-Password', ':=', :value);
 			";
 
 		    $pstmt = $this->conn->prepare($query);
@@ -168,7 +168,7 @@ class userModel extends baseModel {
 				UPDATE `".DB_NAME."`.`".DB_RAD_TABL."`
 				SET `value` = :value
 				WHERE `username` = :username
-				AND `attribute` = 'Cleartext-Password'
+				AND `attribute` = 'Cleartest-Password'
 			";
 
 

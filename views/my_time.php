@@ -14,6 +14,10 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
 </head>
 
 <body>
+    <noscript>
+        <h3>This service requires javascript to be enabled.</h3>
+        <h4>Please turn it on in your browser and refresh the page for proper operation.</h4>
+    </noscript>
 
     <?php require_once SITEROOT."/templates/top_menu.php"; ?>
 
@@ -42,12 +46,12 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Duration</span>
                 <select class="form-control" name="serviceduration">
-                    <option value="NULL"        >Select Days</option>
-                    <option value="86400"       >1   ($5.95 USD)</option>
-                    <option value="604800"      >7   ($11.95 USD)</option>
-                    <option value="18144000"    >30  ($24.95 USD)</option>
-                    <option value="54432000"    >90  ($74.85 USD)</option>
-                    <option value="108864000"   >180 ($134.95 USD)</option>
+                    <option value="NULL"        >Select One</option>
+                    <option value="86400"       >One Day ($5.95 USD)</option>
+                    <option value="604800"      >One Week ($11.95 USD)</option>
+                    <option value="18144000"    >One Month (30 days, $24.95 USD)</option>
+                    <option value="54432000"    >Three Month (90 days, $74.85 USD)</option>
+                    <option value="108864000"   >Six Months (180 days, $134.95 USD)</option>
                 </select>
             </div>
 
@@ -75,12 +79,12 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             </div>
 
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Billing</br>Address</span>
+                <span class="input-group-addon">Billig</br>Address</span>
                 <input type="text"    class="form-control" placeholder="Street"     name="line1">
                 <input type="text"    class="form-control" placeholder="City"       name="city">
                 <input type="text"    class="form-control" placeholder="State"      name="state">
                 <input type="text"    class="form-control" placeholder="ZIP"        name="zip">
-                <input type="hidden"  class="form-control" placeholder="Country"    name="country">
+                <input type="text"    class="form-control" placeholder="Country"    name="country" value="US">
             </div>
 
             <div class="input-group input-group-lg">
@@ -93,7 +97,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 <select class="form-control" name="cardtype">
                     <option>Select One</option>
                     <option value="mastercard">Mastercard</option>
-                    <option value="visa" selected>Visa</option>
+                    <option value="visa">Visa</option>
                 </select>
             </div>
 
@@ -223,8 +227,6 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             });
         });
     </script>
-
-    <?php require_once __DIR__."/templates/ajax_loader.php"; ?>
 
 </body>
 </html>

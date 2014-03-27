@@ -44,7 +44,7 @@ class timeModel extends baseModel {
 			$query = "			
 				INSERT INTO `".DB_NAME."`.`".DB_RAD_TABL."`
 						( `username`, `attribute`, `op`, `value`)
-				VALUES 	( :username, 'Access-Expire', ':=', :value_expire)
+				VALUES 	( :username, 'Expiration', ':=', :value_expire)
 			";
 
 			$pstmt = $this->conn->prepare($query);
@@ -70,8 +70,10 @@ class timeModel extends baseModel {
 		$return_data = null;
 		
 		$query = "
-			SELECT `username`,`attribute`,`value` FROM `".DB_NAME."`.`".DB_RAD_TABL."`
-			WHERE  `username` = '".$username."' AND `attribute` = 'Expiration'
+			SELECT `value`
+			FROM `".DB_NAME."`.`".DB_RAD_TABL."`
+			WHERE  `username` = '".$username."'
+			AND `attribute` = 'Expiration'
 		";
 
 	    $qdata = $this->conn->prepare($query);
@@ -109,7 +111,8 @@ class timeModel extends baseModel {
 		$query = "			
 			UPDATE `".DB_NAME."`.`".DB_RAD_TABL."`
 			SET `value` = ?
-			WHERE `username` = ? AND `attribute` = 'Access-Expire'	
+			WHERE `username` = ?
+			AND `attribute` = 'Expiration'	
 		";
 
 		$pstmt = $this->conn->prepare($query);

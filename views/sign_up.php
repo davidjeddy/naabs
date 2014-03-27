@@ -142,7 +142,5 @@
         });
     </script>
 
-    <?php require_once __DIR__."/templates/ajax_loader.php"; ?>
-
 </body>
 </html>

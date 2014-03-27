@@ -7,41 +7,53 @@
  * @version 0.0.7
  */
 /* Standard configs */
-define('SITEOWNER', "Wind Networks, LLC");
-define('SITEEMAIL', "support@windnetworks.net");
-define('SITETITLE', "WiFi Accounting");
-define('SITEROOT', 	"../views");
-define('SITETAX',   0.0);
-define('SITESHIPRATE', 0.0);
-define('SITEPHONE', "352-577-5127");
-define('SITECONTACT', "Please contact the administrator at phone number ".SITEPHONE.". Sorry for the inconvenience.");
+define('SITEOWNER', 	"Wind Networks, LLC");
+define('SITEEMAIL', 	"support@windnetworks.net");
+define('SITETITLE', 	"WiFi Accounting");
+define('SITETAX',   	0.0);
+define('SITESHIPRATE', 	0.0);
+define('SITEPHONE', 	"352-577-5127");
+define('SITECONTACT', 	"Please contact the administrator at phone number ".SITEPHONE.". Sorry for the inconvenience.");
 
 /* Debug options */
 error_reporting(E_ALL);
+
 #SITEDIR must be from the root of the file system
-define("SITEDIR",	"/home/pheagey/www/windsnet/logs/");
-define("SITELOG",	"Application.log");
+define("SITEROOT", 		"../views");
+define("SITEDIR",		"/var/www/windwifi/logs/");
+define("SITELOG",		"Application.log");
 
 /* DB config */
-define("DB_HOST",   "127.0.0.1");
-define("DB_PORT",   "3306");
-define("DB_NAME",   "radius");
+define("DB_HOST",   	"127.0.0.1");
+define("DB_PORT",   	"3306");
+define("DB_NAME",   	"radius");
 define("DB_RAD_TABL",   "radcheck");
 define("DB_DATA_TABL",  "user_data");
-define("DB_DTFORMAT","Y-m-d H:i:s");
+define("DB_DTFORMAT",	"Y-m-d H:i:s");
 
 /* DB conn info */
-//Testing host
-if (!defined('STDIN')
-	&& ( $_SERVER["SERVER_ADDR"] == "127.0.0.1" || $_SERVER["SERVER_ADDR"] == "localhost")
-) {
-    define("DB_USER",       "root");
-    define("DB_PASS",       "Asdf1234");
-//Prod host
-} else {
-    define("DB_USER",       "windsnet");
-    define("DB_PASS",       "!6tu94E@A");
+// Testing host
+// Ignore DB if running on the CLI
+/*
+if (!defined('STDIN')) {
+	// Use testing DB conn data if in a dev ENV
+	if ( $_SERVER["SERVER_ADDR"] == "127.0.0.1"
+		|| $_SERVER["SERVER_ADDR"] == "localhost"
+		|| substr($_SERVER["SERVER_ADDR"], 0,3) == "192"
+	) {
+	    define("DB_USER", 	"root");
+	    define("DB_PASS", 	"Asdf1234");
+
+	//Prod host
+	} else {
+	    define("DB_USER", 	"root");
+		define("DB_PASS", 	"!6tu94E@A");
+	}
 }
+*/
+define("DB_USER", "root");
+define("DB_PASS", "!6tu94E@A");
+
 
 /* Edit for your locality */
 date_default_timezone_set("UTC");
