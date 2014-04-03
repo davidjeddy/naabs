@@ -48,7 +48,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 <select class="form-control" name="serviceduration">
                     <option value="NULL"        >Select One</option>
                     <option value="86400"       >One Day ($5.95 USD)</option>
-                    <option value="604800"      >One Week ($11.95 USD)</option>
+                    <option value="604800"      >One Week (7 days, $11.95 USD)</option>
                     <option value="18144000"    >One Month (30 days, $24.95 USD)</option>
                     <option value="54432000"    >Three Month (90 days, $74.85 USD)</option>
                     <option value="108864000"   >Six Months (180 days, $134.95 USD)</option>

@@ -31,6 +31,7 @@
             } else {  ?>
             <li><a href="<?= SITEROOT; ?>/sign_up.php">Sign up</a></li>
             <?php }; ?>
+            <li><a href="<?= SITEROOT; ?>/terms.php">Terms of Service</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php 
