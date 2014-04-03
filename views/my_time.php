@@ -79,7 +79,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             </div>
 
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Billig</br>Address</span>
+                <span class="input-group-addon">Billing</br>Address</span>
                 <input type="text"    class="form-control" placeholder="Street"     name="line1">
                 <input type="text"    class="form-control" placeholder="City"       name="city">
                 <input type="text"    class="form-control" placeholder="State"      name="state">
@@ -98,6 +98,8 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                     <option>Select One</option>
                     <option value="mastercard">Mastercard</option>
                     <option value="visa">Visa</option>
+                    <option value="discover">Discover</option>
+                    <option value="amex">American Express</option>
                 </select>
             </div>
 

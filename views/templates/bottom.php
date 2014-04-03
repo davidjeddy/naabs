@@ -58,4 +58,4 @@ body.loading .loading_overlay {
     display: block;
 }
 </style>
-<div class="loading_overlay"><!-- Place at bottom of page --></div>
+<div class="loading_overlay"><br />Please be patient, this process can take up to a minute.<br />Please do not hit the back button or close the page.<!-- Place at bottom of page --></div>
