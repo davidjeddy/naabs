@@ -51,9 +51,9 @@
             <h5>Best phone number(s) you can be contacted at.</h5>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Phone</span>
-                <input type="text"    class="form-control" length="11" placeholder="Mobile Phone" name="mobilephone">
-                <input type="text"    class="form-control" length="32" placeholder="Home Phone" name="homephone">
-                <input type="text"    class="form-control" length="32" placeholder="Work Phone" name="workphone">
+                <input type="text"    class="form-control" length="11" placeholder="Primary Phone" name="mobilephone">
+                <input type="text"    class="form-control" length="32" placeholder="Secondary Phone" name="homephone">
+                <input type="text"    class="form-control" length="32" placeholder="Third Phone" name="workphone">
             </div>
         </div>
 
