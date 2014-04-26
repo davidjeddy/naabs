@@ -59,7 +59,7 @@
 
         <div class="well well-lg">
             <h3>Location</h3>
-            <h5>Where are you staying within the grounds.</h5>
+            <h5>If staying in the park, please put a lot number. (Not required).</h5>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Lot Number</span>
                 <input type="text"    class="form-control" length="11" placeholder="0 to 850"  name="lotid">
