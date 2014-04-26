@@ -158,6 +158,8 @@ class baseClass {
             case 'sign_up':
                 $this->logger->addDebug('Starting baseClass->goAction()->create_user');
 
+echo 'asdf';
+exit;
                 //Create the user account in the DB
                 require_once __DIR__.'/user_class.php';           
                 $userClass = new userClass();
@@ -174,6 +176,7 @@ class baseClass {
                     ) );
                 //false return
                 } else {
+
                     echo json_encode(array("bool" => false, "text" => $return_data) );
                 }
     		break;
