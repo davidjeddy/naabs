@@ -47,6 +47,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 <span class="input-group-addon">Duration</span>
                 <select class="form-control" name="serviceduration">
                     <option value="NULL"        >Select One</option>
+                    <option value="14400"       >4 Hours ($2.95 USD)</option>
                     <option value="86400"       >One Day ($5.95 USD)</option>
                     <option value="604800"      >One Week (7 days, $11.95 USD)</option>
                     <option value="18144000"    >One Month (30 days, $24.95 USD)</option>
