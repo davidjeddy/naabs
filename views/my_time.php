@@ -29,9 +29,9 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
 
         <?php
             if ( !empty($t_remaining) ) {
-                echo'<h3>Access Ends at</h3><p>'.date('F jS, Y h:i:s a', $t_remaining).'</p>';
+                echo'<h3>Account access ends at</h3><p>'.date('F jS, Y h:i:s a', $t_remaining).'</p>';
             } else {
-                echo '<h4>No time credited.</h4>';
+                echo '<h4>No time currently crecdited to you account.</h4>';
             };
         ?>
         </p>
@@ -51,7 +51,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                     <option value="86400"       >One Day ($5.95 USD)</option>
                     <option value="604800"      >One Week (7 days, $11.95 USD)</option>
                     <option value="18144000"    >One Month (30 days, $24.95 USD)</option>
-                    <option value="54432000"    >Three Month (90 days, $69.95 USD)</option>
+                    <option value="54432000"    >Three Months (90 days, $69.95 USD)</option>
                     <option value="108864000"   >Six Months (180 days, $132.95 USD)</option>
                 </select>
             </div>
@@ -123,7 +123,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 </select>
                 <!--// Automat this to include this year and then +4 more -->
                 <select class="form-control" name="cardexpireyear">
-                    <option value="NULL">Select Yesar</option>
+                    <option value="NULL">Select Year</option>
                     <option value="2014">2014</option>
                     <option value="2015">2015</option>
                     <option value="2016">2016</option>
@@ -154,10 +154,6 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             $("#mytime").validate({
                 rules: {
                     "serviceduration": {
-                        required: true,
-                        integer: true,
-                    },
-                    "devicecount": {
                         required: true,
                         integer: true,
                     },
@@ -213,9 +209,6 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 messages: {
                     "serviceduration": {
                         integer: "Service duraction required.",
-                    },
-                    "devicecount": {
-                        integer: "Must select the number of devices you plan to use.",
                     },
                     "cardexpiremonth": {
                         integer: "Expiration month needed.",

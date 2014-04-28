@@ -20,7 +20,7 @@ error_reporting(E_ALL);
 
 #SITEDIR must be from the root of the file system
 define("SITEROOT", 		"../views");
-define("SITEDIR",		"/var/www/windwifi/logs/");
+define("SITEDIR",		"/Users/david/Documents/repos/naabs/logs/");
 define("SITELOG",		"Application.log");
 
 /* DB config */

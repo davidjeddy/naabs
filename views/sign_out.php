@@ -19,7 +19,7 @@
         if ( isset($_COOKIE['AUTH']) ) {
             echo "<p>Singing you out now, please stand by.</p>";
         } else {
-            echo "<p>You have been signed out of  ".SITEOWNER."'s web portal.</p>";
+            echo "<p>Thank you for using  ".SITEOWNER."'s web portal. you have been successfully signed out.</p>";
         }; ?>
         
         <p>Thank you.</p>

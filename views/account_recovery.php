@@ -16,7 +16,7 @@
     <div class="well well-lg">
 
         <form id="account_recovery">
-            <h4>The email used to register with:</h4>
+            <h4>Please enter the email that you registerd with:</h4>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Email</span>

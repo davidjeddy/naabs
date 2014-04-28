@@ -6,6 +6,7 @@
 
 <!--// Manually added libs -->
 <script language="javascript" src="<?= SITEROOT; ?>/../global_assets/js/jquery_validate/dist/jquery.validate.min.js" ></script>
+<script language="javascript" src="<?= SITEROOT; ?>/../global_assets/js/jquery_validate/dist/jquery.validate.min.js" ></script>
 <script language="javascript" src="<?= SITEROOT; ?>/../global_assets/js/jquery.unserialize.js" ></script>
 
 <!--// Application JS logic -->
@@ -34,7 +35,6 @@ speak for themselves. Background we set to 80% white with
 our animation centered, and no-repeating */
 .loading_overlay {
     text-align: center;
-    vertical-align: middle;
     display:    none;
     position:   fixed;
     z-index:    1000;

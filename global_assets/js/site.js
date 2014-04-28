@@ -19,15 +19,14 @@
 function ajaxCall(type, data, dataType, action) {
 	console.log( 'ajax function called' );
 
-	if ( typeof('type') == 'undefined' ) 	{ type 	= "POST"; } 
-	if ( typeof('data') == 'undefined' ) 	{ data 	= "NULL"; }
-	if ( typeof('dataType') == 'undefined' ){ dataType= "JSON"; } 
-	if ( typeof('action') == 'undefined' )  { action= ""; } 
-
+	if ( typeof('type')     == 'undefined' ) { type 	= "POST"; } 
+	if ( typeof('data')     == 'undefined' ) { data 	= "NULL"; }
+	if ( typeof('dataType') == 'undefined' ) { dataType= "JSON"; } 
+	if ( typeof('action')   == 'undefined' ) { action= ""; } 
 
 	$("body").addClass("loading");
 
-    var promise = $.ajax({ type: type, data: data, dataType: dataType, url: "../controllers/base_class.php" });
+    var promise = null;//$.ajax({ type: type, data: data, dataType: dataType, url: "../controllers/base_class.php" });
 
     promise.success(function(data) {
 		console.log("promise.success");
@@ -161,6 +160,6 @@ $(document).on("click", "button.print", function(e) {
 
 // Custom jQ validator method
 jQuery.validator.addMethod("lettersandspace", function(value, element) {
-  return this.optional(element) || /^[ a-z]+$/i.test(value);
-}, "Letters and spaced only please"); 
+  return this.optional(element) || /^[~!@#$%^&*()_+-=' a-z]+$/i.test(value);
+}, "Letters and spaces only please"); 
 -->

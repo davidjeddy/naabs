@@ -23,7 +23,7 @@ if (!$_COOKIE['EMAIL']) {
     <div class="well well-lg">
 
         <form id="account_recovery">
-            <h4>Reset your password</h4>
+            <h4>Please enter a new password.</h4>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Password</span>
                 <input type="password"    class="form-control" placeholder="Password"           name="password"         id="password">

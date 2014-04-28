@@ -25,15 +25,19 @@
             </div>
 
             <div class="input-group input-group-lg">
-                <span class="input-group-addon">Password</span>
-                <input type="password"    class="form-control" placeholder="Password"           name="password"         id="password">
-                <input type="password"    class="form-control" placeholder="Repeat password"    name="repeatpassword"   id="repeatpassword">
+                <span class="input-group-addon">Password.</span>
+                <input type="password"    class="form-control"
+                    placeholder="Password (Alphanumeric and atleast 8 characers please.)"
+                    name="password" id="password">
+                <input type="password"    class="form-control"
+                    placeholder="Repeat password (Must match above password.)"
+                    name="repeatpassword" id="repeatpassword">
             </div>
         </div>
 
         <div class="well well-lg">
             <h3>Security</h3>
-            <h5>Please provide a question and answer that will be used for account recovery.</h5>
+            <h5>Please provide a security question and answer. This will be used to recover your account if necessary.</h5>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Question</span>
                 <input type="text"    class="form-control" length="11" placeholder="Question" name="securityquestion">
@@ -51,9 +55,9 @@
             <h5>Best phone number(s) you can be contacted at.</h5>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Phone</span>
-                <input type="text"    class="form-control" length="11" placeholder="Primary Phone" name="mobilephone">
-                <input type="text"    class="form-control" length="32" placeholder="Secondary Phone" name="homephone">
-                <input type="text"    class="form-control" length="32" placeholder="Third Phone" name="workphone">
+                <input type="text"    class="form-control" length="11" placeholder="Primary Phone (1237894560 format)" name="mobilephone">
+                <input type="text"    class="form-control" length="32" placeholder="Secondary Phone (1237894560 format)" name="homephone">
+                <input type="text"    class="form-control" length="32" placeholder="Third Phone (1237894560 format)" name="workphone">
             </div>
         </div>
 
