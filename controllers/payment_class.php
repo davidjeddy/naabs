@@ -159,6 +159,8 @@ class paymentClass extends baseClass {
 	private function getAmount($param_data) {
 
         switch ($param_data) {
+        	case "14400":
+        		return "9.95"
         	case  "86400":
         		return "5.95";
         		break;

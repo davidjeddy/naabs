@@ -33,6 +33,8 @@ with position:fixed. Width, height, top and left speak
 speak for themselves. Background we set to 80% white with
 our animation centered, and no-repeating */
 .loading_overlay {
+    text-align: center;
+    vertical-align: middle;
     display:    none;
     position:   fixed;
     z-index:    1000;
