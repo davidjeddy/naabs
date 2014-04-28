@@ -226,3 +226,23 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
 
 </body>
 </html>
+
+<?php
+//@note Pop with test data from Paypal for localhost testing
+if ($_SERVER['HTTP_HOST'] == 'localhost') { ?>
+<script>
+    $("input[name  = 'firstname']").val('Joe');
+    $("input[name  = 'lastname']").val('Shopper');
+    $("input[name  = 'line1']").val('52 N Main St');
+    $("input[name  = 'city']").val('Johnstown');
+    $("input[name  = 'state']").val('OH');
+    $("input[name  = 'zip']").val('12345');
+    $("input[name  = 'country']").val('US');
+    
+    $("input[name  = 'cardnumber']").val('4417119669820331');
+    $("select[name = 'cardtype'] > option:eq(2)").attr('selected', true);
+    $("select[name = 'cardexpiremonth'] > option:eq(11)").attr('selected', true);
+    $("select[name = 'cardexpireyear'] > option:eq(5)").attr('selected', true);
+    $("input[name  = 'cardcvv2']").val('874');
+</script>
+<?php }; ?>
