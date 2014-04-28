@@ -26,7 +26,7 @@ function ajaxCall(type, data, dataType, action) {
 
 	$("body").addClass("loading");
 
-    var promise = null;//$.ajax({ type: type, data: data, dataType: dataType, url: "../controllers/base_class.php" });
+    var promise = $.ajax({ type: type, data: data, dataType: dataType, url: "../controllers/base_class.php" });
 
     promise.success(function(data) {
 		console.log("promise.success");
