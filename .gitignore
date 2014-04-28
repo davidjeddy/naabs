@@ -36,3 +36,4 @@ priv_docs/
 *.zip
 *.sublime-workspace
 naabs.sublime-workspace
+config.php
