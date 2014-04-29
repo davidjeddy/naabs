@@ -28,6 +28,8 @@ function ajaxCall(type, data, dataType, action) {
 
     var promise = $.ajax({ type: type, data: data, dataType: dataType, url: "../controllers/base_class.php" });
 
+	window.scroll(0,0);
+
     promise.success(function(data) {
 		console.log("promise.success");
 

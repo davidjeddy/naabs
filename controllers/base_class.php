@@ -1,6 +1,7 @@
 <?php
 /**
  * Windsnet base controller class
+ * this also acts as a pseudo router for CNTL requests based on the 'action' post data.
  * 
  * @author David J Eddy <me@davidjeddy.com>
  * @since 0.0.2b
@@ -158,6 +159,8 @@ class baseClass {
             case 'sign_up':
                 $this->logger->addDebug('Starting baseClass->goAction()->create_user');
 
+    sleep(10);
+
                 //Create the user account in the DB
                 require_once __DIR__.'/user_class.php';           
                 $userClass = new userClass();
@@ -174,7 +177,8 @@ class baseClass {
                     ) );
                 //false return
                 } else {
-                    echo json_encode(array("bool" => false, "text" => "An account with that email already exists. Please try account recovery.") );
+                    echo json_encode(array("bool" => false, "text" => "An account with that email already exists.\n
+                        Please try account recovery.") );
                 }
     		break;
             case 'create_time':
@@ -217,11 +221,19 @@ class baseClass {
                         ) );
                     //false return
                     } else {
-                        echo json_encode(array("bool" => false, "text" => "An error occured while crediting your account with the time specified.".SITECONTACT) );
+                        echo json_encode(array(
+                            "bool" => false,
+                            "text" => "An error occured while crediting your account.\n
+                            Please contact a site administrator at ".SITECONTACT."."
+                        ));
                     }
                 } else {
 
-                    echo json_encode(array("bool" => false, "text" => "There was an error during payment processing. Please check the information and try again." ) );    
+                    echo json_encode(array(
+                        "bool" => false,
+                        "text" => "There was an error during payment processing.\n 
+                            Please check the information and try again."
+                    ));    
                 }
             break;
             case 'account_recovery':

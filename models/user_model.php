@@ -39,7 +39,7 @@ class userModel extends baseModel {
 
 		// Check if username(email) already exists
 		if ( $this->getUserdata( $param_data->email) !== false ) {
-			echo json_encode(array(false, "User account already exists."));
+
 			return false;
 		}
 
@@ -94,7 +94,7 @@ class userModel extends baseModel {
 			    	'value'		=> strtolower($value),
 			    ));
 
-				$this->logger->AddInfo( $param_data->email." account added to ".DB_RAD_TABL." tbo." );
+				$this->logger->AddInfo( $param_data->email." account data added to ".DB_DATA_TABL." tbo." );
 			}
 
 

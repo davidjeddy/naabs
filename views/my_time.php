@@ -229,7 +229,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
 
 <?php
 //@note Pop with test data from Paypal for localhost testing
-if ($_SERVER['HTTP_HOST'] == 'localhost') { ?>
+if ($_SERVER["SERVER_ADDR"] == "127.0.0.1" || $_SERVER["SERVER_ADDR"] == "localhost") { ?>
 <script>
     $("input[name  = 'firstname']").val('Joe');
     $("input[name  = 'lastname']").val('Shopper');

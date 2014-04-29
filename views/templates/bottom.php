@@ -6,7 +6,7 @@
 
 <!--// Manually added libs -->
 <script language="javascript" src="<?= SITEROOT; ?>/../global_assets/js/jquery_validate/dist/jquery.validate.min.js" ></script>
-<script language="javascript" src="<?= SITEROOT; ?>/../global_assets/js/jquery_validate/dist/jquery.validate.min.js" ></script>
+<script language="javascript" src="<?= SITEROOT; ?>/../global_assets/js/jquery_validate.error_overrides.js" ></script>
 <script language="javascript" src="<?= SITEROOT; ?>/../global_assets/js/jquery.unserialize.js" ></script>
 
 <!--// Application JS logic -->
@@ -42,9 +42,10 @@ our animation centered, and no-repeating */
     left:       0;
     height:     100%;
     width:      100%;
-    background: rgba( 255, 255, 255, .66 ) 
+    padding-top: 10%;
+    background: rgba( 255, 255, 255, .90 ) 
                 url('<?= SITEROOT; ?>/../global_assets/images/ajax_processing.gif') 
-                50% 50% 
+                50% 25% 
                 no-repeat;
 }
 
@@ -61,6 +62,6 @@ body.loading .loading_overlay {
 }
 </style>
 <div class="loading_overlay">
-    <p>Please be patient, this process can take up to a minute.</p>
-    <p>Please do not hit the back button or close the page.</p>
+    <h3>Please be patient, this process can take up to a minute.</h3>
+    <h3>Please do not hit the back button or close the page.</h3>
 </div>

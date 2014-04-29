@@ -55,15 +55,18 @@
             <h5>Best phone number(s) you can be contacted at.</h5>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Phone</span>
-                <input type="text"    class="form-control" length="11" placeholder="Primary Phone (1237894560 format)" name="mobilephone">
-                <input type="text"    class="form-control" length="32" placeholder="Secondary Phone (1237894560 format)" name="homephone">
-                <input type="text"    class="form-control" length="32" placeholder="Third Phone (1237894560 format)" name="workphone">
+                <input type="text" class="form-control" length="11" placeholder="Primary Phone (3527778888 format)"
+                    name="primaryphone">
+                <input type="text"    class="form-control" length="32" placeholder="Secondary Phone (3527778888 format)"
+                    name="secondaryphone">
+                <input type="text"    class="form-control" length="32" placeholder="Third Phone (3527778888 format)"
+                    name="tertiaryphone">
             </div>
         </div>
 
         <div class="well well-lg">
             <h3>Location</h3>
-            <h5>If staying in the park, please put a lot number. (Not required).</h5>
+            <h5>If staying in the park, please provide a lot number (not required).</h5>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Lot Number</span>
                 <input type="text"    class="form-control" length="11" placeholder="0 to 850"  name="lotid">
@@ -109,14 +112,14 @@
                 "securityanswer": {
                     required: true,
                 },
-                "mobilephone": {
+                "primaryphone": {
                     required: true,
                     phoneUS: true,
                 },
-                "homephone": {
+                "secondaryphone": {
                     phoneUS: true,
                 },
-                "altphone": {
+                "tertiaryphone": {
                     phoneUS: true,
                 },
             },
@@ -128,19 +131,19 @@
                     equalTo: "Password fields do not match.",
                 },
                 "securityquestion": {
-                    equalTo: "Must provide a security question.",
+                    equalTo: "Securit question is required.",
                 },
                 "securityanswer": {
-                    equalTo: "Security answer must be provided.",
+                    equalTo: "Security answer required please.",
                 },
-                "cellphone": {
-                    phoneUS: "U.S. formated phone number please.",
+                "primaryphone": {
+                    phoneUS: "U.S. formated phone number, no dashes or spaces please.",
                 },
-                "homephone": {
-                    phoneUS: "U.S. formated phone number please.",
+                "secondaryphone": {
+                    phoneUS: "U.S. formated phone number, no dashes or spaces please.",
                 },
-                "altphone": {
-                    phoneUS: "U.S. formated phone number please.",
+                "tertiaryphone": {
+                    phoneUS: "U.S. formated phone number, no dashes or spaces please.",
                 },
             },
         });
@@ -148,3 +151,17 @@
 
 </body>
 </html>
+<?php
+//@note Pop with test data from Paypal for localhost testing
+if ($_SERVER["SERVER_ADDR"] == "127.0.0.1" || $_SERVER["SERVER_ADDR"] == "localhost") { ?>
+<script>
+    $("input[name  = 'email']").val('joe@shopper.com');
+    $("input[name  = 'repeatemail']").val('joe@shopper.com');
+    $("input[name  = 'password']").val('testpassword');
+    $("input[name  = 'repeatpassword']").val('testpassword');
+    $("input[name  = 'securityquestion']").val('qwerqwerqwer');
+    $("input[name  = 'securityanswer']").val('asdfasdfasdf');
+    $("input[name  = 'primaryphone']").val('3216540987');
+    $("input[name  = 'lotid']").val('14B');
+</script>
+<?php }; ?>
