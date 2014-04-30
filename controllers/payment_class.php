@@ -168,13 +168,13 @@ class paymentClass extends baseClass {
         	case "604800":
         		return "11.95";
         		break;
-        	case "18144000":
+        	case "2592000":
         		return "24.95";
         		break;
-        	case "54432000":
+        	case "7776000":
         		return "74.85";
         		break;
-        	case "108864000":
+        	case "15552000":
         		return "134.95";
         		break;
         	default:

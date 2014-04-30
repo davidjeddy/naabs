@@ -31,7 +31,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
             if ( !empty($t_remaining) ) {
                 echo'<h3>Account access ends at</h3><p>'.date('F jS, Y h:i:s a', $t_remaining).'</p>';
             } else {
-                echo '<h4>No time currently crecdited to you account.</h4>';
+                echo '<h4>No time currently credited to you account.</h4>';
             };
         ?>
         </p>
@@ -50,9 +50,9 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                     <option value="14400"       >4 Hours ($2.95 USD)</option>
                     <option value="86400"       >One Day ($5.95 USD)</option>
                     <option value="604800"      >One Week (7 days, $11.95 USD)</option>
-                    <option value="18144000"    >One Month (30 days, $24.95 USD)</option>
-                    <option value="54432000"    >Three Months (90 days, $69.95 USD)</option>
-                    <option value="108864000"   >Six Months (180 days, $132.95 USD)</option>
+                    <option value="2592000"    >One Month (30 days, $24.95 USD)</option>
+                    <option value="7776000"    >Three Months (90 days, $69.95 USD)</option>
+                    <option value="15552000"   >Six Months (180 days, $132.95 USD)</option>
                 </select>
             </div>
 
@@ -137,6 +137,10 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
                 <input type="text"    class="form-control" placeholder="CVV2"  name="cardcvv2">
             </div>
         </div>
+
+
+         <p align="center">By Clicking submit you agree to the <a href="terms.php" target="_blank">Terms of Service<a/><p/>
+
 
         <input type="hidden" name="action" value="create_time">
 
