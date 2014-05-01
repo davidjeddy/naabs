@@ -20,7 +20,7 @@
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">Email</span>
-                <input type="text" class="form-control" maxlength="64" placeholder="account@provider.com" name="email" value="test1@email.com">
+                <input type="text" class="form-control" maxlength="64" placeholder="account@provider.com" name="email">
             </div>
 
             <input type="hidden" class="form-control" name="action" value="account_recovery">
