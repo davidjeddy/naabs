@@ -57,6 +57,7 @@ class paymentClass extends baseClass {
 
 	/**
 	 * Update/Submit a CC payment to Paypal for processing
+	 * Ok, this has now become the biggest pain in the dick method so far. : DJE : 2014-05-08
 	 *
 	 * @author David J Eddy <me@davidjeddy.com>
 	 * @version 0.0.1
@@ -73,11 +74,11 @@ class paymentClass extends baseClass {
 			$apiContext = new ApiContext(new OAuthTokenCredential(PP_CLIENTID, PP_SECRET));
 
 			$addr = new Address();
-			$addr->setLine1($param_data->line1);
-			$addr->setCity($param_data->city);
-			$addr->setState($param_data->state);
-			$addr->setPostal_code($param_data->zip);
-			$addr->setCountry_code($param_data->country);
+			$addr->setLine1((string)$param_data->line1);
+			$addr->setCity((string)$param_data->city);
+			$addr->setCountry_code((string)$param_data->country);
+			$addr->setPostal_code((string)$param_data->zip);
+			$addr->setState((string)$param_data->state);
 
 			$card = new CreditCard();
 			$card->setNumber($param_data->cardnumber);
@@ -96,13 +97,19 @@ class paymentClass extends baseClass {
 			$payer->setPayment_method('credit_card');
 			$payer->setFunding_instruments(array($fi));
 
+			$amountDetails = new AmountDetails();
+			$amountDetails->setSubtotal($this->getAmount($param_data->serviceduration));
+			$amountDetails->setTax('0');
+			$amountDetails->setShipping('0');
+
 			$amount = new Amount();
 			$amount->setCurrency('USD');
 			$amount->setTotal($this->getAmount($param_data->serviceduration));
+			$amount->setDetails($amountDetails);
 
 			$transaction = new Transaction();
 			$transaction->setAmount($amount);
-			$transaction->setDescription('This is the payment transaction description.');
+			$transaction->setDescription('Wireless access request.');
 
 			$payment = new Payment();
 			$payment->setIntent('sale');

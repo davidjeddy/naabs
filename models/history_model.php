@@ -35,7 +35,7 @@ class historyModel extends baseModel {
 		$query = "
 			SELECT * FROM `".DB_NAME."`.`radtransactionlog`
 			WHERE  `username` = '".$username."'
-			ORDER BY `create_time` ASC
+			ORDER BY `create_time` DESC
 		";
 
 	    $qdata = $this->conn->prepare($query);
