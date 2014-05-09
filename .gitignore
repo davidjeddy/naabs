@@ -1,6 +1,6 @@
 #naab config files.
-*.ini
-config.*
+/*.ini
+/config.*
 
 #ignore thumbnails created by windows
 Thumbs.db
