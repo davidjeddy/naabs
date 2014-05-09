@@ -139,7 +139,7 @@ $t_remaining = $timeClass->readTime($_COOKIE['USER']);
         </div>
 
 
-         <p align="center">By Clicking submit you agree to the <a href="terms.php" target="_blank">Terms of Service<a/><p/>
+         <div id="center_test">By clicking submit you agree to the <a href="terms.php" target="_blank">Terms of Service</a></div>
 
 
         <input type="hidden" name="action" value="create_time">
