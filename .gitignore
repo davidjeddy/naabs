@@ -40,3 +40,4 @@ priv_docs/
 *.sublime-workspace
 naabs.sublime-workspace
 config.php
+*.lock
